@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="title_activity_login">Inloggen</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Wachtwoord</string>
+    <string name="action_sign_in_short">Inloggen</string>
+    <string name="login_progress_signing_in">Bezig met inloggen…</string>
+    <string name="error_invalid_email">Verkeerd e-mailadres</string>
+    <string name="error_invalid_password">Te kort wachtwoord</string>
+    <string name="error_incorrect_password">Incorrect wachtwoord</string>
+    <string name="error_field_required">Dit veld is verplicht</string>
+
+</resources>
