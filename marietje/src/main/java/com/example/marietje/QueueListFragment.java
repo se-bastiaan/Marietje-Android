@@ -155,14 +155,7 @@ public class QueueListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        List<String> names = new ArrayList<String>();
-        names.add("Bezig met laden queue...");
-
-        ListAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, names);
-        setListAdapter(adapter);
-
-        setEmptyText("Kon de queue niet laden.");
+        setEmptyText("Bezig met laden queue...");
         setHasOptionsMenu(true);
 
     }

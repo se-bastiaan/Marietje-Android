@@ -43,10 +43,10 @@ public class SongListFragment extends ListFragment implements
         setHasOptionsMenu(true);
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_2, null, new String[]{
+                R.layout.songs_layout, null, new String[]{
                 MediaEntry.COLUMN_NAME_TITLE,
                 MediaEntry.COLUMN_NAME_ARTIST}, new int[]{
-                android.R.id.text1, android.R.id.text2}, 0);
+                R.id.text1, R.id.text2}, 0);
         setListAdapter(mAdapter);
 
         // Prepare the loader. Either re-connect with an existing one,

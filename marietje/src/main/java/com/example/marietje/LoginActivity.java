@@ -9,7 +9,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -88,12 +90,17 @@ public class LoginActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_forgot_password:
-                AlertDialog alertDialog = new AlertDialog.Builder(
-                        LoginActivity.this).create();
-                alertDialog.setTitle("Geen login?");
-                alertDialog
-                        .setMessage("Vraag een login aan op marietje.marie-curie.nl");
-                alertDialog.show(); // TODO: link to site?
+                   final AlertDialog d = new AlertDialog.Builder(this)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setTitle("Login aanvragen")
+                        .setIcon(R.drawable.ic_launcher)
+                        .setMessage(Html.fromHtml("Vraag een login aan op <a href=\"http://marietje.marie-curie.nl\">marietje.marie-curie.nl</a>"))
+                        .create();
+                d.show();
+
+                // make text clickable
+                ((TextView)d.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
                 return true;
         }
 
