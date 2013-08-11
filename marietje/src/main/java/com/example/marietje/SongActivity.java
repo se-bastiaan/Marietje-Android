@@ -95,7 +95,7 @@ public class SongActivity extends ActionBarActivity {
                         JSONArray vals = jObject.getJSONArray(names
                                 .getString(i));
 
-                        String title = vals.getString(1).trim().decode;
+                        String title = vals.getString(1).trim();
                         String artist = vals.getString(0).trim();
 
                         if (title == "" || artist == "") {
