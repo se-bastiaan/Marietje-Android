@@ -37,8 +37,9 @@ public class SongActivity extends ActionBarActivity {
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
+    private SongListFragment mSongListFragment;
 
-    public class MediaReader extends AsyncTask<String, Void, String> {
+    public class MediaReader extends AsyncTask<String, Void, Integer> {
         private ProgressDialog dialog;
 
         @Override
@@ -57,7 +58,7 @@ public class SongActivity extends ActionBarActivity {
         }
 
         @Override
-        protected String doInBackground(String... urls) {
+        protected Integer doInBackground(String... urls) {
             InputStream inputStream;
             try {
                 inputStream = Utils.downloadUrl(urls[0]);
@@ -94,7 +95,7 @@ public class SongActivity extends ActionBarActivity {
                         JSONArray vals = jObject.getJSONArray(names
                                 .getString(i));
 
-                        String title = vals.getString(1).trim();
+                        String title = vals.getString(1).trim().decode;
                         String artist = vals.getString(0).trim();
 
                         if (title == "" || artist == "") {
@@ -114,6 +115,8 @@ public class SongActivity extends ActionBarActivity {
 
                     db.setTransactionSuccessful();
                 } catch (SQLException e) {
+                    Log.e(SongActivity.class.getName(), "SQL import error", e);
+                    return 3;
                 } finally {
                     db.endTransaction();
                 }
@@ -122,23 +125,27 @@ public class SongActivity extends ActionBarActivity {
                 Log.i(MediaReader.class.getName(), "Importing done");
 
             } catch (IOException e) {
-                Toast.makeText(SongActivity.this,
-                        "Kon de lijst met liedjes niet downloaden.",
-                        Toast.LENGTH_SHORT).show();
+                return 1;
             } catch (JSONException e) {
                 Log.e(SongActivity.class.getName(), "Fout bij JSON parsing", e);
-                Toast.makeText(SongActivity.this,
-                        "Kon de lijst met liedjes niet downloaden.",
-                        Toast.LENGTH_SHORT).show();
+                return 2;
             }
 
-            return null;
+            return 0;
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Integer result) {
             dialog.dismiss();
-            // TODO: load songs in fragment
+
+            if (result == 0) {
+                mSongListFragment.updateList();
+                return;
+            }
+
+                    Toast.makeText(SongActivity.this,
+                            "Kon de lijst met liedjes niet downloaden.",
+                            Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -182,9 +189,12 @@ public class SongActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
+        // TODO: check if this is the correct way
+        mSongListFragment = (SongListFragment)Fragment.instantiate(this,
+                SongListFragment.class.getName());
+
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(Fragment.instantiate(this,
-                SongListFragment.class.getName()));
+        fragments.add(mSongListFragment);
         fragments.add(Fragment.instantiate(this,
                 QueueListFragment.class.getName()));
         mPagerAdapter = new MyPageAdapter(super.getSupportFragmentManager(),
@@ -204,7 +214,6 @@ public class SongActivity extends ActionBarActivity {
             if (mediaDbHelper.isEmpty()) {
                 Log.i("", "Empty database, download songs");
                 new MediaReader().execute(MEDIA_URL);
-                // TODO: update list
             }
         }
 

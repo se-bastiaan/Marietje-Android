@@ -49,9 +49,11 @@ public class SongListFragment extends ListFragment implements
                 R.id.text1, R.id.text2}, 0);
         setListAdapter(mAdapter);
 
-        // Prepare the loader. Either re-connect with an existing one,
-        // or start a new one.
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    public void updateList() {
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
