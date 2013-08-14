@@ -37,7 +37,6 @@ public class SongActivity extends ActionBarActivity {
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
-    private SongListFragment mSongListFragment;
 
     public class MediaReader extends AsyncTask<String, Void, Integer> {
         private ProgressDialog dialog;
@@ -64,7 +63,7 @@ public class SongActivity extends ActionBarActivity {
                 inputStream = Utils.downloadUrl(urls[0]);
 
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream, "UTF-8"), 8);
+                        new InputStreamReader(inputStream, "UTF-8"), 8000);
                 StringBuilder sb = new StringBuilder();
 
                 String line = null;
@@ -95,7 +94,7 @@ public class SongActivity extends ActionBarActivity {
                         JSONArray vals = jObject.getJSONArray(names
                                 .getString(i));
 
-                        String title = vals.getString(1).trim().decode;
+                        String title = vals.getString(1).trim();
                         String artist = vals.getString(0).trim();
 
                         if (title == "" || artist == "") {
@@ -109,6 +108,8 @@ public class SongActivity extends ActionBarActivity {
                                 title);
                         values.put(MediaEntry.COLUMN_NAME_ARTIST,
                                 artist);
+                        values.put(MediaEntry.COLUMN_NAME_REQCOUNT,
+                                0); // TODO: keep this value if it has any
 
                         db.insert(MediaEntry.TABLE_NAME, null, values);
                     }
@@ -138,14 +139,15 @@ public class SongActivity extends ActionBarActivity {
         protected void onPostExecute(Integer result) {
             dialog.dismiss();
 
-            if (result == 0) {
-                mSongListFragment.updateList();
-                return;
-            }
+            // FIXME: fake insert to update list
+            getContentResolver().insert(MediaProvider.CONTENT_URI_FILTER, null);
+            getContentResolver().insert(MediaProvider.CONTENT_URI_FAVOURITES, null);
 
-                    Toast.makeText(SongActivity.this,
-                            "Kon de lijst met liedjes niet downloaden.",
-                            Toast.LENGTH_SHORT).show();
+            if (result != 0) {
+                Toast.makeText(SongActivity.this,
+                        "Kon de lijst met liedjes niet downloaden.",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -165,8 +167,10 @@ public class SongActivity extends ActionBarActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             if (position == 0)
-                return "Aanvragen";
+                return "Favorieten";
             if (position == 1)
+                return "Aanvragen";
+            if (position == 2)
                 return "Queue";
             return "";
         }
@@ -189,12 +193,11 @@ public class SongActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
-        // TODO: check if this is the correct way
-        mSongListFragment = (SongListFragment)Fragment.instantiate(this,
-                SongListFragment.class.getName());
-
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(mSongListFragment);
+        fragments.add(Fragment.instantiate(this,
+                FavouriteFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this,
+                SongListFragment.class.getName()));
         fragments.add(Fragment.instantiate(this,
                 QueueListFragment.class.getName()));
         mPagerAdapter = new MyPageAdapter(super.getSupportFragmentManager(),
@@ -202,6 +205,7 @@ public class SongActivity extends ActionBarActivity {
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(1); // set to request
     }
 
     @Override

@@ -23,5 +23,4 @@ public class Utils {
         conn.connect();
         return conn.getInputStream();
     }
-
 }

@@ -6,6 +6,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.marietje.MediaContract.MediaEntry;
 
@@ -14,6 +15,7 @@ public class MediaProvider extends ContentProvider {
 
     private static final int ALL_MEDIA = 1;
     private static final int SEARCH_SONG = 2;
+    private static final int FAVOURITES = 3;
 
     private static final String AUTHORITY = "com.example.marietje.songprovider";
 
@@ -25,6 +27,9 @@ public class MediaProvider extends ContentProvider {
     public static final Uri CONTENT_URI_FILTER = Uri.parse("content://" + AUTHORITY
             + "/search");
 
+    public static final Uri CONTENT_URI_FAVOURITES = Uri.parse("content://" + AUTHORITY
+            + "/fav");
+
     // a content URI pattern matches content URIs using wildcard characters:
     // *: Matches a string of any valid characters of any length.
     // #: Matches a string of numeric characters of any length.
@@ -34,23 +39,28 @@ public class MediaProvider extends ContentProvider {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(AUTHORITY, "media", ALL_MEDIA);
         uriMatcher.addURI(AUTHORITY, "search/*", SEARCH_SONG);
+        uriMatcher.addURI(AUTHORITY, "fav/", FAVOURITES);
     }
 
     @Override
-    public int delete(Uri arg0, String arg1, String[] arg2) {
-        // TODO Auto-generated method stub
+    public int delete(Uri uri, String where, String[] whereArgs) {
+        getContext().getContentResolver().notifyChange(uri, null);
         return 0;
     }
 
     @Override
-    public String getType(Uri arg0) {
-        // TODO Auto-generated method stub
+    public String getType(Uri uri) {
         return null;
     }
 
     @Override
-    public Uri insert(Uri arg0, ContentValues arg1) {
-        // TODO Auto-generated method stub
+    public Uri insert(Uri uri, ContentValues values) {
+        if (getContext().getContentResolver() == null) {
+            Log.e("", "faal");
+            return null;
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
         return null;
     }
 
@@ -75,6 +85,10 @@ public class MediaProvider extends ContentProvider {
                 queryBuilder.appendWhereEscapeString('%' + uri.getLastPathSegment() + '%');
 
                 break;
+            case FAVOURITES:
+                queryBuilder.appendWhere(MediaEntry.COLUMN_NAME_REQCOUNT + " > 0 ");
+                sortOrder = MediaEntry.COLUMN_NAME_REQCOUNT  + " DESC "; // FIXME: use original sortOrder?
+                break;
             default:
                 queryBuilder.appendWhere("1");
                 break;
@@ -89,8 +103,8 @@ public class MediaProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
-        // TODO Auto-generated method stub
+    public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
+        getContext().getContentResolver().notifyChange(uri, null);
         return 0;
     }
 

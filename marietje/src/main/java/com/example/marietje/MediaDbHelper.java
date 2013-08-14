@@ -8,9 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.marietje.MediaContract.MediaEntry;
 
 public class MediaDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "Media.db";
 
+    private static final String INT_TYPE = " int";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
@@ -18,7 +19,8 @@ public class MediaDbHelper extends SQLiteOpenHelper {
                     MediaEntry._ID + " INTEGER PRIMARY KEY," +
                     MediaEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP + // TODO: change type to int?
                     MediaEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
-                    MediaEntry.COLUMN_NAME_ARTIST + TEXT_TYPE +
+                    MediaEntry.COLUMN_NAME_ARTIST + TEXT_TYPE + COMMA_SEP +
+                    MediaEntry.COLUMN_NAME_REQCOUNT + INT_TYPE +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -31,15 +33,15 @@ public class MediaDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
-        System.out.println(SQL_CREATE_ENTRIES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
-        db.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(db);
+        if (oldVersion == 4 && newVersion == 5) {
+            // add request count
+            db.execSQL("ALTER TABLE " + MediaEntry.TABLE_NAME + " ADD " +
+                    MediaEntry.COLUMN_NAME_REQCOUNT + INT_TYPE + " DEFAULT 0");
+        }
     }
 
     @Override

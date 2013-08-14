@@ -10,72 +10,36 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.marietje.MediaContract.MediaEntry;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class SongListFragment extends ListFragment implements
-        OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
-    private final String REQUEST_URL = "http://marietje.marie-curie.nl:8080/request";
-
-    private String mCurFilter = "";
+// TODO: give SongListFragment extra parameters. Don't copy code.
+public class FavouriteFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private SimpleCursorAdapter mAdapter;
+    private final String REQUEST_URL = "http://marietje.marie-curie.nl:8080/request";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setEmptyText("Geen liedjes gevonden.");
         setHasOptionsMenu(true);
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
-                R.layout.songs_layout, null, new String[]{
-                MediaEntry.COLUMN_NAME_TITLE,
-                MediaEntry.COLUMN_NAME_ARTIST}, new int[]{
-                R.id.text1, R.id.text2}, 0);
+                R.layout.fav_layout, null, new String[]{
+                MediaContract.MediaEntry.COLUMN_NAME_TITLE,
+                MediaContract.MediaEntry.COLUMN_NAME_ARTIST,
+                MediaContract.MediaEntry.COLUMN_NAME_REQCOUNT}, new int[]{
+                R.id.text1, R.id.text2, R.id.text3}, 0);
         setListAdapter(mAdapter);
 
         getLoaderManager().initLoader(0, null, this);
-    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Place an action bar item for searching.
-        MenuItem item = menu.add("Zoeken");
-        item.setIcon(android.R.drawable.ic_menu_search);
-        MenuItemCompat.setShowAsAction(item,
-                MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-        SearchView sv = new SearchView(getActivity());
-        sv.setOnQueryTextListener(this);
-        MenuItemCompat.setActionView(item, sv);
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        //mCurFilter = !TextUtils.isEmpty(newText) ? newText : null;
-        mCurFilter = newText;
-        getLoaderManager().restartLoader(0, null, this);
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        // Don't care about this.
-        return true;
     }
 
     @Override
@@ -116,8 +80,9 @@ public class SongListFragment extends ListFragment implements
                     /* Increase the request count */
                     MediaDbHelper mediaDbHelper = new MediaDbHelper(getActivity());
                     SQLiteDatabase db = mediaDbHelper.getWritableDatabase();
-                    db.execSQL("UPDATE " + MediaEntry.TABLE_NAME + " SET " + MediaEntry.COLUMN_NAME_REQCOUNT + " = "
-                            + MediaEntry.COLUMN_NAME_REQCOUNT + " + 1 WHERE " + MediaEntry.COLUMN_NAME_ENTRY_ID + " = " +
+
+                    db.execSQL("UPDATE " + MediaContract.MediaEntry.TABLE_NAME + " SET " + MediaContract.MediaEntry.COLUMN_NAME_REQCOUNT + " = "
+                            + MediaContract.MediaEntry.COLUMN_NAME_REQCOUNT + " + 1 WHERE " + MediaContract.MediaEntry.COLUMN_NAME_ENTRY_ID + " = " +
                             c.getString(1)); // FIXME: move, plus: is this safe?
                     db.close();
 
@@ -135,7 +100,6 @@ public class SongListFragment extends ListFragment implements
                             c.getString(2) + " aangevraagd.",
                             Toast.LENGTH_SHORT).show();
 
-                    // TODO: check not null activity
                     getActivity().getContentResolver().insert(MediaProvider.CONTENT_URI_FAVOURITES, null); // FIXME: fake insert to update list
                 }
                 if (result == 1) {
@@ -151,20 +115,19 @@ public class SongListFragment extends ListFragment implements
                 }
             }
 
-            ;
-
         }.execute();
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri baseUri = Uri.withAppendedPath(MediaProvider.CONTENT_URI_FILTER,
-                Uri.encode(mCurFilter));
+        Uri baseUri = MediaProvider.CONTENT_URI_FAVOURITES;
 
+        // TODO: where to do sorting?
         return new CursorLoader(getActivity(), baseUri, new String[]{"_id",
-                MediaEntry.COLUMN_NAME_ENTRY_ID, MediaEntry.COLUMN_NAME_TITLE,
-                MediaEntry.COLUMN_NAME_ARTIST}, null, null, MediaEntry.COLUMN_NAME_TITLE + "," +
-                MediaEntry.COLUMN_NAME_ARTIST);
+                MediaContract.MediaEntry.COLUMN_NAME_ENTRY_ID, MediaContract.MediaEntry.COLUMN_NAME_TITLE,
+                MediaContract.MediaEntry.COLUMN_NAME_ARTIST, MediaContract.MediaEntry.COLUMN_NAME_REQCOUNT},
+                null, null, MediaContract.MediaEntry.COLUMN_NAME_TITLE + "," +
+                MediaContract.MediaEntry.COLUMN_NAME_ARTIST);
     }
 
     @Override
