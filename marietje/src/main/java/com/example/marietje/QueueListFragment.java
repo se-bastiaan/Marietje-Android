@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,26 +14,60 @@ import android.widget.Toast;
 
 import com.example.marietje.QueueXMLParser.Entry;
 
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class QueueListFragment extends ListFragment {
+    private final String NOW_PLAYING_URL = "http://marietje.marie-curie.nl:8080/playing";
     private final String QUEUE_URL = "http://marietje.marie-curie.nl:8080/requests";
     private final int UPDATE_DELAY = 2000;
     private final int UPDATE_DELAY_ERROR = 10000;
-    private boolean doUpdate;
+    private Thread updateThread = null;
+
+    // TODO: move?
+    public Entry getCurrentPlaying() throws XmlPullParserException, IOException {
+        InputStream stream = Utils.downloadUrl(NOW_PLAYING_URL);
+
+        XmlPullParser parser = Xml.newPullParser();
+        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,
+                false);
+        parser.setInput(stream, null);
+        parser.nextTag();
+
+        parser.require(XmlPullParser.START_TAG, null, "playing");
+        String title = parser.getAttributeValue(null, "title");
+        String artist = parser.getAttributeValue(null, "artist");
+        String requester = parser.getAttributeValue(null, "requestedBy");
+
+        if (requester == null) {
+            requester = "marietje";
+        }
+
+        parser.nextTag();
+        parser.require(XmlPullParser.END_TAG, null, "playing");
+
+        stream.close();
+
+        return new Entry(title, artist, requester);
+    }
 
     public void startUpdate() {
+        /* Kill old thread */
+        if (updateThread != null) {
+            updateThread.interrupt();
+        }
+
         final Handler handler = new Handler();
-        doUpdate = true;
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                while (doUpdate) {
+                while (true) {
                     Log.i("", "Doing an update...");
 
                     ArrayAdapter<String[]> adapter = null;
@@ -43,6 +78,8 @@ public class QueueListFragment extends ListFragment {
                         InputStream stream = Utils.downloadUrl(QUEUE_URL);
                         List<Entry> entries = parser.parse(stream);
                         stream.close();
+
+                        entries.add(0, getCurrentPlaying());
 
                         final List<String[]> data = new ArrayList<String[]>();
 
@@ -140,14 +177,16 @@ public class QueueListFragment extends ListFragment {
                             Thread.sleep(UPDATE_DELAY);
                         }
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Log.i("", "Thread interrupted");
+                        return; // stop the thread
                     }
 
                 }
             }
         };
 
-        new Thread(r).start(); // start updating
+        updateThread = new Thread(r);
+        updateThread.start(); // start updating
     }
 
     @Override
@@ -165,12 +204,24 @@ public class QueueListFragment extends ListFragment {
 
         if (isVisibleToUser) {
             Log.i("", "Visible");
+
             startUpdate();
-        }
-        else {
+        } else {
             Log.i("", "Queue updates disabled");
-            doUpdate = false; // FIXME: does this guarantee that the thread stops?
+
+            if (updateThread != null) {
+                updateThread.interrupt();
+            }
         }
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (updateThread != null) {
+            updateThread.interrupt();
+        }
     }
 }

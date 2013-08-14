@@ -13,7 +13,7 @@ import java.util.List;
 public class QueueXMLParser {
     private final String ns = null;
 
-    public class Entry {
+    public static class Entry {
         public String title;
         public String artist;
         public String requester;
