@@ -81,6 +81,9 @@ public class SongListFragment extends ListFragment implements
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         final Cursor c = (Cursor) l.getItemAtPosition(position);
+        final String songID = c.getString(1);
+        final String title = c.getString(2); // store, because cursor gets recycled and might change
+
 
         // TODO: move to listener?
         new AsyncTask<Void, Void, Integer>() {
@@ -97,7 +100,7 @@ public class SongListFragment extends ListFragment implements
                                     + settings.getString("username", "user")
                                     + "/"
                                     + settings.getString("password", "pass")
-                                    + "/" + c.getString(1));
+                                    + "/" + songID);
 
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(res, "UTF-8"), 8);
@@ -118,7 +121,7 @@ public class SongListFragment extends ListFragment implements
                     SQLiteDatabase db = mediaDbHelper.getWritableDatabase();
                     db.execSQL("UPDATE " + MediaEntry.TABLE_NAME + " SET " + MediaEntry.COLUMN_NAME_REQCOUNT + " = "
                             + MediaEntry.COLUMN_NAME_REQCOUNT + " + 1 WHERE " + MediaEntry.COLUMN_NAME_ENTRY_ID + " = " +
-                            c.getString(1)); // FIXME: move, plus: is this safe?
+                            songID); // FIXME: move, plus: is this safe?
                     db.close();
 
                 } catch (IOException e) {
@@ -132,7 +135,7 @@ public class SongListFragment extends ListFragment implements
             protected void onPostExecute(Integer result) {
                 if (result == 0) {
                     Toast.makeText(getActivity(),
-                            c.getString(2) + " aangevraagd.",
+                            title + " aangevraagd.",
                             Toast.LENGTH_SHORT).show();
 
                     // TODO: check not null activity

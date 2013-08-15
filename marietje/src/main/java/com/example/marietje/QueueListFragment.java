@@ -147,7 +147,8 @@ public class QueueListFragment extends ListFragment {
 
                         @Override
                         public void run() {
-                            if (ada != null) {
+                            // only update when view exists
+                            if (ada != null && isVisible()) {
                                 // restore view position
                                 int index = getListView().getFirstVisiblePosition();
                                 View v = getListView().getChildAt(0);
@@ -159,8 +160,7 @@ public class QueueListFragment extends ListFragment {
 
                                 Log.i("", "Finished update");
                             } else {
-                                // display error
-                                if (getActivity() != null) {
+                                if (isVisible()) {
                                     Toast.makeText(getActivity(),
                                             "Kon de queue niet laden",
                                             Toast.LENGTH_SHORT).show();
