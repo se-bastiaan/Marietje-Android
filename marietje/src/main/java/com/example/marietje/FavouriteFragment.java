@@ -104,7 +104,7 @@ public class FavouriteFragment extends ListFragment implements LoaderManager.Loa
                 }
                 if (result == 1) {
                     Toast.makeText(getActivity(),
-                            "Kon liedje niet aangevragen.", Toast.LENGTH_SHORT)
+                            "Kon liedje niet aanvragen.", Toast.LENGTH_SHORT)
                             .show();
                 }
                 if (result == 2) {

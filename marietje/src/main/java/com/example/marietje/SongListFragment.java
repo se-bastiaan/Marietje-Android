@@ -143,7 +143,7 @@ public class SongListFragment extends ListFragment implements
                 }
                 if (result == 1) {
                     Toast.makeText(getActivity(),
-                            "Kon liedje niet aangevragen.", Toast.LENGTH_SHORT)
+                            "Kon liedje niet aanvragen.", Toast.LENGTH_SHORT)
                             .show();
                 }
                 if (result == 2) {
