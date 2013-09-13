@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -88,6 +89,17 @@ public class SongActivity extends ActionBarActivity {
 
                 try {
                     db.beginTransaction(); // speeds up insertion
+
+                    // save the request counts
+                    Cursor c = db.query(MediaEntry.TABLE_NAME, new String[]{MediaEntry.COLUMN_NAME_ENTRY_ID, MediaEntry.COLUMN_NAME_REQCOUNT},
+                            MediaEntry.COLUMN_NAME_REQCOUNT + " > 0", null, null, null, null);
+                    List<String[]> reqList = new ArrayList<String[]>();
+
+                    while (c.moveToNext()) {
+                        reqList.add(new String[]{c.getString(0), c.getString(1)});
+                    }
+                    c.close();
+
                     db.delete(MediaEntry.TABLE_NAME, null, null); // clear table
 
                     for (int i = 0; i < names.length(); i++) {
@@ -112,6 +124,14 @@ public class SongActivity extends ActionBarActivity {
                                 0); // TODO: keep this value if it has any
 
                         db.insert(MediaEntry.TABLE_NAME, null, values);
+                    }
+
+                    // restore the request counts
+                    for (String[] v : reqList) {
+                        ContentValues values = new ContentValues();
+                        values.put(MediaEntry.COLUMN_NAME_REQCOUNT, v[1]);
+
+                        db.update(MediaEntry.TABLE_NAME, values, MediaEntry.COLUMN_NAME_ENTRY_ID + " = " + v[0], null);
                     }
 
                     db.setTransactionSuccessful();
