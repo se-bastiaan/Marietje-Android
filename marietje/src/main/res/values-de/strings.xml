@@ -37,6 +37,6 @@
     <string name="queue">Queue</string>
 
     <!-- About -->
-    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the 'Marietje App' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
+    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
 
 </resources>

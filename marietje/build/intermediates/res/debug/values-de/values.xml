@@ -17,5 +17,31 @@
     <string name="abc_searchview_description_voice" msgid="893419373245838918">"Sprachsuche"</string>
     <string name="abc_shareactionprovider_share_with" msgid="3421042268587513524">"Freigeben für"</string>
     <string name="abc_shareactionprovider_share_with_application" msgid="7165123711973476752">"Freigeben für %s"</string>
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values-de/strings.xml -->
+    <eat-comment />
+
+    <string name="about_mariedroid">Über MarieDroid</string>
+    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
+    <string name="action_refresh">Aktualisieren Songs</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="app_name">MarieDroid</string>
+    <string name="error_loading_media">Die Tracklist konnte nicht heruntergeladen werden</string>
+    <string name="favourites">Favoriten</string>
+    <string name="has_been_requested">has been requested.</string>
+    <string name="in_queue">Dieser Song ist bereits in der Queue</string>
+    <string name="incorrect_login">Die Kombination der Benutzername und Passwort ist nicht korrekt</string>
+    <string name="loading_media">Liste der Songs herunterladen…</string>
+    <string name="loading_queue">Queue herunterladen…</string>
+    <string name="login">Login</string>
+    <string name="logout">Ausloggen</string>
+    <string name="no_songs">Keine Songs gefunden…</string>
+    <string name="password">Password</string>
+    <string name="queue">Queue</string>
+    <string name="request">Requests</string>
+    <string name="search">Suchen</string>
+    <string name="song_request_error">Der Song könnte nicht angefragt werden</string>
+    <string name="unknown_error">Ein unbekannter Fehler ist aufgetreten</string>
+    <string name="username">Benutzername</string>
+    <string name="wrong_login">Falsche Anmeldedaten. Bitte versuche es erneut</string>
 
 </resources>

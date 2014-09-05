@@ -10,6 +10,7 @@ import nl.ru.science.mariedroid.Constants;
 public class MediaDbHelper extends SQLiteOpenHelper {
 
     private static final String INT_TYPE = " int";
+    private static final String FLOAT_TYPE = " float";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
@@ -18,7 +19,8 @@ public class MediaDbHelper extends SQLiteOpenHelper {
                     MediaEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
                     MediaEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     MediaEntry.COLUMN_NAME_ARTIST + TEXT_TYPE + COMMA_SEP +
-                    MediaEntry.COLUMN_NAME_REQCOUNT + INT_TYPE +
+                    MediaEntry.COLUMN_NAME_REQCOUNT + INT_TYPE + COMMA_SEP +
+                    MediaEntry.COLUMN_NAME_LENGTH + FLOAT_TYPE +
                     " )";
 
     public MediaDbHelper(Context context) {
@@ -32,11 +34,7 @@ public class MediaDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 4 && newVersion == 5) {
-            // add request count
-            db.execSQL("ALTER TABLE " + MediaEntry.TABLE_NAME + " ADD " +
-                    MediaEntry.COLUMN_NAME_REQCOUNT + INT_TYPE + " DEFAULT 0");
-        }
+        // Nothing, yet.
     }
 
     @Override

@@ -17,5 +17,31 @@
     <string name="abc_searchview_description_voice" msgid="893419373245838918">"Gesproken zoekopdracht"</string>
     <string name="abc_shareactionprovider_share_with" msgid="3421042268587513524">"Delen met"</string>
     <string name="abc_shareactionprovider_share_with_application" msgid="7165123711973476752">"Delen met %s"</string>
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values-nl/strings.xml -->
+    <eat-comment />
+
+    <string name="about_mariedroid">Over MarieDroid</string>
+    <string name="about_text">Deze applicatie geeft je de mogelijkheid om nieuwe nummers aan de wachtrij van de muziekcomputers, aka Marietje en Marietje-Noord, in de Noord- &amp; Zuidkantine van het Huygensgebouw (Radboud Universiteit) toe te voegen.\n\nDeze applicatie is gebaseerd op de \'Marietje App\' van Ben Ruijl (github.com/benruijl).\n\nDe broncode is te vinden op http://github.com/se-bastiaan/MarieDroid, verbeteringen zijn altijd welkom.</string>
+    <string name="action_refresh">Ververs liedjes</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="app_name">MarieDroid</string>
+    <string name="error_loading_media">Kon de lijst met liedjes niet downloaden.</string>
+    <string name="favourites">Favorieten</string>
+    <string name="has_been_requested">is aangevraagd.</string>
+    <string name="in_queue">Dit liedje staat al in de wachtrij</string>
+    <string name="incorrect_login">De combinatie van gebruikersnaam en wachtwoord is incorrect.</string>
+    <string name="loading_media">Lijst met liedjes downloaden…</string>
+    <string name="loading_queue">Wachtrij ophalen…</string>
+    <string name="login">Inloggen</string>
+    <string name="logout">Uitloggen</string>
+    <string name="no_songs">Geen liedjes gevonden…</string>
+    <string name="password">Wachtwoord</string>
+    <string name="queue">Wachtrij</string>
+    <string name="request">Aanvragen</string>
+    <string name="search">Zoeken</string>
+    <string name="song_request_error">Het liedje kon niet worden aangevraagd.</string>
+    <string name="unknown_error">Er is een onbekende fout opgetreden</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="wrong_login">Verkeerde inloggegevens. Log uit en probeer het opnieuw.</string>
 
 </resources>

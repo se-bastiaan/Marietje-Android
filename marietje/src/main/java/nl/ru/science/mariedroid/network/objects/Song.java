@@ -38,6 +38,7 @@ public class Song {
     public String artist;
     public String title;
     public Integer requestCount;
+    public Float length;
 
     public Song(String id, String artist, String title, Integer requestCount) {
         this.id = id;

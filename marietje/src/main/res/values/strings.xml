@@ -16,15 +16,15 @@
     <string name="logout">Logout</string>
 
     <!-- Errors -->
-    <string name="unknown_error">We've encountered an unknown error</string>
+    <string name="unknown_error">We\'ve encountered an unknown error</string>
     <string name="incorrect_login">The combination of username and password is incorrect.</string>
     <string name="wrong_login">Incorrect credentials. Logout and try again.</string>
-    <string name="song_request_error">Couldn't request song.</string>
-    <string name="error_loading_media">Couldn't download the tracklist.</string>
+    <string name="song_request_error">Couldn\'t request song.</string>
+    <string name="error_loading_media">Couldn\'t download the tracklist.</string>
     <string name="in_queue">This song is already in the queue</string>
 
     <!-- Messages -->
-    <string name="no_songs">Couldn't find any songs…</string>
+    <string name="no_songs">Couldn\'t find any songs…</string>
     <string name="loading_queue">Loading queue…</string>
     <string name="loading_media">Downloading tracklist…</string>
     <string name="has_been_requested">has been requested.</string>
@@ -35,6 +35,6 @@
     <string name="queue">Queue</string>
 
     <!-- About -->
-    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the 'Marietje App' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
+    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
 
 </resources>

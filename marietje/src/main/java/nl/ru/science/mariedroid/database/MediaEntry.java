@@ -8,4 +8,5 @@ public class MediaEntry implements BaseColumns {
     public static final String COLUMN_NAME_TITLE = "title";
     public static final String COLUMN_NAME_ARTIST = "artist";
     public static final String COLUMN_NAME_REQCOUNT = "reqcount";
+    public static final String COLUMN_NAME_LENGTH = "length";
 }
