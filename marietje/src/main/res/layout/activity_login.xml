@@ -32,44 +32,55 @@
     <!-- Login form -->
 
     <ScrollView
-            android:id="@+id/login_form"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <LinearLayout
                 style="@style/LoginFormContainer"
                 android:orientation="vertical">
 
-            <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Vul een gebruikersnaam in"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true"/>
+            <Spinner
+                android:id="@+id/instance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
             <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Vul een wachtwoord in"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="Inloggen"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"/>
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/login"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                />
 
             <Button
-                    android:id="@+id/sign_in_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="16dp"
-                    android:paddingLeft="32dp"
-                    android:paddingRight="32dp"
-                    android:text="Inloggen"/>
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/login"
+                android:onClick="loginClick"
+                />
         </LinearLayout>
     </ScrollView>
 
