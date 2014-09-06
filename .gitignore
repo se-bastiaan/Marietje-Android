@@ -27,6 +27,7 @@ local.properties
 /*/*/build
 /*/build
 */build
+build/
 /*/*/production
 *.iml
 *.iws
