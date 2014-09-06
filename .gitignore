@@ -33,5 +33,6 @@ build/
 *.iws
 *.ipr
 *.jks
+*.map
 *~
 *.swp
