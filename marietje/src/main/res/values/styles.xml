@@ -33,6 +33,10 @@
                 <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Radboud.Widget</item>
 
+        <item name="android:editTextStyle">@style/EditText.Radboud</item>
+        <item name="android:listViewStyle">@style/ListView.Radboud</item>
+        <item name="android:listViewWhiteStyle">@style/ListView.Radboud.White</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItem.Radboud</item>
     </style>
 
     <style name="ActionBar.Solid.Radboud" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -83,6 +87,23 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="EditText.Radboud" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/radboud_edit_text_holo_light</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="ListView.Radboud" parent="android:Widget.ListView">
+        <item name="android:listSelector">@drawable/radboud_list_selector_holo_light</item>
+    </style>
+
+    <style name="ListView.Radboud.White" parent="android:Widget.ListView.White">
+        <item name="android:listSelector">@drawable/radboud_list_selector_holo_light</item>
+    </style>
+
+    <style name="SpinnerItem.Radboud" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#000000</item>
     </style>
 
 </resources>

@@ -1956,9 +1956,10 @@ android.support.v4.widget.ViewDragHelper$Callback -> android.support.v4.widget.V
     304:304:int clampViewPositionHorizontal$17e143b0(android.view.View,int) -> b
     319:319:int clampViewPositionVertical$17e143b0(android.view.View) -> d
 android.support.v7.app.ActionBar -> android.support.v7.app.ActionBar:
-    void setSelectedNavigationItem(int) -> a
+    void setLogo(int) -> a
+    void setSelectedNavigationItem(int) -> b
     void setDisplayHomeAsUpEnabled(boolean) -> a
-    void setNavigationMode(int) -> b
+    void setNavigationMode(int) -> c
     int getDisplayOptions() -> a
     android.support.v7.app.ActionBar$Tab newTab() -> b
     void addTab(android.support.v7.app.ActionBar$Tab) -> a
@@ -2162,10 +2163,11 @@ android.support.v7.app.ActionBarImplBase -> android.support.v7.app.ActionBarImpl
     boolean mShowHideAnimationEnabled -> x
     android.support.v7.app.ActionBar$Callback mCallback -> y
     155:173:void setHasEmbeddedTabs(boolean) -> c
-    225:233:void setSelectedNavigationItem(int) -> a
+    209:210:void setLogo(int) -> a
+    225:233:void setSelectedNavigationItem(int) -> b
     312:313:void setDisplayHomeAsUpEnabled(boolean) -> a
     327:328:void setHomeButtonEnabled(boolean) -> b
-    367:387:void setNavigationMode(int) -> b
+    367:387:void setNavigationMode(int) -> c
     391:391:int getDisplayOptions() -> a
     396:396:android.support.v7.app.ActionBar$Tab newTab() -> b
     401:402:void addTab(android.support.v7.app.ActionBar$Tab) -> a
@@ -2213,9 +2215,10 @@ android.support.v7.app.ActionBarImplICS -> android.support.v7.app.ActionBarImplI
     android.app.ActionBar mActionBar -> c
     android.support.v4.app.FragmentTransaction mActiveTransaction -> d
     java.util.ArrayList mAddedMenuVisWrappers -> e
-    124:125:void setSelectedNavigationItem(int) -> a
+    108:109:void setLogo(int) -> a
+    124:125:void setSelectedNavigationItem(int) -> b
     179:180:void setDisplayHomeAsUpEnabled(boolean) -> a
-    229:230:void setNavigationMode(int) -> b
+    229:230:void setNavigationMode(int) -> c
     234:234:int getDisplayOptions() -> a
     239:242:android.support.v7.app.ActionBar$Tab newTab() -> b
     247:248:void addTab(android.support.v7.app.ActionBar$Tab) -> a
@@ -2245,9 +2248,10 @@ android.support.v7.app.ActionBarImplJB -> android.support.v7.app.ActionBarImplJB
     20:20:void addTab(android.support.v7.app.ActionBar$Tab) -> a
     20:20:android.support.v7.app.ActionBar$Tab newTab() -> b
     20:20:int getDisplayOptions() -> a
-    20:20:void setNavigationMode(int) -> b
+    20:20:void setNavigationMode(int) -> c
     20:20:void setDisplayHomeAsUpEnabled(boolean) -> a
-    20:20:void setSelectedNavigationItem(int) -> a
+    20:20:void setSelectedNavigationItem(int) -> b
+    20:20:void setLogo(int) -> a
 android.support.v7.app.ActionBarImplJBMR2 -> android.support.v7.app.ActionBarImplJBMR2:
 android.support.v7.appcompat.R -> android.support.v7.appcompat.R:
 android.support.v7.appcompat.R$anim -> android.support.v7.appcompat.R$anim:
@@ -6361,8 +6365,8 @@ nl.ru.science.mariedroid.activities.AboutActivity -> nl.ru.science.mariedroid.ac
 nl.ru.science.mariedroid.activities.BaseActivity -> nl.ru.science.mariedroid.activities.BaseActivity:
     nl.ru.science.mariedroid.network.ApiHelper mApi -> o
     android.support.v7.app.ActionBar mActionBar -> p
-    20:21:void onCreate(android.os.Bundle) -> onCreate
-    24:29:void onCreate(android.os.Bundle,java.lang.Integer) -> a
+    21:22:void onCreate(android.os.Bundle) -> onCreate
+    25:31:void onCreate(android.os.Bundle,java.lang.Integer) -> a
 nl.ru.science.mariedroid.activities.LoginActivity -> nl.ru.science.mariedroid.activities.LoginActivity:
     com.koushikdutta.async.future.Future mAuthFuture -> w
     java.lang.String mUsername -> x
@@ -6441,7 +6445,8 @@ nl.ru.science.mariedroid.database.MediaProvider -> nl.ru.science.mariedroid.data
     104:105:int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[]) -> update
 nl.ru.science.mariedroid.fragments.BaseListFragment -> nl.ru.science.mariedroid.fragments.BaseListFragment:
     nl.ru.science.mariedroid.network.ApiHelper mApi -> X
-    17:19:void onCreate(android.os.Bundle) -> a
+    19:21:void onCreate(android.os.Bundle) -> a
+    25:27:void onViewCreated(android.view.View,android.os.Bundle) -> a
 nl.ru.science.mariedroid.fragments.FavouriteFragment -> nl.ru.science.mariedroid.fragments.FavouriteFragment:
     android.support.v4.widget.SimpleCursorAdapter mAdapter -> Y
     24:37:void onActivityCreated(android.os.Bundle) -> b
