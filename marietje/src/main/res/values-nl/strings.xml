@@ -41,6 +41,6 @@
     <string name="queue">Wachtrij</string>
 
     <!-- About -->
-    <string name="about_text">Deze applicatie geeft je de mogelijkheid om nieuwe nummers aan de wachtrij van de muziekcomputers, aka Marietje en Marietje-Noord, in de Noord- &amp; Zuidkantine van het Huygensgebouw (Radboud Universiteit) toe te voegen.\n\nDeze applicatie is gebaseerd op de \'Marietje App\' van Ben Ruijl (github.com/benruijl).\n\nDe broncode is te vinden op http://github.com/se-bastiaan/MarieDroid, verbeteringen zijn altijd welkom.</string>
+    <string name="about_text">Deze applicatie geeft je de mogelijkheid om nieuwe nummers toe te voegen aan de wachtrij van de muziekcomputers, aka Marietje en Marietje-Noord, in de Noord- &amp; Zuidkantine van het Huygensgebouw (Radboud Universiteit).\n\nDeze applicatie is gebaseerd op de \'Marietje App\' van Ben Ruijl (github.com/benruijl).\n\nDe broncode is te vinden op http://github.com/se-bastiaan/MarieDroid, verbeteringen zijn altijd welkom.</string>
 
 </resources>
