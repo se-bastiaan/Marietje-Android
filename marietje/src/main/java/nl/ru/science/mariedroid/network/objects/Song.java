@@ -46,9 +46,13 @@ public class Song {
         this.title = title;
         this.requestCount= requestCount;
     }
-    
-    public void request(final BaseListFragment fragment, ApiHelper api) {
-        final Context context = fragment.getActivity();
+
+    /**
+     * Request song on server and handle response by giving feedback using a Toast
+     * @param context Context
+     * @param api ApiHelper
+     */
+    public void request(final Context context, ApiHelper api) {
         if(!PrefUtils.getUsername(context, "").isEmpty() && !PrefUtils.getPassword(context, "").isEmpty()) {
             api.requestSong(this, new FutureCallback<ApiHelper.SongRequestResult>() {
                 @Override

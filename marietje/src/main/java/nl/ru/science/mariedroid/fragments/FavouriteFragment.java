@@ -45,7 +45,7 @@ public class FavouriteFragment extends BaseListFragment implements LoaderManager
                 cursor.getString(cursor.getColumnIndex(MediaEntry.COLUMN_NAME_TITLE)),
                 cursor.getInt(cursor.getColumnIndex(MediaEntry.COLUMN_NAME_REQCOUNT))
         );
-        song.request(this, mApi);
+        song.request(getActivity(), mApi);
     }
 
     @Override

@@ -9,6 +9,11 @@ import android.content.pm.PackageManager;
  */
 public class AppUtils {
 
+    /**
+     * Get application versionCode
+     * @param context Context
+     * @return versionCode as Integer
+     */
     public static int getAppVersion(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager()

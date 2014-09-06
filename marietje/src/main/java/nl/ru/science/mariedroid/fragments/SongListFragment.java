@@ -84,7 +84,7 @@ public class SongListFragment extends BaseListFragment implements OnQueryTextLis
                 cursor.getString(2),
                 cursor.getInt(4)
         );
-        song.request(this, mApi);
+        song.request(getActivity(), mApi);
     }
 
     @Override

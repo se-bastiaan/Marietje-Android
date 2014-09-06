@@ -6360,6 +6360,38 @@ nl.ru.science.mariedroid.Constants -> nl.ru.science.mariedroid.Constants:
     java.lang.String[] INSTANCE_NAMES -> b
     java.lang.String[] INSTANCE_URLS -> c
     java.lang.Integer DATABASE_VERSION -> d
+nl.ru.science.mariedroid.ObscuredSharedPreferences -> nl.ru.science.mariedroid.ObscuredSharedPreferences:
+    char[] SEKRIT -> c
+    android.content.SharedPreferences delegate -> a
+    android.content.Context context -> b
+    114:114:nl.ru.science.mariedroid.ObscuredSharedPreferences$Editor edit() -> a
+    120:120:java.util.Map getAll() -> getAll
+    125:126:boolean getBoolean(java.lang.String,boolean) -> getBoolean
+    131:132:float getFloat(java.lang.String,float) -> getFloat
+    137:138:int getInt(java.lang.String,int) -> getInt
+    143:144:long getLong(java.lang.String,long) -> getLong
+    149:150:java.lang.String getString(java.lang.String,java.lang.String) -> getString
+    156:156:java.util.Set getStringSet(java.lang.String,java.util.Set) -> getStringSet
+    161:161:boolean contains(java.lang.String) -> contains
+    166:167:void registerOnSharedPreferenceChangeListener(android.content.SharedPreferences$OnSharedPreferenceChangeListener) -> registerOnSharedPreferenceChangeListener
+    171:172:void unregisterOnSharedPreferenceChangeListener(android.content.SharedPreferences$OnSharedPreferenceChangeListener) -> unregisterOnSharedPreferenceChangeListener
+    176:183:java.lang.String encrypt(java.lang.String) -> a
+    189:196:java.lang.String decrypt(java.lang.String) -> b
+    30:30:android.content.SharedPreferences$Editor edit() -> edit
+nl.ru.science.mariedroid.ObscuredSharedPreferences$Editor -> nl.ru.science.mariedroid.ObscuredSharedPreferences$Editor:
+    android.content.SharedPreferences$Editor delegate -> a
+    nl.ru.science.mariedroid.ObscuredSharedPreferences this$0 -> b
+    79:80:nl.ru.science.mariedroid.ObscuredSharedPreferences$Editor putString(java.lang.String,java.lang.String) -> a
+    86:87:android.content.SharedPreferences$Editor putStringSet(java.lang.String,java.util.Set) -> putStringSet
+    92:93:void apply() -> apply
+    103:103:boolean commit() -> commit
+    46:46:android.content.SharedPreferences$Editor clear() -> clear
+    46:46:android.content.SharedPreferences$Editor remove(java.lang.String) -> remove
+    46:46:android.content.SharedPreferences$Editor putBoolean(java.lang.String,boolean) -> putBoolean
+    46:46:android.content.SharedPreferences$Editor putFloat(java.lang.String,float) -> putFloat
+    46:46:android.content.SharedPreferences$Editor putLong(java.lang.String,long) -> putLong
+    46:46:android.content.SharedPreferences$Editor putInt(java.lang.String,int) -> putInt
+    46:46:android.content.SharedPreferences$Editor putString(java.lang.String,java.lang.String) -> putString
 nl.ru.science.mariedroid.activities.AboutActivity -> nl.ru.science.mariedroid.activities.AboutActivity:
     14:15:void onCreate(android.os.Bundle) -> onCreate
 nl.ru.science.mariedroid.activities.BaseActivity -> nl.ru.science.mariedroid.activities.BaseActivity:
@@ -6404,29 +6436,29 @@ nl.ru.science.mariedroid.activities.LoginActivity$4 -> nl.ru.science.mariedroid.
 nl.ru.science.mariedroid.activities.MainActivity -> nl.ru.science.mariedroid.activities.MainActivity:
     android.app.ProgressDialog mDialog -> r
     android.support.v4.view.ViewPager viewPager -> q
-    41:65:void onCreate(android.os.Bundle) -> onCreate
-    69:79:void onResume() -> onResume
-    84:85:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    90:101:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    129:148:void refreshMediaDatabase() -> c
-    32:32:android.app.ProgressDialog access$000(nl.ru.science.mariedroid.activities.MainActivity) -> a
+    43:77:void onCreate(android.os.Bundle) -> onCreate
+    81:91:void onResume() -> onResume
+    96:97:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    102:113:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    141:160:void refreshMediaDatabase() -> c
+    34:34:android.app.ProgressDialog access$000(nl.ru.science.mariedroid.activities.MainActivity) -> a
 nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector -> nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector:
     10:12:void inject(butterknife.ButterKnife$Finder,nl.ru.science.mariedroid.activities.MainActivity,java.lang.Object) -> inject
     15:16:void reset(nl.ru.science.mariedroid.activities.MainActivity) -> reset
 nl.ru.science.mariedroid.activities.MainActivity$1 -> nl.ru.science.mariedroid.activities.MainActivity$1:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    61:62:void onPageSelected(int) -> a
+    73:74:void onPageSelected(int) -> a
 nl.ru.science.mariedroid.activities.MainActivity$2 -> nl.ru.science.mariedroid.activities.MainActivity$2:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    111:112:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
+    123:124:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
 nl.ru.science.mariedroid.activities.MainActivity$3 -> nl.ru.science.mariedroid.activities.MainActivity$3:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    134:134:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    146:146:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.activities.MainActivity$PageAdapter -> nl.ru.science.mariedroid.activities.MainActivity$PageAdapter:
     java.util.List fragments -> c
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> b
-    160:160:android.support.v4.app.Fragment getItem(int) -> a
-    176:176:int getCount() -> c
+    172:172:android.support.v4.app.Fragment getItem(int) -> a
+    188:188:int getCount() -> c
 nl.ru.science.mariedroid.database.MediaDbHelper -> nl.ru.science.mariedroid.database.MediaDbHelper:
     32:33:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     38:38:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
@@ -6460,9 +6492,10 @@ nl.ru.science.mariedroid.fragments.QueueListFragment -> nl.ru.science.mariedroid
     android.os.Handler updateHandler -> aa
     java.lang.Runnable updateRunnable -> ab
     57:60:void onCreate(android.os.Bundle) -> a
-    79:83:void onActivityCreated(android.os.Bundle) -> b
-    87:99:void setUserVisibleHint(boolean) -> b
-    103:108:void onPause() -> g
+    64:66:void onViewCreated(android.view.View,android.os.Bundle) -> a
+    85:89:void onActivityCreated(android.os.Bundle) -> b
+    93:105:void setUserVisibleHint(boolean) -> b
+    109:114:void onPause() -> g
     17:17:java.util.ArrayList access$002(nl.ru.science.mariedroid.fragments.QueueListFragment,java.util.ArrayList) -> a
     17:17:java.util.ArrayList access$000(nl.ru.science.mariedroid.fragments.QueueListFragment) -> a
     17:17:java.lang.Runnable access$100(nl.ru.science.mariedroid.fragments.QueueListFragment) -> b
@@ -6479,13 +6512,13 @@ nl.ru.science.mariedroid.fragments.QueueListFragment$1$1$1 -> nl.ru.science.mari
 nl.ru.science.mariedroid.fragments.SongListFragment -> nl.ru.science.mariedroid.fragments.SongListFragment:
     java.lang.String mCurFilter -> Y
     android.support.v4.widget.SimpleCursorAdapter mAdapter -> Z
-    31:44:void onActivityCreated(android.os.Bundle) -> b
-    49:56:void onCreateOptionsMenu$761f6f96(android.view.Menu) -> a
-    60:62:boolean onQueryTextChange(java.lang.String) -> a
-    73:81:void onListItemClick$42a3bb55(android.widget.ListView,int) -> a
-    85:88:android.support.v4.content.Loader onCreateLoader$e57f803() -> a
-    101:102:void onLoaderReset$5dda1f52() -> b
-    24:24:void onLoadFinished$13079eae(java.lang.Object) -> a
+    33:46:void onActivityCreated(android.os.Bundle) -> b
+    51:63:void onCreateOptionsMenu$761f6f96(android.view.Menu) -> a
+    67:69:boolean onQueryTextChange(java.lang.String) -> a
+    80:88:void onListItemClick$42a3bb55(android.widget.ListView,int) -> a
+    92:95:android.support.v4.content.Loader onCreateLoader$e57f803() -> a
+    108:109:void onLoaderReset$5dda1f52() -> b
+    26:26:void onLoadFinished$13079eae(java.lang.Object) -> a
 nl.ru.science.mariedroid.network.ApiHelper -> nl.ru.science.mariedroid.network.ApiHelper:
     android.content.Context mContext -> a
     27:27:java.lang.String getInstanceBaseUrl() -> a
@@ -6555,16 +6588,21 @@ nl.ru.science.mariedroid.network.objects.Song$2 -> nl.ru.science.mariedroid.netw
     83:152:java.lang.Boolean doInBackground(java.lang.String[]) -> a
     76:76:void onPostExecute(java.lang.Object) -> onPostExecute
     76:76:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+nl.ru.science.mariedroid.utils.AppUtils -> nl.ru.science.mariedroid.utils.AppUtils:
+    14:19:int getAppVersion(android.content.Context) -> a
 nl.ru.science.mariedroid.utils.LogUtils -> nl.ru.science.mariedroid.utils.LogUtils:
     10:11:void d(java.lang.Object) -> a
     14:17:void d(java.lang.Object,java.lang.Object) -> a
 nl.ru.science.mariedroid.utils.PrefUtils -> nl.ru.science.mariedroid.utils.PrefUtils:
-    14:15:void saveUserLogin(android.content.Context,java.lang.String,java.lang.String) -> a
-    18:18:java.lang.String getUsername(android.content.Context,java.lang.String) -> a
-    22:22:java.lang.String getPassword(android.content.Context,java.lang.String) -> b
-    26:27:void saveInstanceIndex(android.content.Context,java.lang.Integer) -> a
-    30:30:java.lang.Integer getInstanceIndex(android.content.Context) -> a
-    54:55:void reset(android.content.Context) -> b
+    15:16:void saveUserLogin(android.content.Context,java.lang.String,java.lang.String) -> a
+    19:19:java.lang.String getUsername(android.content.Context,java.lang.String) -> a
+    23:23:java.lang.String getPassword(android.content.Context,java.lang.String) -> b
+    27:28:void saveInstanceIndex(android.content.Context,java.lang.Integer) -> a
+    31:31:java.lang.Integer getInstanceIndex(android.content.Context) -> a
+    35:36:void saveVersionCode(android.content.Context,java.lang.Integer) -> b
+    39:39:java.lang.Integer getVersionCode(android.content.Context) -> b
+    63:64:void reset(android.content.Context) -> c
+    71:71:nl.ru.science.mariedroid.ObscuredSharedPreferences getObscuredPrefs(android.content.Context) -> d
 nl.ru.science.mariedroid.widget.QueueListAdapter -> nl.ru.science.mariedroid.widget.QueueListAdapter:
     android.view.LayoutInflater mInflater -> a
     android.content.Context mContext -> b

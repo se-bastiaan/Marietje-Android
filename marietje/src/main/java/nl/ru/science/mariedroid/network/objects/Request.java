@@ -36,6 +36,14 @@ public class Request {
         this.length = length;
     }
 
+    /**
+     * Parse the request XML using a SAXParser
+     * @param xml String XML from server
+     * @return ArrayList<Request> List with requests found in XML
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
     public static ArrayList<Request> parseXML(String xml) throws ParserConfigurationException, SAXException, IOException{
         StringReader reader = new StringReader(xml);
         SAXParserFactory saxPF = SAXParserFactory.newInstance();
@@ -47,6 +55,11 @@ public class Request {
         return handler.getRequests();
     }
 
+    /**
+     * Parse the XML from server in background
+     * @param result String XML from server
+     * @param callback FutureCallback<ArrayList<Request>> List with requests found in XML
+     */
     public static void parseXMLAsync(String result, final FutureCallback<ArrayList<Request>> callback) {
         new AsyncTask<String, Void, ArrayList<Request>>() {
 
