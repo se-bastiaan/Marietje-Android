@@ -36,7 +36,7 @@
         <item name="android:editTextBackground">@drawable/radboud_edit_text_holo_light</item>
         <item name="android:listChoiceBackgroundIndicator">@drawable/radboud_list_selector_holo_light</item>
         <item name="android:activatedBackgroundIndicator">@drawable/radboud_activated_background_holo_light</item>
-
+        <item name="android:fastScrollThumbDrawable">@drawable/radboud_fastscroll_thumb_holo</item>
     </style>
 
     <style name="ActionBar.Solid.Radboud" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

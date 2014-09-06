@@ -88,6 +88,14 @@ public class MainActivity extends BaseActivity {
                 refreshMediaDatabase();
             }
         }
+
+        getApp().startQueueUpdating();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getApp().stopQueueUpdating();
     }
 
     @Override

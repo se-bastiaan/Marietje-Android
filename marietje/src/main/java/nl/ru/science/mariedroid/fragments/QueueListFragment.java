@@ -17,56 +17,16 @@ import nl.ru.science.mariedroid.widget.QueueListAdapter;
 public class QueueListFragment extends BaseListFragment {
 
     private ArrayList<Request> mRequests;
-    private final int UPDATE_DELAY = 2000;
-    private Handler updateHandler = null;
-
-    private Runnable updateRunnable = new Runnable() {
-        @Override
-        public void run() {
-            LogUtils.d("Updating 'now playing'...");
-
-            mApi.getNowPlaying(new FutureCallback<ArrayList<Request>>() {
-                @Override
-                public void onCompleted(Exception e, ArrayList<Request> result) {
-                    if (e == null) {
-                        mRequests = result;
-                        mApi.getRequests(new FutureCallback<ArrayList<Request>>() {
-                            @Override
-                            public void onCompleted(Exception e, ArrayList<Request> result) {
-                                if (e == null) {
-                                    Request request = mRequests.get(0);
-                                    mRequests = result;
-                                    mRequests.add(0, request);
-                                    refreshListAdapter();
-                                    updateHandler.postDelayed(updateRunnable, UPDATE_DELAY);
-                                } else {
-                                    Toast.makeText(getActivity(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(getActivity(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateHandler = new Handler();
-        mRequests = new ArrayList<Request>();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getListView().setSelector(android.R.color.transparent);
-    }
-
-    public void startUpdate() {
-        updateHandler.postDelayed(updateRunnable, UPDATE_DELAY);
     }
 
     public void refreshListAdapter() {
@@ -94,12 +54,17 @@ public class QueueListFragment extends BaseListFragment {
 
         if (isVisibleToUser) {
             LogUtils.d("Visible");
-            startUpdate();
+            mRequests = getApp().getCurrentRequestData();
+            refreshListAdapter();
+            getApp().setQueueUpdatingCallback(new FutureCallback<ArrayList<Request>>() {
+                @Override
+                public void onCompleted(Exception e, ArrayList<Request> result) {
+                    mRequests = result;
+                    refreshListAdapter();
+                }
+            });
         } else {
             LogUtils.d("Queue updates disabled");
-            if(updateHandler != null) {
-                updateHandler.removeCallbacksAndMessages(null);
-            }
         }
 
     }
@@ -107,9 +72,6 @@ public class QueueListFragment extends BaseListFragment {
     @Override
     public void onPause() {
         super.onPause();
-
-        if (updateHandler != null) {
-            updateHandler.removeCallbacksAndMessages(null);
-        }
+        getApp().setQueueUpdatingCallback(null);
     }
 }

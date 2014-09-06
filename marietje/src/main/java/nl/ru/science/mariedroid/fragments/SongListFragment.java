@@ -22,11 +22,12 @@ import nl.ru.science.mariedroid.R;
 import nl.ru.science.mariedroid.database.MediaEntry;
 import nl.ru.science.mariedroid.database.MediaProvider;
 import nl.ru.science.mariedroid.network.objects.Song;
+import nl.ru.science.mariedroid.widget.AlphabetCursorAdapter;
 
 public class SongListFragment extends BaseListFragment implements OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     private String mCurFilter = "";
-    private SimpleCursorAdapter mAdapter;
+    private AlphabetCursorAdapter mAdapter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -35,12 +36,14 @@ public class SongListFragment extends BaseListFragment implements OnQueryTextLis
         setEmptyText(getActivity().getString(R.string.no_songs));
         setHasOptionsMenu(true);
 
-        mAdapter = new SimpleCursorAdapter(getActivity(),
+        mAdapter = new AlphabetCursorAdapter(getActivity(),
                 R.layout.fragment_songs_listitem, null, new String[]{
                 MediaEntry.COLUMN_NAME_TITLE,
                 MediaEntry.COLUMN_NAME_ARTIST}, new int[]{
                 R.id.text1, R.id.text2}, 0);
         setListAdapter(mAdapter);
+
+        getListView().setFastScrollEnabled(true);
 
         getLoaderManager().initLoader(0, null, this);
     }
