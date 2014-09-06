@@ -16,6 +16,12 @@
     <string name="username">Benutzername</string>
     <string name="password">Password</string>
     <string name="logout">Ausloggen</string>
+    <string name="title_activity_login">Login</string>
+    <string name="login_progress_signing_in">Inloggen…</string>
+    <string name="error_invalid_email">Verkeerd e-mailadres</string>
+    <string name="error_invalid_password">Te kort wachtwoord</string>
+    <string name="error_incorrect_password">Passwort nicht korrekt</string>
+    <string name="error_field_required">Dit veld is verplicht</string>
 
     <!-- Errors -->
     <string name="unknown_error">Ein unbekannter Fehler ist aufgetreten</string>

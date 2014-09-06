@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-nl/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-nl/values.xml -->
     <eat-comment />
 
     <string name="abc_action_bar_home_description" msgid="4600421777120114993">"Navigeren naar startpositie"</string>
@@ -17,7 +17,7 @@
     <string name="abc_searchview_description_voice" msgid="893419373245838918">"Gesproken zoekopdracht"</string>
     <string name="abc_shareactionprovider_share_with" msgid="3421042268587513524">"Delen met"</string>
     <string name="abc_shareactionprovider_share_with_application" msgid="7165123711973476752">"Delen met %s"</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values-nl/strings.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values-nl/strings.xml -->
     <eat-comment />
 
     <string name="about_mariedroid">Over MarieDroid</string>
@@ -25,6 +25,10 @@
     <string name="action_refresh">Ververs liedjes</string>
     <string name="action_settings">Instellingen</string>
     <string name="app_name">MarieDroid</string>
+    <string name="error_field_required">Dit veld is verplicht</string>
+    <string name="error_incorrect_password">Incorrect wachtwoord</string>
+    <string name="error_invalid_email">Verkeerd e-mailadres</string>
+    <string name="error_invalid_password">Te kort wachtwoord</string>
     <string name="error_loading_media">Kon de lijst met liedjes niet downloaden.</string>
     <string name="favourites">Favorieten</string>
     <string name="has_been_requested">is aangevraagd.</string>
@@ -33,6 +37,7 @@
     <string name="loading_media">Lijst met liedjes downloaden…</string>
     <string name="loading_queue">Wachtrij ophalen…</string>
     <string name="login">Inloggen</string>
+    <string name="login_progress_signing_in">Bezig met inloggen…</string>
     <string name="logout">Uitloggen</string>
     <string name="no_songs">Geen liedjes gevonden…</string>
     <string name="password">Wachtwoord</string>
@@ -40,6 +45,7 @@
     <string name="request">Aanvragen</string>
     <string name="search">Zoeken</string>
     <string name="song_request_error">Het liedje kon niet worden aangevraagd.</string>
+    <string name="title_activity_login">Inloggen</string>
     <string name="unknown_error">Er is een onbekende fout opgetreden</string>
     <string name="username">Gebruikersnaam</string>
     <string name="wrong_login">Verkeerde inloggegevens. Log uit en probeer het opnieuw.</string>

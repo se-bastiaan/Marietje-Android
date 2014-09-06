@@ -14,6 +14,12 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_login">Login</string>
+    <string name="login_progress_signing_in">Logging in…</string>
+    <string name="error_invalid_email">Invalid e-mail</string>
+    <string name="error_invalid_password">Password is too short</string>
+    <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_field_required">This field is required</string>
 
     <!-- Errors -->
     <string name="unknown_error">We\'ve encountered an unknown error</string>

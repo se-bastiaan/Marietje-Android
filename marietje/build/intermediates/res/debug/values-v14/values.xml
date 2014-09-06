@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values-v14/styles.xml -->
     <eat-comment />
 
     <style name="ActionBar.Solid.Radboud" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -15,7 +15,7 @@
         <item name="android:background">@drawable/ab_transparent_radboud</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Radboud</item>
     </style>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-v14/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.SearchResult.Subtitle" parent="@android:TextAppearance.Holo.SearchResult.Subtitle" />
@@ -180,7 +180,7 @@
         <item name="buttonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="buttonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values-v14/styles.xml -->
     <eat-comment />
 
     <style name="Theme.Radboud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -202,7 +202,7 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Radboud</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Radboud</item>
     </style>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-v14/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="Widget.AppCompat.Base.ActionBar" parent="android:Widget.Holo.ActionBar" />

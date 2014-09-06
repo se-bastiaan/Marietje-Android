@@ -6,4 +6,4 @@
             android:id="@+id/logout"
             android:title="@string/logout"/>
 </menu>
-<!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/menu/activity_main.xml -->
+<!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/menu/activity_main.xml -->

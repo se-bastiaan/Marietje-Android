@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment />
 
     <attr name="actionBarDivider" format="reference" />
@@ -78,11 +78,11 @@
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/colors.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values/colors.xml -->
     <eat-comment />
 
     <color name="now_playing">#D6D6D6</color>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="ActionBar">
@@ -514,12 +514,12 @@
     <dimen name="abc_panel_menu_list_width">296dp</dimen>
     <dimen name="abc_search_view_preferred_width">320dip</dimen>
     <dimen name="abc_search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment />
 
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
@@ -548,31 +548,18 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="about_mariedroid">About MarieDroid</string>
     <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
     <string name="action_refresh">Refresh songs</string>
     <string name="action_settings">Settings</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/string_login_activity.xml -->
-    <eat-comment />
-
-    <string name="action_sign_in_short">Inloggen</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
-    <eat-comment />
-
     <string name="app_name">MarieDroid</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/string_login_activity.xml -->
-    <eat-comment />
-
-    <string name="error_field_required">Dit veld is verplicht</string>
-    <string name="error_incorrect_password">Incorrect wachtwoord</string>
-    <string name="error_invalid_email">Verkeerd e-mailadres</string>
-    <string name="error_invalid_password">Te kort wachtwoord</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
-    <eat-comment />
-
+    <string name="error_field_required">This field is required</string>
+    <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_invalid_email">Invalid e-mail</string>
+    <string name="error_invalid_password">Password is too short</string>
     <string name="error_loading_media">Couldn\'t download the tracklist.</string>
     <string name="favourites">Favourites</string>
     <string name="has_been_requested">has been requested.</string>
@@ -581,39 +568,19 @@
     <string name="loading_media">Downloading tracklist…</string>
     <string name="loading_queue">Loading queue…</string>
     <string name="login">Login</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/string_login_activity.xml -->
-    <eat-comment />
-
-    <string name="login_progress_signing_in">Bezig met inloggen…</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
-    <eat-comment />
-
+    <string name="login_progress_signing_in">Logging in…</string>
     <string name="logout">Logout</string>
     <string name="no_songs">Couldn\'t find any songs…</string>
     <string name="password">Password</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/string_login_activity.xml -->
-    <eat-comment />
-
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Wachtwoord</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
-    <eat-comment />
-
     <string name="queue">Queue</string>
     <string name="request">Request</string>
     <string name="search">Search</string>
     <string name="song_request_error">Couldn\'t request song.</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/string_login_activity.xml -->
-    <eat-comment />
-
-    <string name="title_activity_login">Inloggen</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/strings.xml -->
-    <eat-comment />
-
+    <string name="title_activity_login">Login</string>
     <string name="unknown_error">We\'ve encountered an unknown error</string>
     <string name="username">Username</string>
     <string name="wrong_login">Incorrect credentials. Logout and try again.</string>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="ActionBar.Solid.Radboud" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -659,7 +626,7 @@
     <style name="ProgressBar.Radboud" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_radboud</item>
     </style>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">
@@ -1081,7 +1048,7 @@
     <style name="Theme.Base.AppCompat.Light.DialogWhenLarge" parent="Theme.Base.AppCompat.Light" />
 
     <style name="Theme.Base.Light" parent="android:Theme.Light" />
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="Theme.Radboud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -1103,7 +1070,7 @@
         <item name="popupMenuStyle">@style/PopupMenu.Radboud</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Radboud</item>
     </style>
-    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
+    <!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment />
 
     <style name="Widget.AppCompat.ActionBar" parent="Widget.AppCompat.Base.ActionBar" />

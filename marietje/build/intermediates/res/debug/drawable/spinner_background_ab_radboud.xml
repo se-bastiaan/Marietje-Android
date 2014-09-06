@@ -26,4 +26,4 @@
         android:drawable="@drawable/spinner_ab_focused_radboud" />
     <item android:drawable="@drawable/spinner_ab_default_radboud" />
 </selector>
-<!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/drawable/spinner_background_ab_radboud.xml -->
+<!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/drawable/spinner_background_ab_radboud.xml -->

@@ -13,12 +13,26 @@ repositories {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'MarieDroid'
+            keyPassword 'huygens01'
+            storeFile file('../keystore.jks')
+            storePassword 'huygens01'
+        }
+    }
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
-
+    buildToolsVersion '20.0.0'
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 20
+    }
+    productFlavors {
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
     }
 }
 

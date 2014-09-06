@@ -18,4 +18,4 @@
 
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/ab_texture_tile_radboud"
-    android:tileMode="repeat" /><!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarietjeAndroid/marietje/src/main/res/drawable/ab_background_textured_radboud.xml -->
+    android:tileMode="repeat" /><!-- From: file:/Users/Sebastiaan/Development/Android/Apps/MarieDroid/marietje/src/main/res/drawable/ab_background_textured_radboud.xml -->
