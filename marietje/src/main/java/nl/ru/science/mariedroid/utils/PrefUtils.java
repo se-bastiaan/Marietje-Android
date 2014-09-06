@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import nl.ru.science.mariedroid.Constants;
+import nl.ru.science.mariedroid.ObscuredSharedPreferences;
 
 /**
  * Created by Sebastiaan on 11-06-14.
@@ -11,15 +12,15 @@ import nl.ru.science.mariedroid.Constants;
 public class PrefUtils {
 
     public static void saveUserLogin(Context context, String username, String password) {
-        getPrefs(context).edit().putString("username", username).putString("password", password).apply();
+        getObscuredPrefs(context).edit().putString("username", username).putString("password", password).apply();
     }
 
     public static String getUsername(Context context, String defaultValue) {
-        return getPrefs(context).getString("username", defaultValue);
+        return getObscuredPrefs(context).getString("username", defaultValue);
     }
 
     public static String getPassword(Context context, String defaultValue) {
-        return getPrefs(context).getString("password", defaultValue);
+        return getObscuredPrefs(context).getString("password", defaultValue);
     }
 
     public static void saveInstanceIndex(Context context, Integer index) {
@@ -28,6 +29,14 @@ public class PrefUtils {
 
     public static Integer getInstanceIndex(Context context) {
         return getPrefs(context).getInt("instance_index", -1);
+    }
+
+    public static void saveVersionCode(Context context, Integer code) {
+        getPrefs(context).edit().putInt("version_code", code).apply();
+    }
+
+    public static Integer getVersionCode(Context context) {
+        return getPrefs(context).getInt("version_code", -1);
     }
 
     public static void save(Context context, String key, String value) {
@@ -56,6 +65,10 @@ public class PrefUtils {
 
     public static SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(Constants.PREFS_FILE, Context.MODE_PRIVATE);
+    }
+
+    public static ObscuredSharedPreferences getObscuredPrefs(Context context) {
+        return new ObscuredSharedPreferences(context, getPrefs(context));
     }
 
 }

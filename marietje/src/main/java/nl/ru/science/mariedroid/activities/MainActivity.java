@@ -2,6 +2,7 @@ package nl.ru.science.mariedroid.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,6 +27,7 @@ import nl.ru.science.mariedroid.database.MediaProvider;
 import nl.ru.science.mariedroid.fragments.FavouriteFragment;
 import nl.ru.science.mariedroid.fragments.QueueListFragment;
 import nl.ru.science.mariedroid.fragments.SongListFragment;
+import nl.ru.science.mariedroid.utils.AppUtils;
 import nl.ru.science.mariedroid.utils.LogUtils;
 import nl.ru.science.mariedroid.utils.PrefUtils;
 
@@ -39,6 +41,16 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
+
+        Integer versionCode = AppUtils.getAppVersion(this);
+        Integer savedVersion = PrefUtils.getVersionCode(this);
+        if(!savedVersion.equals(versionCode)) {
+            if(savedVersion == -1) {
+                PrefUtils.reset(this);
+            }
+
+            PrefUtils.saveVersionCode(this, AppUtils.getAppVersion(this));
+        }
 
         if (PrefUtils.getUsername(this, "").isEmpty() || PrefUtils.getPassword(this, "").isEmpty()) {
             Intent intent = new Intent(this, LoginActivity.class);

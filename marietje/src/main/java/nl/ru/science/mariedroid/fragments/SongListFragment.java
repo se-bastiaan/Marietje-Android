@@ -1,6 +1,7 @@
 package nl.ru.science.mariedroid.fragments;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import nl.ru.science.mariedroid.R;
@@ -51,6 +53,11 @@ public class SongListFragment extends BaseListFragment implements OnQueryTextLis
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 
         SearchView sv = new SearchView(getActivity());
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) sv.findViewById(R.id.search_src_text);
+        LinearLayout searchPlate = (LinearLayout) sv.findViewById(R.id.search_plate);
+        searchAutoComplete.setTextColor(Color.WHITE);
+        searchPlate.setBackgroundResource(R.drawable.radboud_white_edit_text_holo_light);
+
         sv.setOnQueryTextListener(this);
         MenuItemCompat.setActionView(item, sv);
     }

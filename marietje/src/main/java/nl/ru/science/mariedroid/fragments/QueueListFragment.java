@@ -59,6 +59,12 @@ public class QueueListFragment extends BaseListFragment {
         mRequests = new ArrayList<Request>();
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getListView().setSelector(android.R.color.transparent);
+    }
+
     public void startUpdate() {
         updateHandler.postDelayed(updateRunnable, UPDATE_DELAY);
     }

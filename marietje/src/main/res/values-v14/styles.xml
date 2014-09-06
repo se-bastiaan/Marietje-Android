@@ -33,6 +33,10 @@
                 <!-- Light.DarkActionBar specific -->
         <item name="android:actionBarWidgetTheme">@style/Theme.Radboud.Widget</item>
 
+        <item name="android:editTextBackground">@drawable/radboud_edit_text_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/radboud_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/radboud_activated_background_holo_light</item>
+
     </style>
 
     <style name="ActionBar.Solid.Radboud" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

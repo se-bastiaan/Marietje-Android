@@ -25,4 +25,5 @@ public class BaseListFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
         getListView().setSelector(R.drawable.radboud_list_selector_holo_light);
     }
+
 }
