@@ -111,6 +111,7 @@ public class MainActivity extends BaseActivity {
             case R.id.about:
                 Intent aboutIntent = new Intent(this, AboutActivity.class);
                 startActivity(aboutIntent);
+                return true;
             case R.id.logout:
                 PrefUtils.reset(this);
                 Intent loginIntent = new Intent(this, LoginActivity.class);
