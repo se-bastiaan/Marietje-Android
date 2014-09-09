@@ -36,6 +36,7 @@
     <string name="loading_queue">Queue herunterladen…</string>
     <string name="loading_media">Liste der Songs herunterladen…</string>
     <string name="has_been_requested">has been requested.</string>
+    <string name="loading">Laden…</string>
 
     <!-- Tabs -->
     <string name="favourites">Favoriten</string>

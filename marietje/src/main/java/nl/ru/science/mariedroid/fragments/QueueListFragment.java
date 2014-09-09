@@ -31,18 +31,22 @@ public class QueueListFragment extends BaseListFragment {
     }
 
     public void refreshListAdapter() {
-        int index = getListView().getFirstVisiblePosition();
-        View v = getListView().getChildAt(0);
-        int top = (v == null) ? 0 : v.getTop();
+        try {
+            int index = getListView().getFirstVisiblePosition();
+            View v = getListView().getChildAt(0);
+            int top = (v == null) ? 0 : v.getTop();
 
-        if(mListAdapter == null) {
-            mListAdapter = new QueueListAdapter(getActivity(), mRequests);
-            setListAdapter(mListAdapter);
-        } else {
-            mListAdapter.setData(mRequests);
+            if (mListAdapter == null) {
+                mListAdapter = new QueueListAdapter(getActivity(), mRequests);
+                setListAdapter(mListAdapter);
+            } else {
+                mListAdapter.setData(mRequests);
+            }
+            mListAdapter.notifyDataSetChanged();
+            getListView().setSelectionFromTop(index, top);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mListAdapter.notifyDataSetChanged();
-        getListView().setSelectionFromTop(index, top);
     }
 
     @Override

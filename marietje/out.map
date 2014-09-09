@@ -6441,8 +6441,8 @@ nl.ru.science.mariedroid.activities.MainActivity -> nl.ru.science.mariedroid.act
     81:91:void onResume() -> onResume
     95:96:void onPause() -> onPause
     101:102:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    107:121:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    149:168:void refreshMediaDatabase() -> c
+    107:122:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    150:169:void refreshMediaDatabase() -> c
     34:34:android.app.ProgressDialog access$000(nl.ru.science.mariedroid.activities.MainActivity) -> a
 nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector -> nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector:
     10:12:void inject(butterknife.ButterKnife$Finder,nl.ru.science.mariedroid.activities.MainActivity,java.lang.Object) -> inject
@@ -6452,15 +6452,15 @@ nl.ru.science.mariedroid.activities.MainActivity$1 -> nl.ru.science.mariedroid.a
     73:74:void onPageSelected(int) -> a
 nl.ru.science.mariedroid.activities.MainActivity$2 -> nl.ru.science.mariedroid.activities.MainActivity$2:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    131:132:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
+    132:133:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
 nl.ru.science.mariedroid.activities.MainActivity$3 -> nl.ru.science.mariedroid.activities.MainActivity$3:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    154:154:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    155:155:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.activities.MainActivity$PageAdapter -> nl.ru.science.mariedroid.activities.MainActivity$PageAdapter:
     java.util.List fragments -> c
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> b
-    180:180:android.support.v4.app.Fragment getItem(int) -> a
-    196:196:int getCount() -> c
+    181:181:android.support.v4.app.Fragment getItem(int) -> a
+    197:197:int getCount() -> c
 nl.ru.science.mariedroid.database.MediaDbHelper -> nl.ru.science.mariedroid.database.MediaDbHelper:
     32:33:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     38:38:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade

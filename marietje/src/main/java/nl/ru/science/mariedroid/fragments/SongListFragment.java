@@ -33,7 +33,7 @@ public class SongListFragment extends BaseListFragment implements OnQueryTextLis
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setEmptyText(getActivity().getString(R.string.no_songs));
+        setEmptyText(getActivity().getString(R.string.loading));
         setHasOptionsMenu(true);
 
         mAdapter = new AlphabetCursorAdapter(getActivity(),
@@ -41,6 +41,11 @@ public class SongListFragment extends BaseListFragment implements OnQueryTextLis
                 MediaEntry.COLUMN_NAME_TITLE,
                 MediaEntry.COLUMN_NAME_ARTIST}, new int[]{
                 R.id.text1, R.id.text2}, 0);
+
+        if(mAdapter.getCount() <= 0) {
+            setEmptyText(getActivity().getString(R.string.no_songs));
+        }
+
         setListAdapter(mAdapter);
 
         getListView().setFastScrollEnabled(true);

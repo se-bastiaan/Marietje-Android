@@ -34,6 +34,7 @@
     <string name="loading_queue">Loading queue…</string>
     <string name="loading_media">Downloading tracklist…</string>
     <string name="has_been_requested">has been added to the queue.</string>
+    <string name="loading">Loading…</string>
 
     <!-- Tabs -->
     <string name="favourites">Favourites</string>
@@ -41,6 +42,6 @@
     <string name="queue">Queue</string>
 
     <!-- About -->
-    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.</string>
+    <string name="about_text">This application allows you to add new songs to the queue of the musiccomputers, aka Marietje and Marietje-Noord, in the Noord- &amp; Zuidkantine of the Huygens building (Radboud University).\n\nThis application is a fork of the \'Marietje App\' by Ben Ruijl (github.com/benruijl).\n\nThe source code is available at http://github.com/se-bastiaan/MarieDroid, every improvement is welcome.\n\nFound a problem? File a bug report: http://github.com/se-bastiaan/MarieDroid/issues</string>
 
 </resources>
