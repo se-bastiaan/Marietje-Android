@@ -108,10 +108,13 @@ public class MainActivity extends BaseActivity {
             case R.id.refresh:
                 refreshMediaDatabase();
                 return true;
+            case R.id.about:
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
             case R.id.logout:
                 PrefUtils.reset(this);
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                startActivity(loginIntent);
                 finish();
                 return true;
             default:
