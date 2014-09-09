@@ -118,7 +118,7 @@ android.support.v4.app.Fragment -> android.support.v4.app.Fragment:
     477:477:boolean equals(java.lang.Object) -> equals
     484:484:int hashCode() -> hashCode
     489:504:java.lang.String toString() -> toString
-    687:687:boolean isAdded() -> n
+    687:687:boolean isAdded() -> o
     766:766:void onHiddenChanged$1385ff() -> b_
     802:808:void setHasOptionsMenu$1385ff() -> c_
     820:826:void setMenuVisibility(boolean) -> a
@@ -130,18 +130,19 @@ android.support.v4.app.Fragment -> android.support.v4.app.Fragment:
     1020:1020:android.view.View onCreateView$469ccb8a() -> f
     1034:1034:void onViewCreated(android.view.View,android.os.Bundle) -> a
     1061:1062:void onActivityCreated(android.os.Bundle) -> b
+    1106:1107:void onResume() -> g
     1132:1133:void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
-    1141:1142:void onPause() -> g
+    1141:1142:void onPause() -> h
     1154:1155:void onLowMemory() -> onLowMemory
-    1167:1168:void onDestroyView() -> h
+    1167:1168:void onDestroyView() -> i
     1239:1239:void onCreateOptionsMenu$761f6f96(android.view.Menu) -> a
-    1266:1266:void onDestroyOptionsMenu() -> i
+    1266:1266:void onDestroyOptionsMenu() -> j
     1318:1319:void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
-    1501:1504:android.view.View performCreateView$469ccb8a() -> j
-    1523:1539:void performStart() -> k
+    1501:1504:android.view.View performCreateView$469ccb8a() -> k
+    1523:1539:void performStart() -> l
     1651:1658:void performSaveInstanceState(android.os.Bundle) -> c
-    1685:1702:void performReallyStop() -> l
-    1720:1729:void performDestroy() -> m
+    1685:1702:void performReallyStop() -> m
+    1720:1729:void performDestroy() -> n
 android.support.v4.app.Fragment$1 -> android.support.v4.app.Fragment$1:
     android.support.v4.app.Fragment this$0 -> a
     1468:1471:android.view.View findViewById(int) -> a
@@ -409,13 +410,13 @@ android.support.v4.app.ListFragment -> android.support.v4.app.ListFragment:
     boolean mListShown -> W
     91:136:android.view.View onCreateView$469ccb8a() -> f
     144:146:void onViewCreated(android.view.View,android.os.Bundle) -> a
-    153:159:void onDestroyView() -> h
+    153:159:void onDestroyView() -> i
     173:173:void onListItemClick$42a3bb55(android.widget.ListView,int) -> a
     179:189:void setListAdapter(android.widget.ListAdapter) -> a
-    222:223:android.widget.ListView getListView() -> n
+    222:223:android.widget.ListView getListView() -> o
     232:241:void setEmptyText(java.lang.CharSequence) -> a
     280:313:void setListShown(boolean,boolean) -> a
-    323:374:void ensureList() -> o
+    323:374:void ensureList() -> p
 android.support.v4.app.ListFragment$1 -> android.support.v4.app.ListFragment$1:
     android.support.v4.app.ListFragment this$0 -> a
     51:52:void run() -> run
@@ -6360,32 +6361,6 @@ nl.ru.science.mariedroid.Constants -> nl.ru.science.mariedroid.Constants:
     java.lang.String[] INSTANCE_NAMES -> b
     java.lang.String[] INSTANCE_URLS -> c
     java.lang.Integer DATABASE_VERSION -> d
-nl.ru.science.mariedroid.MarieApplication -> nl.ru.science.mariedroid.MarieApplication:
-    com.koushikdutta.async.future.FutureCallback mQueueCallback -> a
-    int UPDATE_DELAY -> e
-    nl.ru.science.mariedroid.network.ApiHelper mApi -> f
-    java.util.ArrayList mRequests -> b
-    android.os.Handler mUpdateHandler -> c
-    java.lang.Runnable updateRunnable -> d
-    28:32:void onCreate() -> onCreate
-    36:38:void onTerminate() -> onTerminate
-    18:18:java.util.ArrayList access$002(nl.ru.science.mariedroid.MarieApplication,java.util.ArrayList) -> a
-    18:18:java.util.ArrayList access$000(nl.ru.science.mariedroid.MarieApplication) -> a
-    18:18:com.koushikdutta.async.future.FutureCallback access$100(nl.ru.science.mariedroid.MarieApplication) -> b
-    18:18:int access$202(nl.ru.science.mariedroid.MarieApplication,int) -> a
-    18:18:java.lang.Runnable access$300(nl.ru.science.mariedroid.MarieApplication) -> c
-    18:18:int access$200(nl.ru.science.mariedroid.MarieApplication) -> d
-    18:18:android.os.Handler access$400(nl.ru.science.mariedroid.MarieApplication) -> e
-    18:18:nl.ru.science.mariedroid.network.ApiHelper access$500(nl.ru.science.mariedroid.MarieApplication) -> f
-nl.ru.science.mariedroid.MarieApplication$1 -> nl.ru.science.mariedroid.MarieApplication$1:
-    nl.ru.science.mariedroid.MarieApplication this$0 -> a
-    59:89:void run() -> run
-nl.ru.science.mariedroid.MarieApplication$1$1 -> nl.ru.science.mariedroid.MarieApplication$1$1:
-    nl.ru.science.mariedroid.MarieApplication$1 this$1 -> a
-    61:61:void onCompleted(java.lang.Exception,java.lang.Object) -> a
-nl.ru.science.mariedroid.MarieApplication$1$1$1 -> nl.ru.science.mariedroid.MarieApplication$1$1$1:
-    nl.ru.science.mariedroid.MarieApplication$1$1 this$2 -> a
-    66:66:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.ObscuredSharedPreferences -> nl.ru.science.mariedroid.ObscuredSharedPreferences:
     char[] SEKRIT -> c
     android.content.SharedPreferences delegate -> a
@@ -6423,8 +6398,8 @@ nl.ru.science.mariedroid.activities.AboutActivity -> nl.ru.science.mariedroid.ac
 nl.ru.science.mariedroid.activities.BaseActivity -> nl.ru.science.mariedroid.activities.BaseActivity:
     nl.ru.science.mariedroid.network.ApiHelper mApi -> o
     android.support.v7.app.ActionBar mActionBar -> p
-    22:23:void onCreate(android.os.Bundle) -> onCreate
-    26:32:void onCreate(android.os.Bundle,java.lang.Integer) -> a
+    21:22:void onCreate(android.os.Bundle) -> onCreate
+    25:31:void onCreate(android.os.Bundle,java.lang.Integer) -> a
 nl.ru.science.mariedroid.activities.LoginActivity -> nl.ru.science.mariedroid.activities.LoginActivity:
     com.koushikdutta.async.future.Future mAuthFuture -> w
     java.lang.String mUsername -> x
@@ -6463,11 +6438,11 @@ nl.ru.science.mariedroid.activities.MainActivity -> nl.ru.science.mariedroid.act
     android.app.ProgressDialog mDialog -> r
     android.support.v4.view.ViewPager viewPager -> q
     43:77:void onCreate(android.os.Bundle) -> onCreate
-    81:93:void onResume() -> onResume
-    97:99:void onPause() -> onPause
-    104:105:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    110:121:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    149:168:void refreshMediaDatabase() -> c
+    81:91:void onResume() -> onResume
+    95:96:void onPause() -> onPause
+    101:102:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    107:118:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    146:165:void refreshMediaDatabase() -> c
     34:34:android.app.ProgressDialog access$000(nl.ru.science.mariedroid.activities.MainActivity) -> a
 nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector -> nl.ru.science.mariedroid.activities.MainActivity$$ViewInjector:
     10:12:void inject(butterknife.ButterKnife$Finder,nl.ru.science.mariedroid.activities.MainActivity,java.lang.Object) -> inject
@@ -6477,15 +6452,15 @@ nl.ru.science.mariedroid.activities.MainActivity$1 -> nl.ru.science.mariedroid.a
     73:74:void onPageSelected(int) -> a
 nl.ru.science.mariedroid.activities.MainActivity$2 -> nl.ru.science.mariedroid.activities.MainActivity$2:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    131:132:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
+    128:129:void onTabSelected$2693a8e(android.support.v7.app.ActionBar$Tab) -> a
 nl.ru.science.mariedroid.activities.MainActivity$3 -> nl.ru.science.mariedroid.activities.MainActivity$3:
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> a
-    154:154:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    151:151:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.activities.MainActivity$PageAdapter -> nl.ru.science.mariedroid.activities.MainActivity$PageAdapter:
     java.util.List fragments -> c
     nl.ru.science.mariedroid.activities.MainActivity this$0 -> b
-    180:180:android.support.v4.app.Fragment getItem(int) -> a
-    196:196:int getCount() -> c
+    177:177:android.support.v4.app.Fragment getItem(int) -> a
+    193:193:int getCount() -> c
 nl.ru.science.mariedroid.database.MediaDbHelper -> nl.ru.science.mariedroid.database.MediaDbHelper:
     32:33:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     38:38:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
@@ -6504,9 +6479,8 @@ nl.ru.science.mariedroid.database.MediaProvider -> nl.ru.science.mariedroid.data
     104:105:int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[]) -> update
 nl.ru.science.mariedroid.fragments.BaseListFragment -> nl.ru.science.mariedroid.fragments.BaseListFragment:
     nl.ru.science.mariedroid.network.ApiHelper mApi -> X
-    21:23:void onCreate(android.os.Bundle) -> a
-    27:29:void onViewCreated(android.view.View,android.os.Bundle) -> a
-    36:36:nl.ru.science.mariedroid.MarieApplication getApp() -> o
+    20:22:void onCreate(android.os.Bundle) -> a
+    26:28:void onViewCreated(android.view.View,android.os.Bundle) -> a
 nl.ru.science.mariedroid.fragments.FavouriteFragment -> nl.ru.science.mariedroid.fragments.FavouriteFragment:
     android.support.v4.widget.SimpleCursorAdapter mAdapter -> Y
     24:37:void onActivityCreated(android.os.Bundle) -> b
@@ -6516,16 +6490,28 @@ nl.ru.science.mariedroid.fragments.FavouriteFragment -> nl.ru.science.mariedroid
     18:18:void onLoadFinished$13079eae(java.lang.Object) -> a
 nl.ru.science.mariedroid.fragments.QueueListFragment -> nl.ru.science.mariedroid.fragments.QueueListFragment:
     java.util.ArrayList mRequests -> Y
-    23:24:void onCreate(android.os.Bundle) -> a
-    28:30:void onViewCreated(android.view.View,android.os.Bundle) -> a
-    33:41:void refreshListAdapter() -> p
-    45:49:void onActivityCreated(android.os.Bundle) -> b
-    53:70:void setUserVisibleHint(boolean) -> b
-    74:76:void onPause() -> g
-    17:17:java.util.ArrayList access$002(nl.ru.science.mariedroid.fragments.QueueListFragment,java.util.ArrayList) -> a
+    nl.ru.science.mariedroid.widget.QueueListAdapter mListAdapter -> Z
+    android.os.Handler mHandler -> aa
+    java.lang.Runnable updateRunnable -> ab
+    24:25:void onCreate(android.os.Bundle) -> a
+    29:31:void onViewCreated(android.view.View,android.os.Bundle) -> a
+    50:54:void onActivityCreated(android.os.Bundle) -> b
+    58:68:void setUserVisibleHint(boolean) -> b
+    72:74:void onResume() -> g
+    78:80:void onPause() -> h
+    16:16:java.util.ArrayList access$002(nl.ru.science.mariedroid.fragments.QueueListFragment,java.util.ArrayList) -> a
+    16:16:java.util.ArrayList access$000(nl.ru.science.mariedroid.fragments.QueueListFragment) -> a
+    16:16:java.lang.Runnable access$100(nl.ru.science.mariedroid.fragments.QueueListFragment) -> b
+    16:16:android.os.Handler access$200(nl.ru.science.mariedroid.fragments.QueueListFragment) -> c
 nl.ru.science.mariedroid.fragments.QueueListFragment$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1:
     nl.ru.science.mariedroid.fragments.QueueListFragment this$0 -> a
-    59:59:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    85:112:void run() -> run
+nl.ru.science.mariedroid.fragments.QueueListFragment$1$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1$1:
+    nl.ru.science.mariedroid.fragments.QueueListFragment$1 this$1 -> a
+    87:87:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+nl.ru.science.mariedroid.fragments.QueueListFragment$1$1$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1$1$1:
+    nl.ru.science.mariedroid.fragments.QueueListFragment$1$1 this$2 -> a
+    92:92:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.fragments.SongListFragment -> nl.ru.science.mariedroid.fragments.SongListFragment:
     java.lang.String mCurFilter -> Y
     nl.ru.science.mariedroid.widget.AlphabetCursorAdapter mAdapter -> Z
@@ -6574,19 +6560,24 @@ nl.ru.science.mariedroid.network.objects.Request -> nl.ru.science.mariedroid.net
     java.lang.String title -> a
     java.lang.String artist -> b
     java.lang.String requester -> c
-    java.lang.String length -> d
-    48:55:java.util.ArrayList parseXML(java.lang.String) -> a
-    64:87:void parseXMLAsync(java.lang.String,com.koushikdutta.async.future.FutureCallback) -> a
+    java.lang.Long length -> d
+    java.lang.Long serverTime -> e
+    java.lang.Long endTime -> f
+    java.lang.Long startTime -> g
+    java.lang.Boolean nowPlaying -> h
+    57:70:java.lang.String getRemainingTime(java.lang.Long) -> a
+    82:89:java.util.ArrayList parseXML(java.lang.String) -> a
+    98:121:void parseXMLAsync(java.lang.String,com.koushikdutta.async.future.FutureCallback) -> a
 nl.ru.science.mariedroid.network.objects.Request$1 -> nl.ru.science.mariedroid.network.objects.Request$1:
     java.lang.Exception mException -> b
     com.koushikdutta.async.future.FutureCallback val$callback -> a
-    70:77:java.util.ArrayList doInBackground(java.lang.String[]) -> a
-    64:64:void onPostExecute(java.lang.Object) -> onPostExecute
-    64:64:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    104:111:java.util.ArrayList doInBackground(java.lang.String[]) -> a
+    98:98:void onPostExecute(java.lang.Object) -> onPostExecute
+    98:98:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 nl.ru.science.mariedroid.network.objects.Request$Handler -> nl.ru.science.mariedroid.network.objects.Request$Handler:
     java.util.ArrayList mRequests -> a
-    94:95:void startDocument() -> startDocument
-    99:108:void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes) -> startElement
+    128:129:void startDocument() -> startDocument
+    133:151:void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes) -> startElement
 nl.ru.science.mariedroid.network.objects.Song -> nl.ru.science.mariedroid.network.objects.Song:
     java.lang.String id -> a
     java.lang.String artist -> b
@@ -6607,6 +6598,7 @@ nl.ru.science.mariedroid.network.objects.Song$2 -> nl.ru.science.mariedroid.netw
     80:80:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 nl.ru.science.mariedroid.utils.AppUtils -> nl.ru.science.mariedroid.utils.AppUtils:
     19:24:int getAppVersion(android.content.Context) -> a
+    35:38:java.lang.String setStringLength$7a1ba7c4(java.lang.String) -> a
 nl.ru.science.mariedroid.utils.LogUtils -> nl.ru.science.mariedroid.utils.LogUtils:
     10:11:void d(java.lang.Object) -> a
     14:17:void d(java.lang.Object,java.lang.Object) -> a
@@ -6628,18 +6620,20 @@ nl.ru.science.mariedroid.widget.AlphabetCursorAdapter -> nl.ru.science.mariedroi
     58:61:android.database.Cursor swapCursor(android.database.Cursor) -> b
 nl.ru.science.mariedroid.widget.QueueListAdapter -> nl.ru.science.mariedroid.widget.QueueListAdapter:
     android.view.LayoutInflater mInflater -> a
-    android.content.Context mContext -> b
-    java.util.ArrayList mRequests -> c
-    48:48:int getCount() -> getCount
-    53:53:long getItemId(int) -> getItemId
-    58:58:nl.ru.science.mariedroid.network.objects.Request getItem(int) -> a
-    65:85:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-    20:20:java.lang.Object getItem(int) -> getItem
+    java.util.ArrayList mRequests -> b
+    java.lang.Long mServerTime -> c
+    46:58:void setData(java.util.ArrayList) -> a
+    62:62:int getCount() -> getCount
+    67:67:long getItemId(int) -> getItemId
+    72:72:nl.ru.science.mariedroid.network.objects.Request getItem(int) -> a
+    79:100:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    18:18:java.lang.Object getItem(int) -> getItem
 nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder -> nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder:
     android.widget.TextView text1 -> a
     android.widget.TextView text2 -> b
     android.widget.TextView text3 -> c
-    nl.ru.science.mariedroid.widget.QueueListAdapter this$0 -> d
+    android.widget.TextView text4 -> d
+    nl.ru.science.mariedroid.widget.QueueListAdapter this$0 -> e
 nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder$$ViewInjector -> nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder$$ViewInjector:
-    10:16:void inject(butterknife.ButterKnife$Finder,nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder,java.lang.Object) -> inject
-    19:22:void reset(nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder) -> reset
+    10:18:void inject(butterknife.ButterKnife$Finder,nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder,java.lang.Object) -> inject
+    21:25:void reset(nl.ru.science.mariedroid.widget.QueueListAdapter$ViewHolder) -> reset

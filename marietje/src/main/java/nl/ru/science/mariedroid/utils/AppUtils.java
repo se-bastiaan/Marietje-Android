@@ -25,4 +25,17 @@ public class AppUtils {
         }
     }
 
+    /**
+     * Set length of integer string
+     * @param str Input string
+     * @param length Required length of string
+     * @return String input with prepended 0's until length reached
+     */
+    public static String setStringLength(String str, int length) {
+        while(str.length() < length) {
+            str = "0" + str;
+        }
+        return str;
+    }
+
 }

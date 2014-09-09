@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import butterknife.ButterKnife;
-import nl.ru.science.mariedroid.MarieApplication;
 import nl.ru.science.mariedroid.R;
 import nl.ru.science.mariedroid.network.ApiHelper;
 
@@ -29,10 +28,6 @@ public class BaseActivity extends ActionBarActivity {
         mApi = new ApiHelper(this);
         mActionBar = getSupportActionBar();
         mActionBar.setLogo(R.drawable.ic_logo);
-    }
-
-    public MarieApplication getApp() {
-        return (MarieApplication) getApplication();
     }
 
 }

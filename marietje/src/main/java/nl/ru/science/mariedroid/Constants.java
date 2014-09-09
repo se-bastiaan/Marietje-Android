@@ -5,7 +5,7 @@ package nl.ru.science.mariedroid;
  */
 public class Constants {
 
-    public static final Boolean LOG_ENABLED = false;
+    public static final Boolean LOG_ENABLED = true;
     public static final String[] INSTANCE_NAMES = {"Marietje-Noord", "Marietje-Zuid"};
     public static final String[] INSTANCE_URLS = {"http://noordslet.science.ru.nl:8080/", "http://zuidslet.science.ru.nl:8080/"};
     public static final String DATABASE_NAME = "MarieDroid-Media.db";

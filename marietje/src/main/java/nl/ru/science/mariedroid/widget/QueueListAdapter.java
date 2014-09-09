@@ -13,15 +13,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import nl.ru.science.mariedroid.R;
 import nl.ru.science.mariedroid.network.objects.Request;
+import nl.ru.science.mariedroid.utils.LogUtils;
 
-/**
- * Created by Sebastiaan on 05-09-14.
- */
 public class QueueListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private Context mContext;
     private ArrayList<Request> mRequests;
+    private Long mServerTime;
 
     class ViewHolder {
         public ViewHolder(View v) {
@@ -34,13 +32,29 @@ public class QueueListAdapter extends BaseAdapter {
         TextView text2;
         @InjectView(R.id.text3)
         TextView text3;
+        @InjectView(R.id.text4)
+        TextView text4;
     }
 
     public QueueListAdapter(Context context, ArrayList<Request> requests) {
         super();
-        mContext = context;
-        mRequests = requests;
+        setData(requests);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void setData(ArrayList<Request> requests) {
+        mServerTime = requests.get(0).serverTime;
+        Long currentCalcTime = requests.get(0).endTime;
+        for(int i = 0; i < requests.size(); i++) {
+            Request request = requests.get(i);
+            if(!request.nowPlaying) {
+                request.startTime = currentCalcTime;
+                currentCalcTime = currentCalcTime + request.length;
+            }
+            requests.set(i, request);
+        }
+
+        mRequests = requests;
     }
 
     @Override
@@ -75,6 +89,7 @@ public class QueueListAdapter extends BaseAdapter {
         holder.text1.setText(request.title);
         holder.text2.setText(request.artist);
         holder.text3.setText(request.requester);
+        holder.text4.setText(request.getRemainingTime(mServerTime));
 
         if(position == 0) {
             convertView.setBackgroundResource(R.color.now_playing);

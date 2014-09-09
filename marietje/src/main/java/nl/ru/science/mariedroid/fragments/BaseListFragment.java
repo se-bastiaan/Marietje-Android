@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 
-import nl.ru.science.mariedroid.MarieApplication;
 import nl.ru.science.mariedroid.R;
 import nl.ru.science.mariedroid.activities.BaseActivity;
 import nl.ru.science.mariedroid.network.ApiHelper;
@@ -30,10 +29,6 @@ public class BaseListFragment extends ListFragment {
 
     public BaseActivity getBaseActivity() {
         return (BaseActivity) getActivity();
-    }
-
-    public MarieApplication getApp() {
-        return getBaseActivity().getApp();
     }
 
 }
