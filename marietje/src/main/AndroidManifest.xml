@@ -24,8 +24,7 @@
         <activity
                 android:name=".activities.LoginActivity"
                 android:label="@string/login"
-                android:windowSoftInputMode="adjustResize|stateVisible" />
-
+                android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.AboutActivity"
                 android:label="@string/about_mariedroid" />
         <provider
