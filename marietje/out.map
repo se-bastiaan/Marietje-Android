@@ -6495,32 +6495,32 @@ nl.ru.science.mariedroid.fragments.QueueListFragment -> nl.ru.science.mariedroid
     java.lang.Runnable updateRunnable -> ab
     24:25:void onCreate(android.os.Bundle) -> a
     29:31:void onViewCreated(android.view.View,android.os.Bundle) -> a
-    50:54:void onActivityCreated(android.os.Bundle) -> b
-    58:68:void setUserVisibleHint(boolean) -> b
-    72:74:void onResume() -> g
-    78:81:void onPause() -> h
+    54:57:void onActivityCreated(android.os.Bundle) -> b
+    61:71:void setUserVisibleHint(boolean) -> b
+    75:77:void onResume() -> g
+    81:84:void onPause() -> h
     16:16:java.util.ArrayList access$002(nl.ru.science.mariedroid.fragments.QueueListFragment,java.util.ArrayList) -> a
     16:16:java.util.ArrayList access$000(nl.ru.science.mariedroid.fragments.QueueListFragment) -> a
     16:16:java.lang.Runnable access$100(nl.ru.science.mariedroid.fragments.QueueListFragment) -> b
     16:16:android.os.Handler access$200(nl.ru.science.mariedroid.fragments.QueueListFragment) -> c
 nl.ru.science.mariedroid.fragments.QueueListFragment$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1:
     nl.ru.science.mariedroid.fragments.QueueListFragment this$0 -> a
-    86:113:void run() -> run
+    89:116:void run() -> run
 nl.ru.science.mariedroid.fragments.QueueListFragment$1$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1$1:
     nl.ru.science.mariedroid.fragments.QueueListFragment$1 this$1 -> a
-    88:88:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    91:91:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.fragments.QueueListFragment$1$1$1 -> nl.ru.science.mariedroid.fragments.QueueListFragment$1$1$1:
     nl.ru.science.mariedroid.fragments.QueueListFragment$1$1 this$2 -> a
-    93:93:void onCompleted(java.lang.Exception,java.lang.Object) -> a
+    96:96:void onCompleted(java.lang.Exception,java.lang.Object) -> a
 nl.ru.science.mariedroid.fragments.SongListFragment -> nl.ru.science.mariedroid.fragments.SongListFragment:
     java.lang.String mCurFilter -> Y
     nl.ru.science.mariedroid.widget.AlphabetCursorAdapter mAdapter -> Z
-    34:49:void onActivityCreated(android.os.Bundle) -> b
-    54:66:void onCreateOptionsMenu$761f6f96(android.view.Menu) -> a
-    70:72:boolean onQueryTextChange(java.lang.String) -> a
-    83:91:void onListItemClick$42a3bb55(android.widget.ListView,int) -> a
-    95:98:android.support.v4.content.Loader onCreateLoader$e57f803() -> a
-    111:112:void onLoaderReset$5dda1f52() -> b
+    34:47:void onActivityCreated(android.os.Bundle) -> b
+    52:64:void onCreateOptionsMenu$761f6f96(android.view.Menu) -> a
+    68:70:boolean onQueryTextChange(java.lang.String) -> a
+    81:89:void onListItemClick$42a3bb55(android.widget.ListView,int) -> a
+    93:96:android.support.v4.content.Loader onCreateLoader$e57f803() -> a
+    115:116:void onLoaderReset$5dda1f52() -> b
     27:27:void onLoadFinished$13079eae(java.lang.Object) -> a
 nl.ru.science.mariedroid.network.ApiHelper -> nl.ru.science.mariedroid.network.ApiHelper:
     android.content.Context mContext -> a
