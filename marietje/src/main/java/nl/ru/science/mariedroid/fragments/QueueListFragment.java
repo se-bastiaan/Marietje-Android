@@ -54,7 +54,6 @@ public class QueueListFragment extends BaseListFragment {
         super.onCreate(savedInstanceState);
 
         setEmptyText(getActivity().getString(R.string.loading_queue));
-        setHasOptionsMenu(true);
     }
 
     @Override

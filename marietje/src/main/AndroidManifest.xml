@@ -27,8 +27,7 @@
                 android:windowSoftInputMode="adjustResize|stateVisible" />
 
         <activity android:name=".activities.AboutActivity"
-                android:label="@string/about_mariedroid"
-                android:windowSoftInputMode="adjustResize|stateVisible" />
+                android:label="@string/about_mariedroid" />
         <provider
                 android:name=".database.MediaProvider"
                 android:authorities="nl.ru.science.mariedroid"
