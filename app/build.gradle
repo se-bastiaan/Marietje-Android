@@ -1,0 +1,250 @@
+import org.moallemi.gradle.internal.VersionCodeType
+
+apply plugin: 'com.android.application'
+apply from: '../config/quality/quality.gradle'
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.moallemi.advanced-build-version'
+apply plugin: 'hu.supercluster.paperwork'
+//TODO uncomment line below after adding fabric api secret and key to fabric.properties
+//apply plugin: 'io.fabric'
+
+advancedVersioning {
+    codeOptions {
+        versionCodeType VersionCodeType.JALALI_DATE
+    }
+    nameOptions {
+        versionMajor 1
+        versionMinor 0
+        versionPatch 0
+    }
+}
+
+paperwork {
+    set = [
+        gitSha   : gitSha(),
+        buildDate: buildTime("dd-MM-yyyy HH:00:00 z", "UTC"),
+    ]
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        multiDexEnabled true
+        applicationId 'com.digitalisma.boilerplate'
+        minSdkVersion 16
+        targetSdkVersion 25
+        testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
+        versionCode advancedVersioning.versionCode
+        versionName advancedVersioning.versionName
+
+        buildConfigField 'String', 'API_URL', '"https://randomuser.me/api/1.1/"'
+    }
+
+    signingConfigs {
+        // TODO Replace the placeholder password here
+        // TODO Add your release keystore in /keystore folder
+        release {
+            storeFile file('../keystore/release.keystore')
+            keyAlias 'placeholder_alias'
+            storePassword "placeholder_pwd"
+            keyPassword "placeholder_pwd"
+        }
+
+        debug {
+            storeFile file('../keystore/debug.keystore')
+            keyAlias 'androiddebugkey'
+            storePassword 'android'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            ext.betaDistributionReleaseNotesFilePath =
+                    file('../crashlytics_release_notes.txt').absolutePath
+        }
+
+        debug {
+            versionNameSuffix " (debug)"
+            debuggable true
+        }
+    }
+
+    sourceSets {
+        def commonTestDir = 'src/commonTest/java'
+        test {
+            java.srcDir commonTestDir
+        }
+        androidTest {
+            java.srcDir commonTestDir
+        }
+    }
+
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            minSdkVersion 21 // Faster, since no support multidex is needed. Use only for development!
+        }
+
+        beta {
+            applicationIdSuffix ".beta"
+            //TODO uncomment line below after adding fabric api secret and key to fabric.properties and creating a distribution group
+            // ext.betaDistributionGroupAliases = 'boilerplate-internal-android'
+        }
+
+        prod {
+            // Empty
+        }
+    }
+
+    lintOptions {
+        abortOnError true // Fail early.
+
+        disable 'GoogleAppIndexingWarning' // App does not have deep linking.
+        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
+    }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+play {
+    serviceAccountEmail = 'your-service-account-email'
+    pk12File = file('key.p12')
+    // By default publishes to Alpha channel
+    track = 'alpha'
+}
+
+ext {
+    autoValueVersion = '1.3'
+    autoValueGsonVersion = '0.4.5'
+    butterknifeVersion = '8.4.0'
+    daggerVersion = '2.8'
+    dexmakerVersion = '1.4'
+    espressoVersion = '2.2'
+    googleServicesVersion = '10.0.1'
+    hamcrestVersion = '1.3'
+    okhttpVersion = '3.5.0'
+    retrofitVersion = '2.1.0'
+    stethoVersion = '1.4.2'
+    supportLibVersion = '25.1.0'
+    supportTestRunnerVersion = '0.5'
+}
+
+/**
+ * Run `gradle dependencyUpdates -Drevision=release` to check for dependency updates
+ */
+dependencies {
+    def daggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+    def jUnit = "junit:junit:4.12"
+    def mockito = "org.mockito:mockito-core:2.6.3"
+
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.4.0'
+
+    // App Dependencies
+    // TODO: Add specific GMS dependencies for your project instead of using the 'all' dependency
+    compile "com.google.android.gms:play-services:${googleServicesVersion}"
+    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:support-annotations:${supportLibVersion}"
+
+    compile "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.8'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
+
+    compile 'com.jakewharton.timber:timber:4.5.0'
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    compile "net.ypresto.timbertreeutils:timbertreeutils:1.0.0"
+
+    // Replace provided dependency below with official AutoValue once this issue is fixed
+    // https://github.com/google/auto/issues/268
+    provided "com.jakewharton.auto.value:auto-value-annotations:${autoValueVersion}"
+    provided "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
+    annotationProcessor "com.google.auto.value:auto-value:${autoValueVersion}"
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
+    annotationProcessor "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
+    annotationProcessor 'com.squareup:javapoet:1.8.0' // https://github.com/rharter/auto-value-parcel/issues/64
+
+    compile  "com.google.dagger:dagger:${daggerVersion}"
+    provided 'javax.annotation:jsr250-api:1.0' // Required by Dagger2
+    annotationProcessor daggerCompiler
+    testAnnotationProcessor daggerCompiler
+    androidTestAnnotationProcessor daggerCompiler
+
+    debugCompile "com.facebook.stetho:stetho:${stethoVersion}"
+    debugCompile "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
+    debugCompile "com.facebook.stetho:stetho-timber:${stethoVersion}@aar"
+
+    debugCompile "com.squareup.leakcanary:leakcanary-android:1.5"
+
+    debugCompile 'hu.supercluster:paperwork:1.2.7'
+    debugCompile "com.github.pedrovgs:lynx:1.6"
+
+    // Instrumentation test dependencies
+    androidTestCompile jUnit
+    androidTestCompile mockito
+    androidTestCompile "com.android.support:support-annotations:${supportLibVersion}"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
+        // Causes IncompatibleClassChangeError.
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'design'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+    androidTestCompile "com.android.support.test:runner:${supportTestRunnerVersion}"
+    androidTestCompile "com.android.support.test:rules:${supportTestRunnerVersion}"
+    androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+
+    // Unit tests dependencies
+    testCompile jUnit
+    testCompile mockito
+    testCompile "org.hamcrest:hamcrest-core:${hamcrestVersion}"
+    testCompile "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+    testCompile "org.hamcrest:hamcrest-integration:${hamcrestVersion}"
+    testCompile 'org.robolectric:robolectric:3.2.2'
+    testCompile "com.squareup.okhttp3:mockwebserver:${okhttpVersion}"
+}
+
+// Log out test results to console
+tasks.matching {it instanceof Test}.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+}
+
+
