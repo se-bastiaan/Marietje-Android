@@ -2,15 +2,15 @@ package eu.se_bastiaan.marietje.test.common;
 
 import android.content.Context;
 
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
+
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.test.common.injection.component.DaggerTestComponent;
 import eu.se_bastiaan.marietje.test.common.injection.component.TestComponent;
 import eu.se_bastiaan.marietje.test.common.injection.module.AppTestModule;
-
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
 
 /**
  * Test rule that creates and sets a Dagger TestComponent into the application overriding the

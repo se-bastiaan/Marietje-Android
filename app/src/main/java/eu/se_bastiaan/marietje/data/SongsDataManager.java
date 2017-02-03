@@ -10,7 +10,7 @@ import rx.Observable;
 @Singleton
 public class SongsDataManager {
 
-    private final static Integer PAGE_SIZE = 100;
+    private static final Integer PAGE_SIZE = 100;
 
     private final SongsService songsService;
 

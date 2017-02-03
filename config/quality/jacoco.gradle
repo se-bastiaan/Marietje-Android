@@ -1,0 +1,18 @@
+apply plugin: 'jacoco-android'
+
+jacocoAndroidUnitTestReport {
+    excludes += ['**/R.class',
+                 '**/R$*.class',
+                 '**/*$ViewInjector*.*',
+                 '**/*$ViewBinder*.*',
+                 '**/BuildConfig.*',
+                 '**/Manifest*.*',
+                 '**/*JavascriptBridge.class',
+                 '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
+                 '**/*$inlined$*.*', // Kotlin specific, Jacoco can not handle several "$" in class name.
+                 '**/*Module.*', // Modules for Dagger.
+                 '**/*Dagger*.*', // Dagger auto-generated code.
+                 '**/*MembersInjector*.*', // Dagger auto-generated code.
+                 '**/*_Provide*Factory*.*', // Dagger auto-generated code.
+                 '**/AutoValue_*.*'] // AutoValue auto-generated codse.
+}

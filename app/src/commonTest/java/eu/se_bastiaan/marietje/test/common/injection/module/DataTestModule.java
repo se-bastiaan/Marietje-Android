@@ -2,16 +2,15 @@ package eu.se_bastiaan.marietje.test.common.injection.module;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.SongsDataManager;
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.remote.ControlService;
-
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
 import eu.se_bastiaan.marietje.data.remote.SongsService;
 
 import static org.mockito.Mockito.mock;

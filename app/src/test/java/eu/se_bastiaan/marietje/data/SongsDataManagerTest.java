@@ -8,7 +8,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 
-import eu.se_bastiaan.marietje.data.SongsDataManager;
 import eu.se_bastiaan.marietje.data.model.SongsResponse;
 import eu.se_bastiaan.marietje.data.remote.SongsService;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;

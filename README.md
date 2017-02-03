@@ -1,7 +1,7 @@
-Marietje for Android
+#Marietje for Android
+[![CircleCI](https://circleci.com/gh/se-bastiaan/Marietje-Android.svg?style=svg)](https://circleci.com/gh/se-bastiaan/Marietje-Android)
 [![BCH compliance](https://bettercodehub.com/edge/badge/se-bastiaan/Marietje-Android)](https://bettercodehub.com)
-[![CI](https://travis-ci.org/se-bastiaan/Marietje-Android.svg)](https://travis-ci.org/se-bastiaan/Marietje-Android)
-=========
+[![codecov](https://codecov.io/gh/se-bastiaan/Marietje-Android/branch/develop/graph/badge.svg)](https://codecov.io/gh/se-bastiaan/Marietje-Android)
 
 Ever wondered how to add music to the queues of Marietje in the Noord- and Zuidkantine in the Radboud University's Huygensbuilding?
 Why not use an app to do it? And now you've found it. Or, at least the source code.

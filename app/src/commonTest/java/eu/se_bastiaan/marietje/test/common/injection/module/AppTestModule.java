@@ -2,11 +2,10 @@ package eu.se_bastiaan.marietje.test.common.injection.module;
 
 import android.content.Context;
 
-import eu.se_bastiaan.marietje.MarietjeApp;
-import eu.se_bastiaan.marietje.injection.ApplicationContext;
-
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.MarietjeApp;
+import eu.se_bastiaan.marietje.injection.ApplicationContext;
 
 /**
  * Provides application-level dependencies for an app running on a testing environment

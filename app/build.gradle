@@ -1,12 +1,12 @@
 import org.moallemi.gradle.internal.VersionCodeType
 
 apply plugin: 'com.android.application'
-apply from: '../config/quality/quality.gradle'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'org.moallemi.advanced-build-version'
 apply plugin: 'hu.supercluster.paperwork'
+apply from: '../config/quality/quality.gradle'
 //TODO uncomment line below after adding fabric api secret and key to fabric.properties
 //apply plugin: 'io.fabric'
 
@@ -45,13 +45,12 @@ android {
     }
 
     signingConfigs {
-        // TODO Replace the placeholder password here
-        // TODO Add your release keystore in /keystore folder
         release {
+            // This file is local only
             storeFile file('../keystore/release.keystore')
-            keyAlias 'placeholder_alias'
-            storePassword "placeholder_pwd"
-            keyPassword "placeholder_pwd"
+            keyAlias "release"
+            keyPassword System.getenv("KEY_PASS").toString() ?: ""
+            storePassword System.getenv("STORE_PASS").toString() ?: ""
         }
 
         debug {
@@ -74,8 +73,10 @@ android {
         }
 
         debug {
+            applicationIdSuffix ".debug"
             versionNameSuffix " (debug)"
             debuggable true
+            testCoverageEnabled true
         }
     }
 
@@ -86,21 +87,6 @@ android {
         }
         androidTest {
             java.srcDir commonTestDir
-        }
-    }
-
-    productFlavors {
-        dev {
-            applicationIdSuffix ".dev"
-            minSdkVersion 21 // Faster, since no support multidex is needed. Use only for development!
-        }
-
-        beta {
-            applicationIdSuffix ".beta"
-        }
-
-        prod {
-            // Empty
         }
     }
 
@@ -159,8 +145,6 @@ dependencies {
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.4.0'
 
     // App Dependencies
-    // TODO: Add specific GMS dependencies for your project instead of using the 'all' dependency
-    compile "com.google.android.gms:play-services:${googleServicesVersion}"
     compile 'com.android.support:multidex:1.0.1'
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"

@@ -3,7 +3,6 @@ package eu.se_bastiaan.marietje.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import eu.se_bastiaan.marietje.injection.ApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,6 +12,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import eu.se_bastiaan.marietje.injection.ApplicationContext;
 
 @Singleton
 public class PreferencesHelper {
