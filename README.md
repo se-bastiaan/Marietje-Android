@@ -1,12 +1,12 @@
-# Android Boilerplate
+Marietje for Android
+[![BCH compliance](https://bettercodehub.com/edge/badge/se-bastiaan/Marietje-Android)](https://bettercodehub.com)
+[![CI](https://travis-ci.org/se-bastiaan/Marietje-Android.svg)](https://travis-ci.org/se-bastiaan/Marietje-Android)
+=========
 
-We at [Digitalisma](http://digitalisma.com) build Android apps. A lot of them. And since we're always using a similar structure we thought it would be good to create a
-boilerplate project as reference for new Android projects. This project shows the architecture and tools that we use.
+Ever wondered how to add music to the queues of Marietje in the Noord- and Zuidkantine in the Radboud University's Huygensbuilding?
+Why not use an app to do it? And now you've found it. Or, at least the source code.
 
-Of course we didn't invent all of this ourselves so we definitely need to give some credits to the [qualitymatters](https://github.com/artem-zinnatullin/qualitymatters) project
-and a lot to the [android-boilerplate](https://github.com/ribot/android-boilerplate) projects.
-
-Libraries and tools we use:
+Libraries and tools used in this project:
 
 - Support libraries
     - AppCompat

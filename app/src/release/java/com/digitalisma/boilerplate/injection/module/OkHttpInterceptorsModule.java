@@ -1,19 +1,18 @@
-package com.digitalisma.boilerplate.injection.module;
+package eu.se_bastiaan.marietje.injection.module;
 
 import android.support.annotation.NonNull;
 
-import com.digitalisma.boilerplate.data.local.PreferencesHelper;
-import com.digitalisma.boilerplate.data.remote.DynamicUrlInterceptor;
-import com.digitalisma.boilerplate.injection.OkHttpInterceptors;
-import com.digitalisma.boilerplate.injection.OkHttpNetworkInterceptors;
-
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.data.remote.interceptor.CookiesInterceptor;
+import eu.se_bastiaan.marietje.data.remote.interceptor.DynamicUrlInterceptor;
+import eu.se_bastiaan.marietje.injection.OkHttpInterceptors;
+import eu.se_bastiaan.marietje.injection.OkHttpNetworkInterceptors;
 import okhttp3.Interceptor;
 
 import static java.util.Collections.emptyList;
@@ -25,18 +24,11 @@ import static java.util.Collections.emptyList;
 public class OkHttpInterceptorsModule {
 
     @Provides
-    @Singleton
-    @NonNull
-    public DynamicUrlInterceptor provideDynamicBaseUrlInterceptor(final PreferencesHelper preferencesHelper) {
-        return new DynamicUrlInterceptor(preferencesHelper);
-    }
-
-    @Provides
     @OkHttpInterceptors
     @Singleton
     @NonNull
-    public List<Interceptor> provideOkHttpInterceptors(DynamicUrlInterceptor urlInterceptor) {
-        return Collections.singletonList(urlInterceptor);
+    public List<Interceptor> provideOkHttpInterceptors(DynamicUrlInterceptor urlInterceptor, CookiesInterceptor cookiesInterceptor) {
+        return Arrays.asList(urlInterceptor, cookiesInterceptor);
     }
 
     @Provides

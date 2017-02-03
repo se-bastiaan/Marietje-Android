@@ -1,4 +1,4 @@
-package com.digitalisma.boilerplate.ui.other;
+package eu.se_bastiaan.marietje.ui.other;
 
 import android.support.annotation.NonNull;
 import android.view.View;

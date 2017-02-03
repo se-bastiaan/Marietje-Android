@@ -1,12 +1,12 @@
-package com.digitalisma.boilerplate.injection.module;
+package eu.se_bastiaan.marietje.injection.module;
 
 import android.support.annotation.NonNull;
 
-import com.digitalisma.boilerplate.devsettings.DeveloperSettingsModel;
-import com.digitalisma.boilerplate.devsettings.LeakCanaryProxy;
-import com.digitalisma.boilerplate.devsettings.NoOpLeakCanaryProxy;
-import com.digitalisma.boilerplate.ui.other.NoOpViewModifier;
-import com.digitalisma.boilerplate.ui.other.ViewModifier;
+import eu.se_bastiaan.marietje.devsettings.DeveloperSettingsModel;
+import eu.se_bastiaan.marietje.devsettings.LeakCanaryProxy;
+import eu.se_bastiaan.marietje.devsettings.NoOpLeakCanaryProxy;
+import eu.se_bastiaan.marietje.ui.other.NoOpViewModifier;
+import eu.se_bastiaan.marietje.ui.other.ViewModifier;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

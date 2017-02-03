@@ -34,14 +34,14 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId 'com.digitalisma.boilerplate'
+        applicationId 'eu.se_bastiaan.marietje'
         minSdkVersion 16
         targetSdkVersion 25
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
         versionCode advancedVersioning.versionCode
         versionName advancedVersioning.versionName
 
-        buildConfigField 'String', 'API_URL', '"https://randomuser.me/api/1.1/"'
+        buildConfigField 'String', 'API_URL', '"https://marietje-noord.science.ru.nl/"'
     }
 
     signingConfigs {
@@ -97,8 +97,6 @@ android {
 
         beta {
             applicationIdSuffix ".beta"
-            //TODO uncomment line below after adding fabric api secret and key to fabric.properties and creating a distribution group
-            // ext.betaDistributionGroupAliases = 'boilerplate-internal-android'
         }
 
         prod {
@@ -146,7 +144,7 @@ ext {
     okhttpVersion = '3.5.0'
     retrofitVersion = '2.1.0'
     stethoVersion = '1.4.2'
-    supportLibVersion = '25.1.0'
+    supportLibVersion = '25.1.1'
     supportTestRunnerVersion = '0.5'
 }
 

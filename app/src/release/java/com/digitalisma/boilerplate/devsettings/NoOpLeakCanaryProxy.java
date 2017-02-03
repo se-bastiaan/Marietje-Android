@@ -1,4 +1,4 @@
-package com.digitalisma.boilerplate.devsettings;
+package eu.se_bastiaan.marietje.devsettings;
 
 import android.support.annotation.NonNull;
 

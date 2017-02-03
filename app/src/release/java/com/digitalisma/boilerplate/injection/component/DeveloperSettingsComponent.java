@@ -1,4 +1,4 @@
-package com.digitalisma.boilerplate.injection.component;
+package eu.se_bastiaan.marietje.injection.component;
 
 import dagger.Subcomponent;
 
