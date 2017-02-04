@@ -7,12 +7,16 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.beta.Beta;
+
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.injection.component.AppComponent;
 import eu.se_bastiaan.marietje.injection.component.DaggerAppComponent;
 import eu.se_bastiaan.marietje.injection.module.AppModule;
 
 import net.ypresto.timbertreeutils.CrashlyticsLogExceptionTree;
 import net.ypresto.timbertreeutils.CrashlyticsLogTree;
+
+import javax.inject.Inject;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;

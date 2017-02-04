@@ -25,10 +25,6 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Inject
     public MainPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-
-        Set<String> cookies = new HashSet<>();
-        cookies.add("sessionid=<id here>");
-        this.dataManager.preferencesHelper().setCookies(cookies);
     }
 
     public void loadSongs() {

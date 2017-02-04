@@ -16,6 +16,7 @@ import timber.log.Timber;
 @Singleton
 public class CookiesInterceptor implements Interceptor {
 
+    public static final String SESSION_COOKIE = "sessionid";
     private final PreferencesHelper preferencesHelper;
 
     @Inject
@@ -36,10 +37,17 @@ public class CookiesInterceptor implements Interceptor {
 
         if (!response.headers("Set-Cookie").isEmpty()) {
             cookies = new HashSet<>();
+            boolean hasSessionCookie = false;
             for (String header : response.headers("Set-Cookie")) {
+                if (!hasSessionCookie) {
+                    hasSessionCookie = header.contains(SESSION_COOKIE);
+                }
                 cookies.add(header);
             }
-            preferencesHelper.setCookies(cookies);
+
+            if (hasSessionCookie) {
+                preferencesHelper.setCookies(cookies);
+            }
         }
 
         return response;

@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.ui.base.BaseActivity;
+import eu.se_bastiaan.marietje.ui.login.LoginActivity;
 import eu.se_bastiaan.marietje.ui.other.ViewModifier;
 
 import java.util.Collections;
@@ -30,6 +32,8 @@ public class MainActivity extends BaseActivity implements MainView {
     MainPresenter presenter;
     @Inject
     SongsAdapter songsAdapter;
+    @Inject
+    PreferencesHelper preferencesHelper;
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
@@ -50,17 +54,22 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
         ButterKnife.bind(this);
+        presenter.attachView(this);
+
+        if (preferencesHelper.getCookies().isEmpty()) {
+            startActivity(LoginActivity.getStartIntent(this));
+            finish();
+            return;
+        }
 
         recyclerView.setAdapter(songsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        presenter.attachView(this);
         presenter.loadSongs();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         presenter.detachView(this);
     }
 

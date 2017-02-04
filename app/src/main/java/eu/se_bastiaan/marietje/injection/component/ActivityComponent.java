@@ -4,6 +4,7 @@ import eu.se_bastiaan.marietje.injection.PerActivity;
 import eu.se_bastiaan.marietje.injection.module.ActivityModule;
 import eu.se_bastiaan.marietje.injection.module.DeveloperSettingsModule;
 import eu.se_bastiaan.marietje.injection.module.FragmentModule;
+import eu.se_bastiaan.marietje.ui.login.LoginActivity;
 import eu.se_bastiaan.marietje.ui.main.MainActivity;
 
 import dagger.Subcomponent;
@@ -19,6 +20,7 @@ import dagger.Subcomponent;
 public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
+    void inject(LoginActivity loginActivity);
 
     FragmentComponent fragmentComponent(FragmentModule fragmentModule);
 

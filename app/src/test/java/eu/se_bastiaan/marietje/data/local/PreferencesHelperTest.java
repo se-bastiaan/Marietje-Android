@@ -10,6 +10,8 @@ import org.robolectric.annotation.Config;
 import java.util.HashSet;
 import java.util.Set;
 
+import eu.se_bastiaan.marietje.BuildConfig;
+
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isEmptyString;
@@ -46,7 +48,7 @@ public class PreferencesHelperTest {
 
     @Test
     public void defaultValuesTest() {
-        assertThat(preferencesHelper.getApiUrl(), isEmptyString());
+        assertThat(preferencesHelper.getApiUrl(), is(equalTo(BuildConfig.API_URL)));
         assertThat(preferencesHelper.getCookies(), empty());
     }
 

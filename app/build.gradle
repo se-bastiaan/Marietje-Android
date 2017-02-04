@@ -210,6 +210,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
     }
     androidTestCompile "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
     androidTestCompile "com.android.support.test:runner:${supportTestRunnerVersion}"
     androidTestCompile "com.android.support.test:rules:${supportTestRunnerVersion}"
     androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'

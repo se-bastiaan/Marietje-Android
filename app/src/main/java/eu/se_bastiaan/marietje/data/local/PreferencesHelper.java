@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import eu.se_bastiaan.marietje.BuildConfig;
 import eu.se_bastiaan.marietje.injection.ApplicationContext;
 
 @Singleton
@@ -41,7 +42,7 @@ public class PreferencesHelper {
     }
 
     public String getApiUrl() {
-        return get(API_URL, "");
+        return get(API_URL, BuildConfig.API_URL);
     }
 
     public void setApiUrl(String apiUrl) {
