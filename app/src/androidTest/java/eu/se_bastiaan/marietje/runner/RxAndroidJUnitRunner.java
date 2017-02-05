@@ -5,7 +5,6 @@ import android.support.test.espresso.Espresso;
 
 import eu.se_bastiaan.marietje.util.RxIdlingExecutionHook;
 import eu.se_bastiaan.marietje.util.RxIdlingResource;
-
 import rx.plugins.RxJavaPlugins;
 
 /**
@@ -24,4 +23,5 @@ public class RxAndroidJUnitRunner extends UnlockDeviceAndroidJUnitRunner {
                 .registerObservableExecutionHook(new RxIdlingExecutionHook(rxIdlingResource));
         Espresso.registerIdlingResources(rxIdlingResource);
     }
+
 }

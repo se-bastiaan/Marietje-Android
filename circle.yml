@@ -3,23 +3,29 @@ machine:
     version: oraclejdk8
   environment:
     QEMU_AUDIO_DRV: none
-    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxPermSize=1024m -XX:+HeapDumpOnOutOfMemoryError"'
 
 dependencies:
   pre:
-    # We already have an emulator, so let's start it to save time
-    - emulator -avd circleci-android24 -no-window:
-        background: true
-    - echo y | android update sdk --no-ui --all --filter "platform-tools,tools,android-25,extra-android-m2repository,extra-android-support"
+    - echo y | android update sdk --no-ui --all --filter "platform-tools,tools,android-19,android-25,extra-android-m2repository,extra-android-support,sys-img-armeabi-v7a-android-19"
     # Build tools should be installed after "tools", uh.
     - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.2"
+    - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+
+compile:
+  override:
+    - ./gradlew --no-daemon --info --stacktrace clean
+    - ./gradlew --no-daemon --info --stacktrace build -PdisablePreDex -PwithDexcount -Dscan
 
 test:
   pre:
+    - emulator -avd test -no-window:
+        background: true
     - circle-android wait-for-boot
-    - adb shell input keyevent 82 &
   override:
-    - bash build.sh
-    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+    - ./gradlew --no-daemon --info --stacktrace connectedAndroidTest -PdisablePreDex -PwithDexcount
   post:
+    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+    - cp -r app/build/reports/* $CIRCLE_TEST_REPORTS
+    - cp -r app/build/jacoco/* $CIRCLE_TEST_REPORTS
     - bash <(curl -s https://codecov.io/bash)

@@ -37,7 +37,7 @@ android {
         applicationId 'nl.ru.science.mariedroid'
         minSdkVersion 16
         targetSdkVersion 25
-        testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
+        testInstrumentationRunner "eu.se_bastiaan.marietje.runner.RxAndroidJUnitRunner"
         versionCode advancedVersioning.versionCode
         versionName advancedVersioning.versionName
 

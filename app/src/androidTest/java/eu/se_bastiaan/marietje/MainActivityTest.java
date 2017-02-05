@@ -46,7 +46,7 @@ public class MainActivityTest {
     public final TestRule chain = RuleChain.outerRule(component).around(main);
 
     @Test
-    public void listOfPersonsShows() {
+    public void listOfSongsShows() {
         SongsResponse response = TestDataFactory.makeSongsResponse(0);
         when(component.getMockDataManager().songsDataManager().songs(0, null, null))
                 .thenReturn(Observable.just(response));
