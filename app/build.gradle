@@ -34,7 +34,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId 'eu.se_bastiaan.marietje'
+        applicationId 'nl.ru.science.mariedroid'
         minSdkVersion 16
         targetSdkVersion 25
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
