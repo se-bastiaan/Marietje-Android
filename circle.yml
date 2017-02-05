@@ -16,6 +16,11 @@ compile:
   override:
     - ./gradlew --no-daemon --info --stacktrace clean
     - ./gradlew --no-daemon --info --stacktrace build -PdisablePreDex -PwithDexcount -Dscan
+  post:
+    - cp -r app/build/reports/* $CIRCLE_TEST_REPORTS
+    - cp -r app/build/jacoco/* $CIRCLE_TEST_REPORTS
+    - cp -r app/build/outputs/lint-* $CIRCLE_TEST_REPORTS
+    - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
 
 test:
   pre:
@@ -26,8 +31,4 @@ test:
     - ./gradlew --no-daemon --info --stacktrace connectedAndroidTest -PdisablePreDex -PwithDexcount
   post:
     - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
-    - cp -r app/build/reports/* $CIRCLE_TEST_REPORTS
-    - cp -r app/build/jacoco/* $CIRCLE_TEST_REPORTS
-    - cp -r app/build/outputs/lint-* $CIRCLE_TEST_REPORTS
-    - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
     - bash <(curl -s https://codecov.io/bash)
