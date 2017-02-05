@@ -1,5 +1,6 @@
 package eu.se_bastiaan.marietje.ui.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,11 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.webkit.CookieManager;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,8 +18,6 @@ import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.ui.base.BaseActivity;
 import eu.se_bastiaan.marietje.ui.main.MainActivity;
-import okhttp3.Cookie;
-import okhttp3.HttpUrl;
 import timber.log.Timber;
 
 public class LoginActivity extends BaseActivity implements LoginView {
@@ -41,6 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         return new Intent(context, LoginActivity.class);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_login);

@@ -23,8 +23,8 @@ public class DataTestModule {
     @Provides
     @NonNull
     @Singleton
-    DataManager provideDataManager(SongsDataManager songsDataManager, ControlDataManager controlDataManager) {
-        return new DataManager(songsDataManager, controlDataManager, mock(PreferencesHelper.class));
+    DataManager provideDataManager(SongsDataManager songsDataManager, ControlDataManager controlDataManager, PreferencesHelper preferencesHelper) {
+        return new DataManager(songsDataManager, controlDataManager, preferencesHelper);
     }
 
     @Provides
@@ -53,6 +53,13 @@ public class DataTestModule {
     @Singleton
     SongsService provideSongsService() {
         return mock(SongsService.class);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    PreferencesHelper providePreferencesHelper() {
+        return mock(PreferencesHelper.class);
     }
 
 }

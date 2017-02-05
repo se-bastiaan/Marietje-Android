@@ -1,8 +1,5 @@
 package eu.se_bastiaan.marietje.ui.main;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.inject.Inject;
 
 import eu.se_bastiaan.marietje.data.DataManager;

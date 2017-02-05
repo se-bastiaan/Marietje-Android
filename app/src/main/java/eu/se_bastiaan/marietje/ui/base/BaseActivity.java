@@ -8,15 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
+import java.util.concurrent.atomic.AtomicLong;
+
+import butterknife.ButterKnife;
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.injection.component.ConfigPersistentComponent;
 import eu.se_bastiaan.marietje.injection.component.DaggerConfigPersistentComponent;
 import eu.se_bastiaan.marietje.injection.module.ActivityModule;
-
-import java.util.concurrent.atomic.AtomicLong;
-
-import butterknife.ButterKnife;
 import timber.log.Timber;
 
 /**

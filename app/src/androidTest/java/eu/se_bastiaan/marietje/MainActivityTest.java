@@ -2,10 +2,11 @@ package eu.se_bastiaan.marietje;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -40,11 +41,23 @@ public class MainActivityTest {
     public final ActivityTestRule<MainActivity> main =
             new ActivityTestRule<MainActivity>(MainActivity.class, false, false) {
                 @Override
+                protected void beforeActivityLaunched() {
+                    Intents.init();
+                    super.beforeActivityLaunched();
+                }
+
+                @Override
                 protected Intent getActivityIntent() {
                     // Override the default intent so we pass a false flag for syncing so it doesn't
                     // start a sync service in the background that would affect  the behaviour of
                     // this test.
                     return MainActivity.getStartIntent(getTargetContext());
+                }
+
+                @Override
+                protected void afterActivityFinished() {
+                    Intents.release();
+                    super.afterActivityFinished();
                 }
             };
 
@@ -75,7 +88,7 @@ public class MainActivityTest {
 
         int position = 0;
         for (Song song : response.data()) {
-            Espresso.onView(ViewMatchers.withId(eu.se_bastiaan.marietje.R.id.recycler_view))
+            Espresso.onView(ViewMatchers.withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
             Espresso.onView(ViewMatchers.withText(song.title()))
                     .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));

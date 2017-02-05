@@ -8,14 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import eu.se_bastiaan.marietje.R;
-import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-import eu.se_bastiaan.marietje.data.model.Song;
-import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
-import eu.se_bastiaan.marietje.ui.base.BaseActivity;
-import eu.se_bastiaan.marietje.ui.login.LoginActivity;
-import eu.se_bastiaan.marietje.ui.other.ViewModifier;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +16,14 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
+import eu.se_bastiaan.marietje.data.model.Song;
+import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.injection.module.DeveloperSettingsModule;
+import eu.se_bastiaan.marietje.ui.base.BaseActivity;
+import eu.se_bastiaan.marietje.ui.login.LoginActivity;
+import eu.se_bastiaan.marietje.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity implements MainView {
 

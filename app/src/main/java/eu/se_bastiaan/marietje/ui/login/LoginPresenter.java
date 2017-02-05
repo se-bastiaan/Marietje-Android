@@ -30,6 +30,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     public void saveCookies(String cookieStr) {
+        if (cookieStr == null) {
+            return;
+        }
+
         HashSet<String> cookieSet = new HashSet<>();
         String[] cookies = cookieStr.split(";");
         boolean hasSessionCookie = false;

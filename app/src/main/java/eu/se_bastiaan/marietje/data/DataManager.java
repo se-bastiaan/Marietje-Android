@@ -1,9 +1,9 @@
 package eu.se_bastiaan.marietje.data;
 
-import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 
 @Singleton
 public class DataManager {

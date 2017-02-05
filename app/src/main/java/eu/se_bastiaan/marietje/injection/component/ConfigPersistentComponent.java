@@ -1,10 +1,9 @@
 package eu.se_bastiaan.marietje.injection.component;
 
+import dagger.Component;
 import eu.se_bastiaan.marietje.injection.ConfigPersistent;
 import eu.se_bastiaan.marietje.injection.module.ActivityModule;
 import eu.se_bastiaan.marietje.ui.base.BaseActivity;
-
-import dagger.Component;
 
 /**
  * A dagger component that will live during the lifecycle of an Activity but it won't

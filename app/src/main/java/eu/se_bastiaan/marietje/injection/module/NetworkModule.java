@@ -3,9 +3,6 @@ package eu.se_bastiaan.marietje.injection.module;
 
 import android.support.annotation.NonNull;
 
-import eu.se_bastiaan.marietje.injection.OkHttpInterceptors;
-import eu.se_bastiaan.marietje.injection.OkHttpNetworkInterceptors;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +10,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.injection.OkHttpInterceptors;
+import eu.se_bastiaan.marietje.injection.OkHttpNetworkInterceptors;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 

@@ -2,11 +2,10 @@ package eu.se_bastiaan.marietje.injection.module;
 
 import android.content.Context;
 
-import eu.se_bastiaan.marietje.MarietjeApp;
-import eu.se_bastiaan.marietje.injection.ApplicationContext;
-
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.MarietjeApp;
+import eu.se_bastiaan.marietje.injection.ApplicationContext;
 
 /**
  * Provide application-level dependencies.

@@ -8,6 +8,7 @@ import org.junit.runners.model.Statement;
 
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.data.DataManager;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.test.common.injection.component.DaggerTestComponent;
 import eu.se_bastiaan.marietje.test.common.injection.component.TestComponent;
 import eu.se_bastiaan.marietje.test.common.injection.module.AppTestModule;

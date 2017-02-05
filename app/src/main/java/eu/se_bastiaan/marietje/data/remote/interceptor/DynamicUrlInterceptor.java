@@ -1,12 +1,11 @@
 package eu.se_bastiaan.marietje.data.remote.interceptor;
 
-import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;

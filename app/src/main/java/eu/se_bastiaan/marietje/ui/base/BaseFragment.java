@@ -10,13 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.injection.component.FragmentComponent;
 import eu.se_bastiaan.marietje.injection.module.FragmentModule;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public abstract class BaseFragment extends Fragment {

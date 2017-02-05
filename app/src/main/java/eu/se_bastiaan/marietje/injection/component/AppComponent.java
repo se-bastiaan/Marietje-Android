@@ -2,6 +2,9 @@ package eu.se_bastiaan.marietje.injection.component;
 
 import android.content.Context;
 
+import javax.inject.Singleton;
+
+import dagger.Component;
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
@@ -14,10 +17,6 @@ import eu.se_bastiaan.marietje.injection.module.DeveloperSettingsModule;
 import eu.se_bastiaan.marietje.injection.module.NetworkModule;
 import eu.se_bastiaan.marietje.injection.module.OkHttpInterceptorsModule;
 import eu.se_bastiaan.marietje.util.EventBus;
-
-import javax.inject.Singleton;
-
-import dagger.Component;
 
 @Singleton
 @Component(modules = {

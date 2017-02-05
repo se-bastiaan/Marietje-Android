@@ -3,10 +3,9 @@ package eu.se_bastiaan.marietje.injection.module;
 import android.app.Activity;
 import android.content.Context;
 
-import eu.se_bastiaan.marietje.injection.ActivityContext;
-
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.injection.ActivityContext;
 
 @Module
 public class FragmentModule {

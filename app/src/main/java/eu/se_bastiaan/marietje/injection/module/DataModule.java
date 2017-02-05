@@ -3,10 +3,6 @@ package eu.se_bastiaan.marietje.injection.module;
 
 import android.support.annotation.NonNull;
 
-import eu.se_bastiaan.marietje.BuildConfig;
-import eu.se_bastiaan.marietje.data.remote.ControlService;
-import eu.se_bastiaan.marietje.data.remote.SongsService;
-import eu.se_bastiaan.marietje.util.GsonTypeAdapterFactory;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +11,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import eu.se_bastiaan.marietje.BuildConfig;
+import eu.se_bastiaan.marietje.data.remote.ControlService;
+import eu.se_bastiaan.marietje.data.remote.SongsService;
+import eu.se_bastiaan.marietje.util.GsonTypeAdapterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

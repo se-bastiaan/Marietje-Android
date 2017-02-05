@@ -10,7 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.SongsDataManager;
-import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.data.model.SongsResponse;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
@@ -40,7 +39,6 @@ public class MainPresenterTest {
     @Before
     public void setUp() {
         when(mockDataManager.songsDataManager()).thenReturn(mock(SongsDataManager.class));
-        when(mockDataManager.preferencesHelper()).thenReturn(mock(PreferencesHelper.class));
 
         mainPresenter = new MainPresenter(mockDataManager);
         mainPresenter.attachView(mockMainView);
