@@ -5,7 +5,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +25,14 @@ public abstract class BaseFragment extends Fragment {
     @NonNull
     private static final Handler MAIN_THREAD_HANDLER = new Handler(Looper.getMainLooper());
 
-    @BindView(R.id.rootview)
-    protected View rootView;
+    @Nullable
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @NonNull
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, @LayoutRes Integer layoutRes) {
         BaseActivity activity = (BaseActivity) getActivity();
-        injectFragment(activity.getActivityComponent().fragmentComponent(new FragmentModule(activity)));
+        injectFragment(activity.getActivityComponent().fragmentComponent(new FragmentModule()));
 
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(layoutRes, container, false);
@@ -39,6 +42,10 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        if (getActivity() instanceof BaseActivity && toolbar != null) {
+            ((BaseActivity) getActivity()).setSupportActionBar(toolbar);
+        }
     }
 
     @Override

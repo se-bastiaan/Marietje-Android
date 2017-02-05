@@ -3,12 +3,24 @@
     <string name="app_name">Marietje</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
 
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_error_title">Sorry</string>
 
-    <string name="empty_songs">There aren\'t any songs</string>
-    <string name="error_loading_songs">There was a problem loading the songs</string>
+    <string name="songs_title_unknown">Unknown title</string>
+    <string name="songs_artist_unknown">Unknown artist</string>
+
+    <string name="request">Request</string>
+    <string name="request_search_hint">Title or artist…</string>
+    <string name="request_songs_empty">No songs found</string>
+    <string name="request_songs_error">There was a problem loading the songs</string>
+    <string name="request_confirm">Are you sure you want to request %1$s by %2$s?</string>
+    <string name="request_success">Song successfully added to the queue.</string>
+    <string name="request_error">Sorry! The song you selected could not be added to the queue.</string>
+
+    <string name="controls">Controls</string>
+    <string name="queue">Queue</string>
 
 </resources>

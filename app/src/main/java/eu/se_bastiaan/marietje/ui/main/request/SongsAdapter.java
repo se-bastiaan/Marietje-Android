@@ -1,6 +1,7 @@
-package eu.se_bastiaan.marietje.ui.main;
+package eu.se_bastiaan.marietje.ui.main.request;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,23 @@ import eu.se_bastiaan.marietje.data.model.Song;
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHolder> {
 
     private List<Song> songs;
+    private Listener listener;
 
     @Inject
     public SongsAdapter() {
         songs = new ArrayList<>();
     }
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
     public void setSongs(List<Song> songs) {
         this.songs.clear();
+        this.songs.addAll(songs);
+    }
+
+    public void addSongs(List<Song> songs) {
         this.songs.addAll(songs);
     }
 
@@ -40,8 +50,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
     @Override
     public void onBindViewHolder(final SongViewHolder holder, int position) {
         Song song = songs.get(position);
-        holder.titleTextView.setText(song.title());
-        holder.artistTextView.setText(song.artist());
+        holder.titleTextView.setText(TextUtils.isEmpty(song.title()) ? holder.itemView.getResources().getString(R.string.songs_title_unknown) : song.title());
+        holder.artistTextView.setText(TextUtils.isEmpty(song.artist()) ? holder.itemView.getResources().getString(R.string.songs_artist_unknown) : song.artist());
+        holder.durationTextView.setText(song.durationStr());
     }
 
     @Override
@@ -54,10 +65,23 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         TextView titleTextView;
         @BindView(R.id.text_artist)
         TextView artistTextView;
+        @BindView(R.id.text_duration)
+        TextView durationTextView;
 
         public SongViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(view -> {
+                if (listener != null) {
+                    listener.onSongClicked(getAdapterPosition(), songs.get(getAdapterPosition()));
+                }
+            });
         }
     }
+
+    public interface Listener {
+        void onSongClicked(int position, Song song);
+    }
+
 }

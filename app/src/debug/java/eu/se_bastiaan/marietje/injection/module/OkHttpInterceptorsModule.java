@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import eu.se_bastiaan.marietje.data.remote.interceptor.CookiesInterceptor;
 import eu.se_bastiaan.marietje.data.remote.interceptor.DynamicUrlInterceptor;
+import eu.se_bastiaan.marietje.devsettings.DeveloperSettings;
 import eu.se_bastiaan.marietje.injection.OkHttpInterceptors;
 import eu.se_bastiaan.marietje.injection.OkHttpNetworkInterceptors;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -29,9 +30,9 @@ public class OkHttpInterceptorsModule {
     @Provides
     @Singleton
     @NonNull
-    public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+    public HttpLoggingInterceptor provideHttpLoggingInterceptor(DeveloperSettings settings) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Timber.d(message));
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.setLevel(settings.getHttpLoggingLevel());
         return httpLoggingInterceptor;
     }
 

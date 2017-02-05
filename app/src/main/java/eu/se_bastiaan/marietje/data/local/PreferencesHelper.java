@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Type;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -22,7 +21,8 @@ public class PreferencesHelper {
     private static final String PREF_FILE_NAME = "biermaster_prefs";
 
     public static final String API_URL = "api_url";
-    public static final String COOKIES = "cookies";
+    public static final String CSRFTOKEN = "csrftoken";
+    public static final String SESSIONID = "sessionid";
 
     private final SharedPreferences pref;
 
@@ -33,12 +33,20 @@ public class PreferencesHelper {
 
     // IN THIS SECTION ADD METHODS PER PREFERENCE
 
-    public Set<String> getCookies() {
-        return get(COOKIES, new HashSet<>());
+    public String getCsrfToken() {
+        return get(CSRFTOKEN + getApiUrl(), "");
     }
 
-    public void setCookies(Set<String> cookies) {
-        save(COOKIES, cookies);
+    public void setCsrftoken(String token) {
+        save(CSRFTOKEN + getApiUrl(), token);
+    }
+
+    public String getSessionId() {
+        return get(SESSIONID + getApiUrl(), "");
+    }
+
+    public void setSessionId(String sessionId) {
+        save(SESSIONID + getApiUrl(), sessionId);
     }
 
     public String getApiUrl() {

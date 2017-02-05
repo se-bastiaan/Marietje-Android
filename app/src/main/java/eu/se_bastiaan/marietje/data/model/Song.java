@@ -2,11 +2,14 @@ package eu.se_bastiaan.marietje.data.model;
 
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Locale;
 
 @AutoValue
 public abstract class Song implements Comparable<Song>, Parcelable {
@@ -16,6 +19,7 @@ public abstract class Song implements Comparable<Song>, Parcelable {
     public abstract long duration();
     public abstract String title();
     public abstract String artist();
+    @Nullable
     @SerializedName("uploader_name")
     public abstract String uploader();
 
@@ -30,6 +34,12 @@ public abstract class Song implements Comparable<Song>, Parcelable {
     @Override
     public int compareTo(@NonNull Song another) {
         return title().compareToIgnoreCase(title());
+    }
+
+    public String durationStr() {
+        long minutes = (long) Math.floor(duration() / 60);
+        long seconds = duration() % 60;
+        return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
     }
 
     @AutoValue.Builder

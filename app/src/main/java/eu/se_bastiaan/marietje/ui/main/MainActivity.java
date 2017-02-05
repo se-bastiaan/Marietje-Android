@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import java.util.Collections;
-import java.util.List;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,27 +18,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.injection.module.DeveloperSettingsModule;
 import eu.se_bastiaan.marietje.ui.base.BaseActivity;
 import eu.se_bastiaan.marietje.ui.login.LoginActivity;
+import eu.se_bastiaan.marietje.ui.main.controls.ControlsFragment;
+import eu.se_bastiaan.marietje.ui.main.queue.QueueFragment;
+import eu.se_bastiaan.marietje.ui.main.request.RequestFragment;
 import eu.se_bastiaan.marietje.ui.other.ViewModifier;
+import eu.se_bastiaan.marietje.util.PixelUtil;
+import eu.se_bastiaan.marietje.util.TextUtil;
 
 public class MainActivity extends BaseActivity implements MainView {
 
+    private Fragment currentFragment;
+
     @Inject
     MainPresenter presenter;
-    @Inject
-    SongsAdapter songsAdapter;
     @Inject
     PreferencesHelper preferencesHelper;
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    @BindView(R.id.container)
+    FrameLayout containerLayout;
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
+    @BindView(R.id.main_drawer_layout)
+    View rootView;
 
     /**
      * Return an Intent to start this Activity.
@@ -55,15 +63,73 @@ public class MainActivity extends BaseActivity implements MainView {
         ButterKnife.bind(this);
         presenter.attachView(this);
 
-        if (preferencesHelper.getCookies().isEmpty()) {
-            startActivity(LoginActivity.getStartIntent(this));
-            finish();
+        if (TextUtil.isEmpty(preferencesHelper.getSessionId())) {
+            showLogin();
             return;
         }
 
-        recyclerView.setAdapter(songsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        presenter.loadSongs();
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            // TODO: Remove when other functionality is added
+            if (item.getItemId() != R.id.tab_request) {
+                Snackbar.make(containerLayout, "Sorry, this functionality is not available yet", Snackbar.LENGTH_SHORT).show();
+                bottomNavigationView.post(() -> ((BottomNavigationMenuView) bottomNavigationView.getChildAt(0)).getChildAt(1).callOnClick());
+                return true;
+            }
+
+            changeTabFragment(item.getItemId());
+            return true;
+        });
+
+//        changeTabFragment(R.id.tab_queue); TODO: Uncomment when functionality is added
+        ((BottomNavigationMenuView) bottomNavigationView.getChildAt(0)).getChildAt(1).callOnClick(); // TODO: Remove when other functionality is added
+        checkKeyBoardUp();
+}
+
+    private void checkKeyBoardUp() {
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int heightDiff = rootView.getRootView().getHeight() - rootView.getHeight();
+            if (heightDiff > PixelUtil.getPixelsFromDp(this, 200)) { // if more than 200 dp, its probably a keyboard...
+                bottomNavigationView.setVisibility(View.GONE);
+            } else {
+                bottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void showMissingFunctionality() {
+        Snackbar.make(containerLayout, "Sorry, this functionality is not available yet", Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void changeTabFragment(int itemId) {
+        Fragment fragment = null;
+        switch (itemId) {
+            case R.id.tab_queue:
+                setTitle(R.string.queue);
+                if (!(currentFragment instanceof QueueFragment))
+                    fragment = QueueFragment.newInstance();
+                break;
+            case R.id.tab_request:
+                setTitle(R.string.request);
+                if (!(currentFragment instanceof RequestFragment))
+                    fragment = RequestFragment.newInstance();
+                break;
+            case R.id.tab_controls:
+                setTitle(R.string.controls);
+                if (!(currentFragment instanceof ControlsFragment))
+                    fragment = ControlsFragment.newInstance();
+                break;
+        }
+
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+            currentFragment = fragment;
+        }
+    }
+
+    @Override
+    public void showLogin() {
+        startActivity(LoginActivity.getStartIntent(this));
+        finish();
     }
 
     @Override
@@ -71,28 +137,6 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onDestroy();
         presenter.detachView(this);
     }
-
-    // MVP View methods implementation
-
-    @Override
-    public void showSongs(List<Song> songs) {
-        songsAdapter.setSongs(songs);
-        songsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showError() {
-        Snackbar.make(recyclerView, R.string.error_loading_songs, Snackbar.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showSongsEmpty() {
-        songsAdapter.setSongs(Collections.<Song>emptyList());
-        songsAdapter.notifyDataSetChanged();
-        Snackbar.make(recyclerView, R.string.empty_songs, Snackbar.LENGTH_LONG).show();
-    }
-
-    // End MVP View methods implementation
 
     @Override
     protected void injectActivity(ActivityComponent component) {

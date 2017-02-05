@@ -62,7 +62,7 @@ public class TestDataFactory {
     public static SongsResponse makeEmptySongsResponse(long currentPage) {
         return SongsResponse.builder()
                 .currentPage(currentPage)
-                .lastPage(currentPage - 1)
+                .lastPage(currentPage)
                 .pageSize(10)
                 .data(new ArrayList<>())
                 .total((currentPage - 1) * 10)

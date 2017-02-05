@@ -36,7 +36,7 @@ public class SongsDataManagerTest {
         SongsResponse response = stubSongsResponse(currentPage);
 
         TestSubscriber<SongsResponse> result = new TestSubscriber<>();
-        dataManager.songs(currentPage, null, null).subscribe(result);
+        dataManager.songs(currentPage, null).subscribe(result);
         result.assertNoErrors();
 
         result.assertReceivedOnNext(Collections.singletonList(response));
@@ -46,8 +46,8 @@ public class SongsDataManagerTest {
     public void songsCallsApi() {
         int currentPage = 4;
         stubSongsResponse(currentPage);
-        dataManager.songs(currentPage, null, null).subscribe();
-        verify(mockSongsService).songs(currentPage, 100, null, null);
+        dataManager.songs(currentPage, null).subscribe();
+        verify(mockSongsService).songs(currentPage, 50, null, null);
     }
 
     @Test
@@ -67,15 +67,17 @@ public class SongsDataManagerTest {
         int currentPage = 2;
         stubSongsResponse(currentPage);
         dataManager.manageSongs(currentPage, null, null).subscribe();
-        verify(mockSongsService).manageSongs(currentPage, 100, null, null);
+        verify(mockSongsService).manageSongs(currentPage, 50, null, null);
     }
 
     private SongsResponse stubSongsResponse(int currentPage) {
         SongsResponse response = TestDataFactory.makeSongsResponse(currentPage);
-        when(mockSongsService.songs(currentPage, 100, null, null))
+        when(mockSongsService.songs(currentPage, 50, null, null))
                 .thenReturn(Observable.just(response));
-        when(mockSongsService.manageSongs(currentPage, 100, null, null))
+        when(mockSongsService.manageSongs(currentPage, 50, null, null))
                 .thenReturn(Observable.just(response));
+        when(mockSongsService.csrf())
+                .thenReturn(Observable.just(""));
         return response;
     }
 

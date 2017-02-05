@@ -3,7 +3,7 @@
 
     <color name="primary">#D32F2F</color>
     <color name="primary_dark">#B71C1C</color>
-    <color name="accent">#616161</color>
+    <color name="accent">#ffffff</color>
     <color name="gray">#ffdfdfdf</color>
 
 </resources>

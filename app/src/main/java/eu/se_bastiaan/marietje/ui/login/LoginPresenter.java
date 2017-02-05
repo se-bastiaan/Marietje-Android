@@ -2,7 +2,6 @@ package eu.se_bastiaan.marietje.ui.login;
 
 import android.content.Context;
 
-import java.util.HashSet;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -34,18 +33,17 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             return;
         }
 
-        HashSet<String> cookieSet = new HashSet<>();
         String[] cookies = cookieStr.split(";");
-        boolean hasSessionCookie = false;
         for (String cookie : cookies) {
-            if (!hasSessionCookie) {
-                hasSessionCookie = cookie.contains(CookiesInterceptor.SESSION_COOKIE);
+            String[] cookieValue = cookie.split("=");
+            if (cookieValue[0].equals(CookiesInterceptor.SESSION_COOKIE)) {
+                this.dataManager.preferencesHelper().setSessionId(cookieValue[1]);
+            } else if (cookieValue[0].equals(CookiesInterceptor.CSRF_COOKIE)) {
+                this.dataManager.preferencesHelper().setCsrftoken(cookieValue[1]);
             }
-            cookieSet.add(cookie.trim());
         }
 
-        if (hasSessionCookie) {
-            this.dataManager.preferencesHelper().setCookies(cookieSet);
+        if (!this.dataManager.preferencesHelper().getSessionId().isEmpty()) {
             view().showLoginSuccessful();
         }
     }
