@@ -1,0 +1,13 @@
+component_depth: 8
+languages:
+- name: java
+  production:
+    exclude:
+      - /app/src/test/.*\.java
+      - /app/src/androidTest/.*\.java
+      - /app/src/commonTest/.*\.java
+  test:
+    include:
+      - /app/src/test/.*\.java
+      - /app/src/androidTest/.*\.java
+      - /app/src/commonTest/.*\.java
