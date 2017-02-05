@@ -173,7 +173,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
 
     @OnClick(R.id.b_change_baseurl)
     void changeBaseUrl() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_Marietje);
         builder.setTitle("API Base Url");
         LinearLayout linearLayout = new LinearLayout(getActivity());
         final EditText input = new EditText(getActivity());
