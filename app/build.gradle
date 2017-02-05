@@ -15,7 +15,7 @@ advancedVersioning {
         versionCodeType VersionCodeType.JALALI_DATE
     }
     nameOptions {
-        versionMajor 1
+        versionMajor 2
         versionMinor 0
         versionPatch 0
     }
