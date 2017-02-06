@@ -122,7 +122,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
                 timer = null;
             }
 
-            if (playNextAt < (System.currentTimeMillis() / 1000)) {
+            if (playNextAt > (System.currentTimeMillis() / 1000)) {
                 if (getAdapterPosition() > 0) {
                     durationTextView.setText(playsAt());
                 } else {
