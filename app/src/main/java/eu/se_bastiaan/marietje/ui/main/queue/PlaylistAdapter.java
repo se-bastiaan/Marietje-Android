@@ -33,12 +33,18 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
     private long currentServerTime = 0;
     private long currentStartedAt = 0;
 
-    private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+    private Handler mainThreadHandler;
     private List<PlaylistSong> playlistSongs;
     private PlaylistAdapter.Listener listener;
 
     @Inject
     public PlaylistAdapter() {
+        mainThreadHandler = new Handler(Looper.getMainLooper());
+        playlistSongs = new ArrayList<>();
+    }
+
+    public PlaylistAdapter(Handler mainThreadHandler) {
+        this.mainThreadHandler = mainThreadHandler;
         playlistSongs = new ArrayList<>();
     }
 
