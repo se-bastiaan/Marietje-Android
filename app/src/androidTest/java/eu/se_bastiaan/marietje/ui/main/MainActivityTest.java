@@ -6,6 +6,7 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
@@ -14,14 +15,18 @@ import org.junit.runner.RunWith;
 
 import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.test.common.TestComponentRule;
+import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.ui.login.LoginActivity;
+import rx.Observable;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -58,6 +63,12 @@ public class MainActivityTest {
     @Rule
     public final TestRule chain = RuleChain.outerRule(component).around(main);
 
+    @Before
+    public void setUp() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+    }
+
     @Test
     public void noSessionOpensLoginActivity() {
         when(component.getMockDataManager().preferencesHelper().getSessionId())
@@ -75,7 +86,8 @@ public class MainActivityTest {
 
         main.launchActivity(null);
 
-        onView(withId(R.id.action_logout))
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText(R.string.action_logout))
                 .perform(click());
 
         verify(component.getMockDataManager().preferencesHelper()).clear();

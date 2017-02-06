@@ -29,6 +29,4 @@ public class PlaylistAdapterTest {
         assertThat(songsAdapter.getItemCount(), equalTo(11));
     }
 
-
-
 }
