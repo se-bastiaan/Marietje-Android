@@ -30,6 +30,7 @@ import eu.se_bastiaan.marietje.data.model.Song;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongViewHolder> {
 
+    private Timer timer;
     private long currentServerTime = 0;
     private long currentStartedAt = 0;
     private long timeLeft = 0;
@@ -63,9 +64,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         this.currentStartedAt = queue.startedAt();
 
         long now = System.currentTimeMillis() / 1000;
-        if (timeOffset == 0) {
-            timeOffset = now - currentServerTime;
-        }
+        timeOffset = now - currentServerTime;
         this.playNextAt = currentStartedAt + timeOffset + queue.currentSong().song().duration();
 
     }
@@ -88,8 +87,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
     }
 
     class SongViewHolder extends RecyclerView.ViewHolder {
-        Timer timer;
-
         @BindView(R.id.text_title)
         TextView titleTextView;
         @BindView(R.id.text_artist)
@@ -111,17 +108,18 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         }
 
         void startTimer() {
-            timeLeft = playlistSongs.get(0).song().duration() - (currentServerTime - currentStartedAt);
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new UpdateTimeLeftTask(), 0, TimeUnit.SECONDS.toMillis(1));
-        }
-
-        void bind() {
             if (timer != null) {
                 timer.cancel();
                 timer = null;
             }
 
+            timeOffset = (System.currentTimeMillis() / 1000) - currentServerTime;
+            timeLeft = playlistSongs.get(0).song().duration() - (currentServerTime - currentStartedAt) + timeOffset;
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new UpdateTimeLeftTask(), 0, TimeUnit.SECONDS.toMillis(1));
+        }
+
+        void bind() {
             if (playNextAt > (System.currentTimeMillis() / 1000)) {
                 if (getAdapterPosition() > 0) {
                     durationTextView.setText(playsAt());
@@ -147,6 +145,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         class UpdateTimeLeftTask extends TimerTask {
             @Override
             public void run() {
+                if (getAdapterPosition() > 0) {
+                    timer.cancel();
+                    timer = null;
+                    return;
+                }
+
                 mainThreadHandler.post(() -> durationTextView.setText(timeLeftStr()));
                 timeLeft -= 1;
                 if (timeLeft <= 0) {

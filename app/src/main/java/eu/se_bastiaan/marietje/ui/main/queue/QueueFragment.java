@@ -121,8 +121,8 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
     @Override
     public void onSongClicked(int position, PlaylistSong playlistSong) {
         List<String> options = Arrays.asList(getString(R.string.queue_move_down), getString(R.string.queue_remove));
-        MenuBottomSheetDialogFragment.newInstance(options, (menu_position, item) -> {
-            switch (menu_position) {
+        MenuBottomSheetDialogFragment.newInstance(options, (menuPosition, item) -> {
+            switch (menuPosition) {
                 case 0:
                     presenter.moveSongDownInQueue(playlistSong.objectId());
                     break;
