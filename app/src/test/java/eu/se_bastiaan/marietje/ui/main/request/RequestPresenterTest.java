@@ -75,7 +75,7 @@ public class RequestPresenterTest {
     }
 
     @Test
-    public void loadSongsReturnsEmptyList() {
+    public void searchSongsReturnsEmptyList() {
         Songs response = TestDataFactory.makeEmptySongsResponse(1);
         String query = "returnsEmpty";
         when(mockDataManager.songsDataManager().songs(1, query))
@@ -89,7 +89,7 @@ public class RequestPresenterTest {
     }
 
     @Test
-    public void loadSongsFails() {
+    public void searchSongsFails() {
         String query = "error";
         when(mockDataManager.songsDataManager().songs(1, query))
                 .thenReturn(Observable.error(new RuntimeException()));
@@ -98,6 +98,15 @@ public class RequestPresenterTest {
         verify(mockRequestView).showLoadingError();
         verify(mockRequestView, never()).showSongsEmpty();
         verify(mockRequestView, never()).showSongs(anyListOf(Song.class), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    public void searchSongsDoesNothing() {
+        requestPresenter.searchSong("te");
+        verify(mockRequestView, never()).showLoading();
+        verify(mockRequestView, never()).showSongs(anyListOf(Song.class), anyBoolean(), anyBoolean());
+        verify(mockRequestView, never()).showSongsEmpty();
+        verify(mockRequestView, never()).showLoadingError();
     }
 
     @Test

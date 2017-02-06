@@ -37,6 +37,10 @@ public class MarietjeApp extends MultiDexApplication implements Foreground.Liste
 
         Foreground.init(this).addListener(this);
 
+        init();
+    }
+
+    public void init() {
         getComponent().eventBus().register(NeedsCsrfToken.class)
                 .subscribe(new RxSubscriber<NeedsCsrfToken>() {
                     @Override
@@ -58,6 +62,13 @@ public class MarietjeApp extends MultiDexApplication implements Foreground.Liste
 
     public static MarietjeApp get(Context context) {
         return (MarietjeApp) context.getApplicationContext();
+    }
+
+    /**
+     * For mocking
+     */
+    public void setAppComponent(AppComponent appComponent) {
+        this.appComponent = appComponent;
     }
 
     public AppComponent getComponent() {

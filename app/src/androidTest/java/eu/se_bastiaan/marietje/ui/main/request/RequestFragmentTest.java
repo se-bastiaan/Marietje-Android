@@ -16,6 +16,7 @@ import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.data.model.Songs;
+import eu.se_bastiaan.marietje.matcher.RecyclerViewItemCountAssertion;
 import eu.se_bastiaan.marietje.test.common.TestComponentRule;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.ui.main.MainActivity;
@@ -30,6 +31,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
@@ -76,6 +78,9 @@ public class RequestFragmentTest {
         onView(allOf(withId(R.id.tab_request), isDisplayed()))
                 .perform(click());
 
+        onView(withId(R.id.progress_bar))
+                .check(matches(not(isDisplayed())));
+
         int position = 0;
         for (Song song : response.data()) {
             onView(withId(R.id.recycler_view))
@@ -88,6 +93,45 @@ public class RequestFragmentTest {
                     .check(matches(isDisplayed()));
             position++;
         }
+    }
+
+    @Test
+    public void emptyListShows() {
+        Songs response = TestDataFactory.makeEmptySongsResponse(1);
+        when(component.getMockDataManager().songsDataManager().songs(1, ""))
+                .thenReturn(Observable.just(response));
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.tab_request), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.request_songs_empty)))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.progress_bar))
+                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.recycler_view))
+                .check(new RecyclerViewItemCountAssertion(0));
+    }
+
+
+
+    @Test
+    public void loadingSongsError() {
+        when(component.getMockDataManager().songsDataManager().songs(1, ""))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.tab_request), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.request_songs_error)))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.progress_bar))
+                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.recycler_view))
+                .check(matches(not(isDisplayed())));
     }
 
     @Test
