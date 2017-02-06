@@ -55,19 +55,25 @@
 # Gson rules
 -keepattributes Signature
 -keep class sun.misc.Unsafe { *; }
-# TODO change to match your package model
+
 # Keep non static or private fields of models so Gson can find their names
--keepclassmembers class com.digitalisma.boilerplate.data.model.** {
+-keepclassmembers class eu.se_bastiaan.marietje.data.model.** {
     !static !private <fields>;
 }
-# TODO change to match your Retrofit services (only if using inner models withing the service)
+
 # Some models used by gson are inner classes inside the retrofit service
--keepclassmembers class com.digitalisma.boilerplate.data.remote.PersonsService$** {
+-keepclassmembers class eu.se_bastiaan.marietje.data.remote.ControlService$** {
+    !static !private <fields>;
+}
+-keepclassmembers class eu.se_bastiaan.marietje.data.remote.SongsService$** {
     !static !private <fields>;
 }
 
 # Retrolambda rules
 -dontwarn java.lang.invoke.*
+
+# Support library rules
+-keep class android.support.v7.widget.SearchView { *; }
 
 # Produces useful obfuscated stack traces
 # http://proguard.sourceforge.net/manual/examples.html#stacktrace
