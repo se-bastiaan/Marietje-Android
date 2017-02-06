@@ -1,0 +1,38 @@
+sudo: false
+
+language: android
+jdk: oraclejdk8
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - android-19
+    - android-25
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - extra-android-support
+    - sys-img-armeabi-v7a-android-19
+
+before_script:
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+  - ./gradlew dependencies
+
+script:
+  - ./gradlew --no-daemon --info --stacktrace clean
+  - ./gradlew --no-daemon --info --stacktrace build -PdisablePreDex -PwithDexcount -Dscan
+  - emulator -avd test -no-window &
+  - android-wait-for-emulator
+  - ./gradlew --no-daemon --info --stacktrace connectedAndroidTest -PdisablePreDex -PwithDexcount
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
