@@ -25,8 +25,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         testInstrumentationRunner "eu.se_bastiaan.marietje.runner.UnlockDeviceAndroidJUnitRunner"
-        versionCode 95111801
-        versionName "2.0.0b1"
+        versionCode 100000200
+        versionName "2.0.0b2"
 
         buildConfigField 'String', 'API_URL', '"https://marietje-noord.science.ru.nl/"'
     }
