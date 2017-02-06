@@ -4,8 +4,9 @@ apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'hu.supercluster.paperwork'
 apply from: '../config/quality/quality.gradle'
-//TODO uncomment line below after adding fabric api secret and key to fabric.properties
-//apply plugin: 'io.fabric'
+if (file("fabric.properties").exists()) {
+    apply plugin: 'io.fabric'
+}
 
 paperwork {
     set = [
