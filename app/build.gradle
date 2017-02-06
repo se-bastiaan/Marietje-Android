@@ -1,25 +1,11 @@
-import org.moallemi.gradle.internal.VersionCodeType
-
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'org.moallemi.advanced-build-version'
 apply plugin: 'hu.supercluster.paperwork'
 apply from: '../config/quality/quality.gradle'
 //TODO uncomment line below after adding fabric api secret and key to fabric.properties
 //apply plugin: 'io.fabric'
-
-advancedVersioning {
-    codeOptions {
-        versionCodeType VersionCodeType.JALALI_DATE
-    }
-    nameOptions {
-        versionMajor 2
-        versionMinor 0
-        versionPatch 0
-    }
-}
 
 paperwork {
     set = [
@@ -38,8 +24,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         testInstrumentationRunner "eu.se_bastiaan.marietje.runner.RxAndroidJUnitRunner"
-        versionCode advancedVersioning.versionCode
-        versionName advancedVersioning.versionName
+        versionCode 95111801
+        versionName "2.0.0b1"
 
         buildConfigField 'String', 'API_URL', '"https://marietje-noord.science.ru.nl/"'
     }
