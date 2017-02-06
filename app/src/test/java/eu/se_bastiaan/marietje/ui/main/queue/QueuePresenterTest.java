@@ -15,6 +15,7 @@ import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
+import eu.se_bastiaan.marietje.util.EventBus;
 import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule;
 import rx.Observable;
 
@@ -29,6 +30,8 @@ public class QueuePresenterTest {
 
     Context context = new MockContext();
     @Mock
+    EventBus eventBus;
+    @Mock
     QueueView mockQueueView;
     @Mock
     DataManager mockDataManager;
@@ -41,7 +44,7 @@ public class QueuePresenterTest {
     public void setUp() {
         when(mockDataManager.controlDataManager()).thenReturn(mock(ControlDataManager.class));
 
-        queuePresenter = new QueuePresenter(mockDataManager, context);
+        queuePresenter = new QueuePresenter(mockDataManager, context, eventBus);
         queuePresenter.attachView(mockQueueView);
 
     }

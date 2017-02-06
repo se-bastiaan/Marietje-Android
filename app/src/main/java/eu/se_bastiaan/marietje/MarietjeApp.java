@@ -10,6 +10,7 @@ import com.crashlytics.android.answers.Answers;
 import net.ypresto.timbertreeutils.CrashlyticsLogExceptionTree;
 import net.ypresto.timbertreeutils.CrashlyticsLogTree;
 
+import eu.se_bastiaan.marietje.events.NeedsCsrfToken;
 import eu.se_bastiaan.marietje.injection.component.AppComponent;
 import eu.se_bastiaan.marietje.injection.component.DaggerAppComponent;
 import eu.se_bastiaan.marietje.injection.module.AppModule;
@@ -35,6 +36,24 @@ public class MarietjeApp extends MultiDexApplication implements Foreground.Liste
         }
 
         Foreground.init(this).addListener(this);
+
+        getComponent().eventBus().register(NeedsCsrfToken.class)
+                .subscribe(new RxSubscriber<NeedsCsrfToken>() {
+                    @Override
+                    public void onNext(NeedsCsrfToken needsCsrfToken) {
+                        getComponent().dataManager().controlDataManager().csrf().subscribe(new RxSubscriber<String>() {
+                            @Override
+                            public void onError(Throwable e) {
+                                Timber.w(e);
+                            }
+
+                            @Override
+                            public void onNext(String s) {
+                                Timber.d("Current CSRF token: " + s);
+                            }
+                        });
+                    }
+                });
     }
 
     public static MarietjeApp get(Context context) {
@@ -57,17 +76,7 @@ public class MarietjeApp extends MultiDexApplication implements Foreground.Liste
 
     @Override
     public void onBecameForeground() {
-        appComponent.dataManager().controlDataManager().csrf().subscribe(new RxSubscriber<String>() {
-            @Override
-            public void onError(Throwable e) {
-                Timber.w(e);
-            }
-
-            @Override
-            public void onNext(String s) {
-                Timber.d("Current CSRF token: " + s);
-            }
-        });
+        getComponent().eventBus().post(new NeedsCsrfToken());
     }
 
     @Override

@@ -18,6 +18,7 @@ import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
+import eu.se_bastiaan.marietje.util.EventBus;
 import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule;
 import rx.Observable;
 
@@ -35,6 +36,8 @@ public class RequestPresenterTest {
 
     Context context = new MockContext();
     @Mock
+    EventBus eventBus;
+    @Mock
     RequestView mockRequestView;
     @Mock
     DataManager mockDataManager;
@@ -48,7 +51,7 @@ public class RequestPresenterTest {
         when(mockDataManager.songsDataManager()).thenReturn(mock(SongsDataManager.class));
         when(mockDataManager.controlDataManager()).thenReturn(mock(ControlDataManager.class));
 
-        requestPresenter = new RequestPresenter(mockDataManager, context);
+        requestPresenter = new RequestPresenter(mockDataManager, context, eventBus);
         requestPresenter.attachView(mockRequestView);
     }
 

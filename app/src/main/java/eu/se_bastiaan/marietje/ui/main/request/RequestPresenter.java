@@ -8,12 +8,15 @@ import javax.inject.Inject;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Songs;
+import eu.se_bastiaan.marietje.events.NeedsCsrfToken;
 import eu.se_bastiaan.marietje.injection.ApplicationContext;
 import eu.se_bastiaan.marietje.injection.PerFragment;
 import eu.se_bastiaan.marietje.ui.base.BasePresenter;
+import eu.se_bastiaan.marietje.util.EventBus;
 import eu.se_bastiaan.marietje.util.RxSubscriber;
 import eu.se_bastiaan.marietje.util.RxUtil;
 import eu.se_bastiaan.marietje.util.TextUtil;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
@@ -23,15 +26,17 @@ public class RequestPresenter extends BasePresenter<RequestView> {
 
     private final DataManager dataManager;
     private final Context context;
+    private final EventBus eventBus;
 
     private String currentQuery;
     private int currentPage = 0;
     private Subscription searchSubscription;
 
     @Inject
-    public RequestPresenter(DataManager dataManager, @ApplicationContext Context context) {
+    public RequestPresenter(DataManager dataManager, @ApplicationContext Context context, EventBus eventBus) {
         this.dataManager = dataManager;
         this.context = context;
+        this.eventBus = eventBus;
     }
 
     @Override
@@ -79,6 +84,13 @@ public class RequestPresenter extends BasePresenter<RequestView> {
                     public void onError(Throwable e) {
                         Timber.w(e);
                         view().showLoadingError();
+
+                        if (e instanceof HttpException) {
+                            HttpException httpException = (HttpException) e;
+                            if (httpException.code() == 403) {
+                                eventBus.post(new NeedsCsrfToken());
+                            }
+                        }
                     }
                 });
 
