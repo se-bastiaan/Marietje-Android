@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import eu.se_bastiaan.marietje.data.DataManager;
+import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.events.NeedsCsrfToken;
 import eu.se_bastiaan.marietje.injection.ApplicationContext;
@@ -73,6 +74,50 @@ public class QueuePresenter extends BasePresenter<QueueView> {
                 });
 
         unsubscribeOnDetachView(loadingSubscription);
+    }
+
+    public void moveSongDownInQueue(long songId) {
+        checkViewAttached();
+
+        Subscription subscription = dataManager.controlDataManager().moveDown(songId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<Empty>() {
+                    @Override
+                    public void onNext(Empty emptyResponse) {
+                        loadData();
+                        view().showMoveDownSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.w(e);
+                        view().showMoveDownError();
+                    }
+                });
+
+        unsubscribeOnDetachView(subscription);
+    }
+
+    public void removeSongFromQueue(long songId) {
+        checkViewAttached();
+
+        Subscription subscription = dataManager.controlDataManager().cancel(songId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<Empty>() {
+                    @Override
+                    public void onNext(Empty emptyResponse) {
+                        loadData();
+                        view().showRemoveSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.w(e);
+                        view().showRemoveError();
+                    }
+                });
+
+        unsubscribeOnDetachView(subscription);
     }
 
 }

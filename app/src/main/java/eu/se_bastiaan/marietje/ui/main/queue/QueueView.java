@@ -9,4 +9,10 @@ public interface QueueView extends MvpView {
     void showLoadingError();
     void showLoading();
 
+    void showMoveDownSuccess();
+    void showMoveDownError();
+
+    void showRemoveSuccess();
+    void showRemoveError();
+
 }

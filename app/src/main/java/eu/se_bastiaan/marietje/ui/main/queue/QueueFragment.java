@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -21,6 +24,7 @@ import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.injection.ActivityContext;
 import eu.se_bastiaan.marietje.injection.component.FragmentComponent;
 import eu.se_bastiaan.marietje.ui.base.BaseFragment;
+import eu.se_bastiaan.marietje.ui.common.dialog.MenuBottomSheetDialogFragment;
 import eu.se_bastiaan.marietje.ui.main.MainActivity;
 
 public class QueueFragment extends BaseFragment implements QueueView, PlaylistAdapter.Listener {
@@ -95,8 +99,38 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
     }
 
     @Override
+    public void showMoveDownSuccess() {
+        Snackbar.make(recyclerView, R.string.queue_move_down_success, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMoveDownError() {
+        Snackbar.make(recyclerView, R.string.queue_move_down_error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showRemoveSuccess() {
+        Snackbar.make(recyclerView, R.string.queue_remove_success, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showRemoveError() {
+        Snackbar.make(recyclerView, R.string.queue_remove_error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onSongClicked(int position, PlaylistSong playlistSong) {
-        Snackbar.make(recyclerView, R.string.functionality_missing, Snackbar.LENGTH_SHORT).show();
+        List<String> options = Arrays.asList(getString(R.string.queue_move_down), getString(R.string.queue_remove));
+        MenuBottomSheetDialogFragment.newInstance(options, (menu_position, item) -> {
+            switch (menu_position) {
+                case 0:
+                    presenter.moveSongDownInQueue(playlistSong.objectId());
+                    break;
+                case 1:
+                    presenter.removeSongFromQueue(playlistSong.objectId());
+                    break;
+            }
+        }).show(getChildFragmentManager(), "song_options_menu");
     }
 
     @Override

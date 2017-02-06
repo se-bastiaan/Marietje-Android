@@ -32,6 +32,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
 
     private long currentServerTime = 0;
     private long currentStartedAt = 0;
+    private long timeLeft = 0;
+    private long timeOffset = 0;
+    private long playNextAt;
 
     private Handler mainThreadHandler;
     private List<PlaylistSong> playlistSongs;
@@ -58,6 +61,13 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         this.playlistSongs.addAll(queue.queuedSongs());
         this.currentServerTime = queue.currentTime();
         this.currentStartedAt = queue.startedAt();
+
+        long now = System.currentTimeMillis() / 1000;
+        if (timeOffset == 0) {
+            timeOffset = now - currentServerTime;
+        }
+        this.playNextAt = currentStartedAt + timeOffset + queue.currentSong().song().duration();
+
     }
 
     @Override
@@ -79,7 +89,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
 
     class SongViewHolder extends RecyclerView.ViewHolder {
         Timer timer;
-        long timeLeft;
 
         @BindView(R.id.text_title)
         TextView titleTextView;
@@ -102,8 +111,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         }
 
         void startTimer() {
-            timeLeft = 0;
-            timeLeft = playlistSongs.get(getAdapterPosition()).song().duration() - (currentServerTime - currentStartedAt);
+            timeLeft = playlistSongs.get(0).song().duration() - (currentServerTime - currentStartedAt);
             timer = new Timer();
             timer.scheduleAtFixedRate(new UpdateTimeLeftTask(), 0, TimeUnit.SECONDS.toMillis(1));
         }
@@ -114,11 +122,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
                 timer = null;
             }
 
-            if (getAdapterPosition() > 0) {
-                durationTextView.setText(playsAt());
+            if (playNextAt < (System.currentTimeMillis() / 1000)) {
+                if (getAdapterPosition() > 0) {
+                    durationTextView.setText(playsAt());
+                } else {
+                    durationTextView.setText(timeLeftStr());
+                    startTimer();
+                }
             } else {
-                durationTextView.setText(timeLeftStr());
-                startTimer();
+                durationTextView.setText("");
             }
 
             PlaylistSong playlistSong = playlistSongs.get(getAdapterPosition());
@@ -150,8 +162,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         }
 
         private String playsAt() {
-            long startsAt = currentStartedAt;
-            for (int i = 0; i < getAdapterPosition(); i++) {
+            long startsAt = playNextAt;
+            for (int i = 1; i < getAdapterPosition(); i++) {
                 long duration = playlistSongs.get(i).song().duration();
                 startsAt += duration;
             }

@@ -20,11 +20,17 @@
     <string name="request_songs_error">There was a problem loading the songs</string>
     <string name="request_confirm">Are you sure you want to request %1$s by %2$s?</string>
     <string name="request_success">Song successfully added to the queue.</string>
-    <string name="request_error">Sorry! The song you selected could not be added to the queue.</string>
+    <string name="request_error">Sorry! The song you selected could not be added to the queue</string>
 
     <string name="controls">Controls</string>
 
     <string name="queue">Queue</string>
     <string name="queue_loading_error">There was a problem loading the queue</string>
+    <string name="queue_move_down">Move down in queue</string>
+    <string name="queue_remove">Remove from queue</string>
+    <string name="queue_move_down_success">Song successfully moved down in the queue</string>
+    <string name="queue_move_down_error">Sorry! The song you selected could not be moved down in the queue</string>
+    <string name="queue_remove_success">Song successfully removed from the queue</string>
+    <string name="queue_remove_error">Sorry! The song you selected could not be removed from the queue</string>
 
 </resources>
