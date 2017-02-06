@@ -13,12 +13,13 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import eu.se_bastiaan.marietje.R;
-import eu.se_bastiaan.marietje.data.model.EmptyResponse;
+import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Song;
-import eu.se_bastiaan.marietje.data.model.SongsResponse;
+import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.test.common.TestComponentRule;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.ui.main.MainActivity;
+import eu.se_bastiaan.marietje.util.IdlingSchedulersOverrideRule;
 import rx.Observable;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -43,7 +44,7 @@ public class RequestFragmentTest {
                     // Override the default intent so we pass a false flag for syncing so it doesn't
                     // start a sync service in the background that would affect  the behaviour of
                     // this test.
-                    return MainActivity.getStartIntent(getTargetContext());
+                    return MainActivity.getStartIntent(getTargetContext(), false);
                 }
             };
 
@@ -51,22 +52,27 @@ public class RequestFragmentTest {
     public void setUp() {
         when(component.getMockDataManager().preferencesHelper().getSessionId())
                 .thenReturn("sessionId");
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
     }
 
     // TestComponentRule needs to go first to make sure the Dagger ApplicationTestComponent is set
     // in the Application before any Activity is launched.
     @Rule
     public final TestRule chain = RuleChain.outerRule(component).around(main);
+    @Rule
+    public final IdlingSchedulersOverrideRule overrideSchedulersRule = new IdlingSchedulersOverrideRule();
 
     @Test
     public void listOfSongsShows() {
-        SongsResponse response = TestDataFactory.makeSongsResponse(1);
+        Songs response = TestDataFactory.makeSongsResponse(1);
         when(component.getMockDataManager().songsDataManager().songs(1, ""))
                 .thenReturn(Observable.just(response));
         when(component.getMockDataManager().songsDataManager().songs(2, ""))
                 .thenReturn(Observable.just(TestDataFactory.makeSongsResponse(2)));
 
         main.launchActivity(null);
+
         onView(allOf(withId(R.id.tab_request), isDisplayed()))
                 .perform(click());
 
@@ -86,11 +92,11 @@ public class RequestFragmentTest {
 
     @Test
     public void requestSongSuccess() {
-        SongsResponse response = TestDataFactory.makeSongsResponse(1);
+        Songs response = TestDataFactory.makeSongsResponse(1);
         when(component.getMockDataManager().songsDataManager().songs(1, ""))
                 .thenReturn(Observable.just(response));
-        when(component.getMockDataManager().controlDataManager().request(0))
-                .thenReturn(Observable.just(EmptyResponse.create()));
+        when(component.getMockDataManager().controlDataManager().request(1))
+                .thenReturn(Observable.just(Empty.create()));
 
         main.launchActivity(null);
         onView(allOf(withId(R.id.tab_request), isDisplayed()))
@@ -98,18 +104,18 @@ public class RequestFragmentTest {
 
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(allOf(withId(android.R.id.button1), withText(getTargetContext().getString(R.string.dialog_action_ok))))
+        onView(allOf(withId(android.R.id.button1), withText(R.string.dialog_action_ok)))
                 .perform(click());
-        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(getTargetContext().getString(R.string.request_success))))
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.request_success)))
                 .check(matches(isDisplayed()));
     }
 
     @Test
     public void requestSongError() {
-        SongsResponse response = TestDataFactory.makeSongsResponse(1);
+        Songs response = TestDataFactory.makeSongsResponse(1);
         when(component.getMockDataManager().songsDataManager().songs(1, ""))
                 .thenReturn(Observable.just(response));
-        when(component.getMockDataManager().controlDataManager().request(0))
+        when(component.getMockDataManager().controlDataManager().request(1))
                 .thenReturn(Observable.error(new RuntimeException()));
 
         main.launchActivity(null);
@@ -118,15 +124,15 @@ public class RequestFragmentTest {
 
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(allOf(withId(android.R.id.button1), withText(getTargetContext().getString(R.string.dialog_action_ok))))
+        onView(allOf(withId(android.R.id.button1), withText(R.string.dialog_action_ok)))
                 .perform(click());
-        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(getTargetContext().getString(R.string.request_error))))
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.request_error)))
                 .check(matches(isDisplayed()));
     }
 
     @Test
     public void requestSongCanceled() {
-        SongsResponse response = TestDataFactory.makeSongsResponse(1);
+        Songs response = TestDataFactory.makeSongsResponse(1);
         when(component.getMockDataManager().songsDataManager().songs(1, ""))
                 .thenReturn(Observable.just(response));
 
@@ -136,7 +142,7 @@ public class RequestFragmentTest {
 
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(allOf(withId(android.R.id.button2), withText(getTargetContext().getString(R.string.dialog_action_cancel))))
+        onView(allOf(withId(android.R.id.button2), withText(R.string.dialog_action_cancel)))
                 .perform(click());
     }
 

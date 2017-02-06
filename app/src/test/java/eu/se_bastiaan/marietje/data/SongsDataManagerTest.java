@@ -8,7 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 
-import eu.se_bastiaan.marietje.data.model.SongsResponse;
+import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.data.remote.SongsService;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import rx.Observable;
@@ -33,9 +33,9 @@ public class SongsDataManagerTest {
     @Test
     public void songsEmitsValues() {
         int currentPage = 0;
-        SongsResponse response = stubSongsResponse(currentPage);
+        Songs response = stubSongsResponse(currentPage);
 
-        TestSubscriber<SongsResponse> result = new TestSubscriber<>();
+        TestSubscriber<Songs> result = new TestSubscriber<>();
         dataManager.songs(currentPage, null).subscribe(result);
         result.assertNoErrors();
 
@@ -53,9 +53,9 @@ public class SongsDataManagerTest {
     @Test
     public void manageSongsEmitsValues() {
         int currentPage = 1;
-        SongsResponse response = stubSongsResponse(currentPage);
+        Songs response = stubSongsResponse(currentPage);
 
-        TestSubscriber<SongsResponse> result = new TestSubscriber<>();
+        TestSubscriber<Songs> result = new TestSubscriber<>();
         dataManager.manageSongs(currentPage, null, null).subscribe(result);
         result.assertNoErrors();
 
@@ -70,14 +70,12 @@ public class SongsDataManagerTest {
         verify(mockSongsService).manageSongs(currentPage, 50, null, null);
     }
 
-    private SongsResponse stubSongsResponse(int currentPage) {
-        SongsResponse response = TestDataFactory.makeSongsResponse(currentPage);
+    private Songs stubSongsResponse(int currentPage) {
+        Songs response = TestDataFactory.makeSongsResponse(currentPage);
         when(mockSongsService.songs(currentPage, 50, null, null))
                 .thenReturn(Observable.just(response));
         when(mockSongsService.manageSongs(currentPage, 50, null, null))
                 .thenReturn(Observable.just(response));
-        when(mockSongsService.csrf())
-                .thenReturn(Observable.just(""));
         return response;
     }
 

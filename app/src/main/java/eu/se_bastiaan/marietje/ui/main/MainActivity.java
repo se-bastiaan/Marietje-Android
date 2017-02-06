@@ -4,10 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -22,7 +23,6 @@ import eu.se_bastiaan.marietje.injection.component.ActivityComponent;
 import eu.se_bastiaan.marietje.injection.module.DeveloperSettingsModule;
 import eu.se_bastiaan.marietje.ui.base.BaseActivity;
 import eu.se_bastiaan.marietje.ui.login.LoginActivity;
-import eu.se_bastiaan.marietje.ui.main.controls.ControlsFragment;
 import eu.se_bastiaan.marietje.ui.main.queue.QueueFragment;
 import eu.se_bastiaan.marietje.ui.main.request.RequestFragment;
 import eu.se_bastiaan.marietje.ui.other.ViewModifier;
@@ -31,6 +31,7 @@ import eu.se_bastiaan.marietje.util.TextUtil;
 
 public class MainActivity extends BaseActivity implements MainView {
 
+    public static final String EXTRA_AUTO_REFRESH_QUEUE = "auto_refresh";
     private Fragment currentFragment;
 
     @Inject
@@ -52,7 +53,16 @@ public class MainActivity extends BaseActivity implements MainView {
      * Return an Intent to start this Activity.
      */
     public static Intent getStartIntent(Context context) {
-        return new Intent(context, MainActivity.class);
+        return getStartIntent(context, true);
+    }
+
+    /**
+     * Return an Intent to start this Activity.
+     */
+    public static Intent getStartIntent(Context context, boolean autoRefresh) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(EXTRA_AUTO_REFRESH_QUEUE, autoRefresh);
+        return intent;
     }
 
     @SuppressLint("InflateParams") // In this case it's ok
@@ -69,19 +79,11 @@ public class MainActivity extends BaseActivity implements MainView {
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            // TODO: Remove when other functionality is added
-            if (item.getItemId() != R.id.tab_request) {
-                Snackbar.make(containerLayout, "Sorry, this functionality is not available yet", Snackbar.LENGTH_SHORT).show();
-                bottomNavigationView.post(() -> ((BottomNavigationMenuView) bottomNavigationView.getChildAt(0)).getChildAt(1).callOnClick());
-                return true;
-            }
-
             changeTabFragment(item.getItemId());
             return true;
         });
 
-//        changeTabFragment(R.id.tab_queue); TODO: Uncomment when functionality is added
-        ((BottomNavigationMenuView) bottomNavigationView.getChildAt(0)).getChildAt(1).callOnClick(); // TODO: Remove when other functionality is added
+        changeTabFragment(R.id.tab_queue);
         checkKeyBoardUp();
 }
 
@@ -94,10 +96,6 @@ public class MainActivity extends BaseActivity implements MainView {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             }
         });
-    }
-
-    private void showMissingFunctionality() {
-        Snackbar.make(containerLayout, "Sorry, this functionality is not available yet", Snackbar.LENGTH_SHORT).show();
     }
 
     private void changeTabFragment(int itemId) {
@@ -113,11 +111,6 @@ public class MainActivity extends BaseActivity implements MainView {
                 if (!(currentFragment instanceof RequestFragment))
                     fragment = RequestFragment.newInstance();
                 break;
-            case R.id.tab_controls:
-                setTitle(R.string.controls);
-                if (!(currentFragment instanceof ControlsFragment))
-                    fragment = ControlsFragment.newInstance();
-                break;
         }
 
         if (fragment != null) {
@@ -130,6 +123,27 @@ public class MainActivity extends BaseActivity implements MainView {
     public void showLogin() {
         startActivity(LoginActivity.getStartIntent(this));
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_controls:
+                // TODO: Add functionality to control audio
+                Snackbar.make(containerLayout.findViewById(R.id.recycler_view), R.string.functionality_missing, Snackbar.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_logout:
+                preferencesHelper.clear();
+                showLogin();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

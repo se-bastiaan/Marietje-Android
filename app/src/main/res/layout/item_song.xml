@@ -28,15 +28,33 @@
         android:layout_marginRight="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
         android:textSize="@dimen/text_body"
-        tools:text="Person Name" />
+        tools:text="Song Title" />
+
+    <TextView
+        android:id="@+id/text_requester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/text_title"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_small_body"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="requester"
+        />
 
     <TextView
         android:id="@+id/text_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_title"
+        android:layout_toLeftOf="@id/text_requester"
+        android:layout_toStartOf="@id/text_requester"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
         android:textSize="@dimen/text_small_body"
-        tools:text="developer" />
+        tools:text="Song Artist" />
 
 </RelativeLayout>

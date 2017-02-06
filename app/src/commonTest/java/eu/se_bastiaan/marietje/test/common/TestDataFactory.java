@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.se_bastiaan.marietje.data.model.PlaylistSong;
-import eu.se_bastiaan.marietje.data.model.QueueResponse;
+import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.model.Song;
-import eu.se_bastiaan.marietje.data.model.SongsResponse;
+import eu.se_bastiaan.marietje.data.model.Songs;
 
 /**
  * Factory class that makes instances of data models with random field values.
@@ -19,14 +19,14 @@ public class TestDataFactory {
                 .objectId(id)
                 .title("title " + id)
                 .artist("artist " + id)
-                .duration(10000L + id * 100L)
+                .duration(100L * id)
                 .uploader("uploader " + id)
                 .build();
     }
 
     public static List<Song> makeListSongs(int number) {
         List<Song> songs = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+        for (int i = 1; i < number + 1; i++) {
             songs.add(makeSong(i));
         }
         return songs;
@@ -43,14 +43,14 @@ public class TestDataFactory {
 
     public static List<PlaylistSong> makeListPlaylistSongs(int number) {
         List<PlaylistSong> songs = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+        for (int i = 1; i < number + 1; i++) {
             songs.add(makePlaylistSong(i));
         }
         return songs;
     }
 
-    public static SongsResponse makeSongsResponse(long currentPage) {
-        return SongsResponse.builder()
+    public static Songs makeSongsResponse(long currentPage) {
+        return Songs.builder()
                 .currentPage(currentPage)
                 .lastPage(100)
                 .pageSize(10)
@@ -59,8 +59,8 @@ public class TestDataFactory {
                 .build();
     }
 
-    public static SongsResponse makeEmptySongsResponse(long currentPage) {
-        return SongsResponse.builder()
+    public static Songs makeEmptySongsResponse(long currentPage) {
+        return Songs.builder()
                 .currentPage(currentPage)
                 .lastPage(currentPage)
                 .pageSize(10)
@@ -69,12 +69,12 @@ public class TestDataFactory {
                 .build();
     }
 
-    public static QueueResponse makeQueueResponse() {
-        return QueueResponse.builder()
-                .currentSong(makePlaylistSong(100))
-                .currentTime(System.currentTimeMillis())
-                .startedAt(System.currentTimeMillis() - 1000L)
-                .queue(makeListPlaylistSongs(10))
+    public static Queue makeQueueResponse() {
+        return Queue.builder()
+                .currentSong(makePlaylistSong(11))
+                .currentTime(90L)
+                .startedAt(0L)
+                .queuedSongs(makeListPlaylistSongs(10))
                 .build();
     }
 

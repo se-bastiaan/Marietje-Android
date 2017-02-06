@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 import javax.inject.Inject;
 
 import eu.se_bastiaan.marietje.data.DataManager;
-import eu.se_bastiaan.marietje.data.model.EmptyResponse;
-import eu.se_bastiaan.marietje.data.model.SongsResponse;
+import eu.se_bastiaan.marietje.data.model.Empty;
+import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.injection.ApplicationContext;
 import eu.se_bastiaan.marietje.injection.PerFragment;
 import eu.se_bastiaan.marietje.ui.base.BasePresenter;
@@ -65,9 +65,9 @@ public class RequestPresenter extends BasePresenter<RequestView> {
 
         searchSubscription = dataManager.songsDataManager().songs(currentPage, queryStr)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<SongsResponse>() {
+                .subscribe(new RxSubscriber<Songs>() {
                     @Override
-                    public void onNext(SongsResponse response) {
+                    public void onNext(Songs response) {
                         if (response.data().isEmpty()) {
                             view().showSongsEmpty();
                         } else {
@@ -90,9 +90,9 @@ public class RequestPresenter extends BasePresenter<RequestView> {
 
         Subscription subscription = dataManager.controlDataManager().request(songId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<EmptyResponse>() {
+                .subscribe(new RxSubscriber<Empty>() {
                     @Override
-                    public void onNext(EmptyResponse emptyResponse) {
+                    public void onNext(Empty emptyResponse) {
                         view().showRequestSuccess();
                     }
 

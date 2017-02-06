@@ -19,8 +19,15 @@ import rx.schedulers.Schedulers;
  */
 public class RxSchedulersOverrideRule implements TestRule {
 
-    private final Func1<Scheduler, Scheduler> newThreadSchedulerFunc = scheduler -> Schedulers.immediate();
-    private final Func1<Scheduler, Scheduler> ioThreadSchedulerFunc = scheduler -> Schedulers.immediate();
+    private final Func1<Scheduler, Scheduler> newThreadSchedulerFunc;
+    private final Func1<Scheduler, Scheduler> ioThreadSchedulerFunc;
+    private final Func1<Scheduler, Scheduler> compThreadSchedulerFunc;
+
+    public RxSchedulersOverrideRule() {
+        newThreadSchedulerFunc = scheduler -> Schedulers.immediate();
+        ioThreadSchedulerFunc = scheduler -> Schedulers.immediate();
+        compThreadSchedulerFunc = scheduler -> Schedulers.immediate();
+    }
 
     private final RxAndroidSchedulersHook rxAndroidSchedulersHook = new RxAndroidSchedulersHook() {
         @Override
@@ -40,6 +47,7 @@ public class RxSchedulersOverrideRule implements TestRule {
                 RxJavaHooks.reset();
                 RxJavaHooks.setOnNewThreadScheduler(newThreadSchedulerFunc);
                 RxJavaHooks.setOnIOScheduler(ioThreadSchedulerFunc);
+                RxJavaHooks.setOnComputationScheduler(compThreadSchedulerFunc);
 
                 base.evaluate();
 

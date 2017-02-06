@@ -9,8 +9,4 @@
         android:id="@+id/tab_request"
         android:icon="@drawable/ic_request"
         android:title="@string/request" />
-    <item
-        android:id="@+id/tab_controls"
-        android:icon="@drawable/ic_controls"
-        android:title="@string/controls" />
 </menu>

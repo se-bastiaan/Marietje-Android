@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.beta.Beta;
 
 import net.ypresto.timbertreeutils.CrashlyticsLogExceptionTree;
 import net.ypresto.timbertreeutils.CrashlyticsLogTree;
@@ -14,10 +13,12 @@ import net.ypresto.timbertreeutils.CrashlyticsLogTree;
 import eu.se_bastiaan.marietje.injection.component.AppComponent;
 import eu.se_bastiaan.marietje.injection.component.DaggerAppComponent;
 import eu.se_bastiaan.marietje.injection.module.AppModule;
+import eu.se_bastiaan.marietje.util.Foreground;
+import eu.se_bastiaan.marietje.util.RxSubscriber;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-public class MarietjeApp extends MultiDexApplication {
+public class MarietjeApp extends MultiDexApplication implements Foreground.Listener {
 
     AppComponent appComponent;
 
@@ -26,13 +27,14 @@ public class MarietjeApp extends MultiDexApplication {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
-            Fabric.with(this, new Answers(), new Beta());
             Timber.plant(new Timber.DebugTree());
         } else {
-            Fabric.with(this, new Crashlytics(), new Answers(), new Beta());
+            Fabric.with(this, new Crashlytics(), new Answers());
             Timber.plant(new CrashlyticsLogExceptionTree(Log.WARN));
             Timber.plant(new CrashlyticsLogTree(Log.INFO));
         }
+
+        Foreground.init(this).addListener(this);
     }
 
     public static MarietjeApp get(Context context) {
@@ -53,4 +55,23 @@ public class MarietjeApp extends MultiDexApplication {
         this.appComponent = appComponent;
     }
 
+    @Override
+    public void onBecameForeground() {
+        appComponent.dataManager().controlDataManager().csrf().subscribe(new RxSubscriber<String>() {
+            @Override
+            public void onError(Throwable e) {
+                Timber.w(e);
+            }
+
+            @Override
+            public void onNext(String s) {
+                Timber.d("Current CSRF token: " + s);
+            }
+        });
+    }
+
+    @Override
+    public void onBecameBackground() {
+        // Do nothing
+    }
 }

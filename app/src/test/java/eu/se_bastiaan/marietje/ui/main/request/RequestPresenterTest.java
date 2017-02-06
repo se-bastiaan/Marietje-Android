@@ -1,4 +1,4 @@
-package eu.se_bastiaan.marietje;
+package eu.se_bastiaan.marietje.ui.main.request;
 
 import android.content.Context;
 import android.test.mock.MockContext;
@@ -14,12 +14,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.SongsDataManager;
-import eu.se_bastiaan.marietje.data.model.EmptyResponse;
+import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Song;
-import eu.se_bastiaan.marietje.data.model.SongsResponse;
+import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
-import eu.se_bastiaan.marietje.ui.main.request.RequestPresenter;
-import eu.se_bastiaan.marietje.ui.main.request.RequestView;
 import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule;
 import rx.Observable;
 
@@ -61,7 +59,7 @@ public class RequestPresenterTest {
 
     @Test
     public void searchSongsReturnsSongs() {
-        SongsResponse response = TestDataFactory.makeSongsResponse(1);
+        Songs response = TestDataFactory.makeSongsResponse(1);
         String query = "returnsSongs";
         when(mockDataManager.songsDataManager().songs(1, query))
                 .thenReturn(Observable.just(response));
@@ -75,7 +73,7 @@ public class RequestPresenterTest {
 
     @Test
     public void loadSongsReturnsEmptyList() {
-        SongsResponse response = TestDataFactory.makeEmptySongsResponse(1);
+        Songs response = TestDataFactory.makeEmptySongsResponse(1);
         String query = "returnsEmpty";
         when(mockDataManager.songsDataManager().songs(1, query))
                 .thenReturn(Observable.just(response));
@@ -103,7 +101,7 @@ public class RequestPresenterTest {
     public void searchSongsReturnsPages() {
         String query = "returnsSongs";
         for (int i = 1; i <= 100; i++) {
-            SongsResponse response = TestDataFactory.makeSongsResponse(i);
+            Songs response = TestDataFactory.makeSongsResponse(i);
             when(mockDataManager.songsDataManager().songs(i, query))
                     .thenReturn(Observable.just(response));
             requestPresenter.searchSong(query);
@@ -119,7 +117,7 @@ public class RequestPresenterTest {
 
     @Test
     public void requestSongShowsSuccess() {
-        EmptyResponse response = EmptyResponse.create();
+        Empty response = Empty.create();
         when(mockDataManager.controlDataManager().request(0))
                 .thenReturn(Observable.just(response));
 

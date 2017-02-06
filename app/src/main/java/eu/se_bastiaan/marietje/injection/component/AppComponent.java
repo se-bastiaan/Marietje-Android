@@ -8,7 +8,6 @@ import dagger.Component;
 import eu.se_bastiaan.marietje.MarietjeApp;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-import eu.se_bastiaan.marietje.data.remote.ControlService;
 import eu.se_bastiaan.marietje.devsettings.LeakCanaryProxy;
 import eu.se_bastiaan.marietje.injection.ApplicationContext;
 import eu.se_bastiaan.marietje.injection.module.AppModule;
@@ -31,7 +30,6 @@ public interface AppComponent {
     @ApplicationContext
     Context context();
     MarietjeApp application();
-    ControlService personsService();
     PreferencesHelper preferencesHelper();
     DataManager dataManager();
     EventBus eventBus();

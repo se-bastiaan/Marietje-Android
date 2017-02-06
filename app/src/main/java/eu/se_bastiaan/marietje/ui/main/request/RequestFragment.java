@@ -43,7 +43,6 @@ public class RequestFragment extends BaseFragment implements RequestView, SongsA
     @ActivityContext
     Context context;
 
-    View rootView;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.recycler_view)
