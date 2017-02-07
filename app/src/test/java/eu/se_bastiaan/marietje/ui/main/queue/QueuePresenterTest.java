@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
+import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.util.EventBus;
@@ -75,6 +76,48 @@ public class QueuePresenterTest {
         verify(mockQueueView).showLoading();
         verify(mockQueueView).showLoadingError();
         verify(mockQueueView, never()).showQueue(any(Queue.class));
+    }
+
+    @Test
+    public void removeSongFromQueueShowsSuccess() {
+        Empty response = Empty.create();
+        when(mockDataManager.controlDataManager().cancel(0))
+                .thenReturn(Observable.just(response));
+
+        queuePresenter.removeSongFromQueue(0);
+        verify(mockQueueView).showRemoveSuccess();
+        verify(mockQueueView, never()).showRemoveError();
+    }
+
+    @Test
+    public void removeSongFromQueueShowsError() {
+        when(mockDataManager.controlDataManager().cancel(0))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        queuePresenter.removeSongFromQueue(0);
+        verify(mockQueueView).showRemoveError();
+        verify(mockQueueView, never()).showRemoveSuccess();
+    }
+
+    @Test
+    public void moveSongDownInQueueShowsSuccess() {
+        Empty response = Empty.create();
+        when(mockDataManager.controlDataManager().moveDown(0))
+                .thenReturn(Observable.just(response));
+
+        queuePresenter.moveSongDownInQueue(0);
+        verify(mockQueueView).showMoveDownSuccess();
+        verify(mockQueueView, never()).showMoveDownError();
+    }
+
+    @Test
+    public void moveSongDownInQueueShowsError() {
+        when(mockDataManager.controlDataManager().moveDown(0))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        queuePresenter.moveSongDownInQueue(0);
+        verify(mockQueueView).showMoveDownError();
+        verify(mockQueueView, never()).showMoveDownSuccess();
     }
 
 }

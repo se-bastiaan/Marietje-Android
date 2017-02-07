@@ -35,7 +35,7 @@ public class TestDataFactory {
     public static PlaylistSong makePlaylistSong(long id) {
         return PlaylistSong.builder()
                 .objectId(id)
-                .canMoveDown(id % 3 == 0)
+                .canMoveDown(id % 2 == 0)
                 .requester("requester " + id)
                 .song(makeSong(id))
                 .build();

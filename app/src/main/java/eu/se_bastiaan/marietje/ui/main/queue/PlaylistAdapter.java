@@ -86,7 +86,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         return playlistSongs.size();
     }
 
-    class SongViewHolder extends RecyclerView.ViewHolder {
+    public class SongViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text_title)
         TextView titleTextView;
         @BindView(R.id.text_artist)

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.PlaylistSong;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.test.common.TestComponentRule;
@@ -30,10 +31,14 @@ import rx.Observable;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static eu.se_bastiaan.marietje.matcher.ViewMatchers.withMenuItemText;
+import static org.hamcrest.Matchers.allOf;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
@@ -98,6 +103,86 @@ public class QueueFragmentTest {
 
             position++;
         }
+    }
+
+    @Test
+    public void removeSongFromQueueSuccess() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().cancel(2))
+                .thenReturn(Observable.just(Empty.create()));
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_remove), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_remove_success)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void removeSongFromQueueError() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().cancel(2))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_remove), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_remove_error)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moveSongDownInQueueSuccess() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().moveDown(2))
+                .thenReturn(Observable.just(Empty.create()));
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_move_down), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_move_down_success)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moveSongDownInQueueError() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().moveDown(2))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_move_down), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_move_down_error)))
+                .check(matches(isDisplayed()));
     }
 
 }

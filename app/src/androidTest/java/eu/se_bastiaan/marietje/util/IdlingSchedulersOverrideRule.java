@@ -2,8 +2,6 @@ package eu.se_bastiaan.marietje.util;
 
 import android.support.test.espresso.Espresso;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -24,20 +22,6 @@ public class IdlingSchedulersOverrideRule implements TestRule {
     public IdlingSchedulersOverrideRule() {
     }
 
-    @Before
-    public void setUp() throws Exception {
-        Espresso.registerIdlingResources(newThreadScheduler.countingIdlingResource(),
-                ioThreadScheduler.countingIdlingResource(),
-                compThreadScheduler.countingIdlingResource());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Espresso.unregisterIdlingResources(newThreadScheduler.countingIdlingResource(),
-                ioThreadScheduler.countingIdlingResource(),
-                compThreadScheduler.countingIdlingResource());
-    }
-
     @Override
     public Statement apply(final Statement base, Description description) {
         return new Statement() {
@@ -55,7 +39,9 @@ public class IdlingSchedulersOverrideRule implements TestRule {
 
                 base.evaluate();
 
-
+                Espresso.unregisterIdlingResources(newThreadScheduler.countingIdlingResource(),
+                        ioThreadScheduler.countingIdlingResource(),
+                        compThreadScheduler.countingIdlingResource());
 
                 RxJavaHooks.reset();
             }

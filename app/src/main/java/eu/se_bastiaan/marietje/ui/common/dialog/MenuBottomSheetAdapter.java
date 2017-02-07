@@ -37,9 +37,9 @@ public class MenuBottomSheetAdapter extends RecyclerView.Adapter<MenuBottomSheet
         return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_text)
+        @BindView(R.id.text_item)
         TextView itemTextView;
 
         ViewHolder(View itemView) {
