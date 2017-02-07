@@ -77,7 +77,8 @@ public class QueueFragmentTest {
         playlistSongs.add(0, response.currentSong());
 
         int position = 0;
-        long startsAt = response.startedAt();
+        long timeOffset = (System.currentTimeMillis() / 1000) - response.currentTime();
+        long startsAt = response.startedAt() + timeOffset;
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
         for (PlaylistSong playlistSong : playlistSongs) {
             Date date = new Date(startsAt * 1000);
