@@ -72,8 +72,8 @@ public class TestDataFactory {
     public static Queue makeQueueResponse() {
         return Queue.builder()
                 .currentSong(makePlaylistSong(11))
-                .currentTime(90L)
-                .startedAt(0L)
+                .currentTime((System.currentTimeMillis() / 1000))
+                .startedAt((System.currentTimeMillis() / 1000) - 90L)
                 .queuedSongs(makeListPlaylistSongs(10))
                 .build();
     }
