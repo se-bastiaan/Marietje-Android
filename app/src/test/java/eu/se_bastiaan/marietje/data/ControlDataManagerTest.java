@@ -43,7 +43,7 @@ public class ControlDataManagerTest {
         when(mockPreferencesHelper.getCsrfToken())
                 .thenReturn(csrfToken);
 
-        String response = "<html>";
+        String response = TestDataFactory.makeNormalCsrfResponse();
         when(mockControlService.csrf())
                 .thenReturn(Observable.just(response));
 
@@ -160,7 +160,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void csrfCallsApi() {
-        String response = "<html>";
+        String response = TestDataFactory.makeNormalCsrfResponse();
         when(mockControlService.csrf())
                 .thenReturn(Observable.just(response));
 
@@ -253,19 +253,35 @@ public class ControlDataManagerTest {
         when(mockPreferencesHelper.getCsrfToken())
                 .thenReturn("csrf_token");
         when(mockControlService.csrf())
+                .thenReturn(Observable.just(TestDataFactory.makeModeratorCsrfResponse()));
+
+        dataManager.csrf().subscribe();
+
+        when(mockPreferencesHelper.getCsrfToken())
+                .thenReturn("csrf_token");
+        when(mockControlService.csrf())
                 .then(new Answer<Observable<String>>() {
                     @Override
                     public Observable<String> answer(InvocationOnMock invocation) throws Throwable {
                         when(mockPreferencesHelper.getCsrfToken())
                                 .thenReturn("");
-                        return Observable.error(new RuntimeException());
+                        return Observable.just(TestDataFactory.makeNormalCsrfResponse());
                     }
                 });
 
         dataManager.csrf().subscribe();
 
-        verify(mockPreferencesHelper).setCsrftoken("");
+        verify(mockPreferencesHelper, times(2)).setCsrftoken("");
         verify(mockPreferencesHelper, times(4)).getCsrfToken();
         verify(mockPreferencesHelper).setCsrftoken("csrf_token");
+
+        verify(mockPreferencesHelper).setCanCancel(true);
+        verify(mockPreferencesHelper).setCanMove(true);
+        verify(mockPreferencesHelper).setCanSkip(true);
+        verify(mockPreferencesHelper).setCanCancel(false);
+        verify(mockPreferencesHelper).setCanMove(false);
+        verify(mockPreferencesHelper).setCanSkip(false);
+
+        verify(mockControlService, times(2)).csrf();
     }
 }

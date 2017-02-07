@@ -2,6 +2,7 @@ package eu.se_bastiaan.marietje.data.remote;
 
 import eu.se_bastiaan.marietje.data.model.Empty;
 import eu.se_bastiaan.marietje.data.model.Queue;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -12,7 +13,7 @@ public interface ControlService {
 
     /**
      * Get new CSRF token
-     * @return {@link String}
+     * @return {@link Response}
      */
     @GET("/")
     Observable<String> csrf();

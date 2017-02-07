@@ -23,6 +23,9 @@ public class PreferencesHelper {
     public static final String API_URL = "api_url";
     public static final String CSRFTOKEN = "csrftoken";
     public static final String SESSIONID = "sessionid";
+    public static final String CAN_CANCEL = "can_cancel";
+    public static final String CAN_MOVE = "can_move";
+    public static final String CAN_SKIP = "can_skip";
 
     private final SharedPreferences pref;
 
@@ -55,6 +58,30 @@ public class PreferencesHelper {
 
     public void setApiUrl(String apiUrl) {
         save(API_URL, apiUrl);
+    }
+
+    public Boolean canCancel() {
+        return get(CAN_CANCEL, false);
+    }
+
+    public void setCanCancel(boolean canCancel) {
+        save(CAN_CANCEL, canCancel);
+    }
+
+    public Boolean canMove() {
+        return get(CAN_MOVE, false);
+    }
+
+    public void setCanMove(boolean canMove) {
+        save(CAN_MOVE, canMove);
+    }
+
+    public Boolean canSkip() {
+        return get(CAN_SKIP, false);
+    }
+
+    public void setCanSkip(boolean canSkip) {
+        save(CAN_SKIP, canSkip);
     }
 
     // DO NOT EDIT BELOW

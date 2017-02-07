@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.PlaylistSong;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.model.Song;
@@ -36,15 +37,17 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
     private long timeLeft = 0;
     private long timeOffset = 0;
     private long playNextAt;
+    private boolean isModerator = false;
 
     private Handler mainThreadHandler;
     private List<PlaylistSong> playlistSongs;
     private PlaylistAdapter.Listener listener;
 
     @Inject
-    public PlaylistAdapter() {
+    public PlaylistAdapter(PreferencesHelper preferencesHelper) {
         mainThreadHandler = new Handler(Looper.getMainLooper());
         playlistSongs = new ArrayList<>();
+        isModerator = preferencesHelper.canCancel() || preferencesHelper.canSkip() || preferencesHelper.canMove();
     }
 
     public PlaylistAdapter(Handler mainThreadHandler) {
@@ -139,7 +142,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
             titleTextView.setText(TextUtils.isEmpty(song.title()) ? itemView.getResources().getString(R.string.songs_title_unknown) : song.title());
             artistTextView.setText(TextUtils.isEmpty(song.artist()) ? itemView.getResources().getString(R.string.songs_artist_unknown) : song.artist());
 
-            itemView.setEnabled(playlistSong.canMoveDown());
+            boolean enabled = playlistSong.canMoveDown() || isModerator;
+            itemView.setEnabled(enabled);
         }
 
         class UpdateTimeLeftTask extends TimerTask {

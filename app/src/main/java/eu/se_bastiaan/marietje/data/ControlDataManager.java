@@ -9,7 +9,6 @@ import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.remote.ControlService;
 import eu.se_bastiaan.marietje.util.TextUtil;
 import rx.Observable;
-import rx.functions.Func1;
 
 @Singleton
 public class ControlDataManager {
@@ -27,16 +26,19 @@ public class ControlDataManager {
         String csrfToken = preferencesHelper.getCsrfToken();
         preferencesHelper.setCsrftoken("");
         return controlService.csrf()
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends String>>() {
-                    @Override
-                    public Observable<String> call(Throwable throwable) {
-                        if (TextUtil.isEmpty(preferencesHelper.getCsrfToken())) {
-                            preferencesHelper.setCsrftoken(csrfToken);
-                        }
-                        return Observable.just(preferencesHelper.getCsrfToken());
-                    }
+                .onErrorReturn(throwable -> "")
+                .doOnNext(s -> {
+                    preferencesHelper.setCanSkip(s.contains("canSkip = 1"));
+                    preferencesHelper.setCanCancel(s.contains("canCancel = 1"));
+                    preferencesHelper.setCanMove(s.contains("canMoveSongs = 1"));
                 })
-                .map(s -> preferencesHelper.getCsrfToken());
+                .map(s -> {
+                    String returnToken = preferencesHelper.getCsrfToken();
+                    if (TextUtil.isEmpty(returnToken)) {
+                        preferencesHelper.setCsrftoken(returnToken = csrfToken);
+                    }
+                    return returnToken;
+                });
     }
 
     public Observable<Queue> queue() {

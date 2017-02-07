@@ -47,10 +47,31 @@ public class PreferencesHelperTest {
     }
 
     @Test
+    public void setCanCancelTest() {
+        preferencesHelper.setCanCancel(true);
+        assertThat(preferencesHelper.canCancel(), is(equalTo(true)));
+    }
+
+    @Test
+    public void setCanMoveTest() {
+        preferencesHelper.setCanMove(true);
+        assertThat(preferencesHelper.canMove(), is(equalTo(true)));
+    }
+
+    @Test
+    public void setCanSkipTest() {
+        preferencesHelper.setCanSkip(true);
+        assertThat(preferencesHelper.canSkip(), is(equalTo(true)));
+    }
+
+    @Test
     public void defaultValuesTest() {
         assertThat(preferencesHelper.getApiUrl(), is(equalTo(BuildConfig.API_URL)));
         assertThat(preferencesHelper.getSessionId(), isEmptyString());
         assertThat(preferencesHelper.getCsrfToken(), isEmptyString());
+        assertThat(preferencesHelper.canMove(), is(equalTo(false)));
+        assertThat(preferencesHelper.canCancel(), is(equalTo(false)));
+        assertThat(preferencesHelper.canSkip(), is(equalTo(false)));
     }
 
 }

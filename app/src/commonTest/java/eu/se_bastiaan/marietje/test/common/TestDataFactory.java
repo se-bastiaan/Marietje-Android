@@ -78,4 +78,12 @@ public class TestDataFactory {
                 .build();
     }
 
+    public static String makeModeratorCsrfResponse() {
+        return "canMoveSongs = 1;canCancel = 1;canSkip = 1;";
+    }
+
+    public static String makeNormalCsrfResponse() {
+        return "canMoveSongs = 0;canCancel = 0;canSkip = 0;";
+    }
+
 }
