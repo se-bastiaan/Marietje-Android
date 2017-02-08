@@ -12,12 +12,8 @@ import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import eu.se_bastiaan.marietje.R;
 import eu.se_bastiaan.marietje.data.model.Empty;
