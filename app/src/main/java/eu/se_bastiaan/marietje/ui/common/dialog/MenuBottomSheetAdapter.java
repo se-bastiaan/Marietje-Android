@@ -1,5 +1,6 @@
 package eu.se_bastiaan.marietje.ui.common.dialog;
 
+import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,10 @@ import eu.se_bastiaan.marietje.R;
 
 public class MenuBottomSheetAdapter extends RecyclerView.Adapter<MenuBottomSheetAdapter.ViewHolder> {
 
-    private List<String> items;
+    private List<Integer> items;
     private Listener listener;
 
-    public MenuBottomSheetAdapter(List<String> items, Listener listener) {
+    public MenuBottomSheetAdapter(List<Integer> items, Listener listener) {
         this.items = items;
         this.listener = listener;
     }
@@ -29,7 +30,7 @@ public class MenuBottomSheetAdapter extends RecyclerView.Adapter<MenuBottomSheet
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTextView.setText(items.get(position));
+        holder.itemTextView.setText(holder.itemView.getResources().getString(items.get(position)));
     }
 
     @Override
@@ -53,6 +54,6 @@ public class MenuBottomSheetAdapter extends RecyclerView.Adapter<MenuBottomSheet
     }
 
     public interface Listener {
-        void onItemClick(int position, String item);
+        void onItemClick(int position, @StringRes int item);
     }
 }

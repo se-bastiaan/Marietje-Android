@@ -2,6 +2,7 @@ package eu.se_bastiaan.marietje.ui.common.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +22,9 @@ public class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment imp
     private static final String ARG_ITEMS = "items";
     private Listener listener;
 
-    public static MenuBottomSheetDialogFragment newInstance(List<String> items, Listener listener) {
+    public static MenuBottomSheetDialogFragment newInstance(List<Integer> items, Listener listener) {
         Bundle args = new Bundle();
-        args.putStringArrayList(ARG_ITEMS, new ArrayList<>(items));
+        args.putIntegerArrayList(ARG_ITEMS, new ArrayList<>(items));
         MenuBottomSheetDialogFragment fragment = new MenuBottomSheetDialogFragment();
         fragment.setListener(listener);
         fragment.setArguments(args);
@@ -35,7 +36,7 @@ public class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment imp
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_sheet_menu, container, false);
 
-        MenuBottomSheetAdapter adapter = new MenuBottomSheetAdapter(getArguments().getStringArrayList(ARG_ITEMS), this);
+        MenuBottomSheetAdapter adapter = new MenuBottomSheetAdapter(getArguments().getIntegerArrayList(ARG_ITEMS), this);
 
         RecyclerView recyclerView = ButterKnife.findById(v, R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -51,7 +52,7 @@ public class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment imp
     }
 
     @Override
-    public void onItemClick(int position, String item) {
+    public void onItemClick(int position, int item) {
         if (listener != null) {
             dismiss();
             listener.onItemClick(position, item);
@@ -59,7 +60,7 @@ public class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment imp
     }
 
     public interface Listener {
-        void onItemClick(int position, String item);
+        void onItemClick(int position, @StringRes int item);
     }
 
 }

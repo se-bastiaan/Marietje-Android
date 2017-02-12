@@ -15,4 +15,10 @@ public interface QueueView extends MvpView {
     void showRemoveSuccess();
     void showRemoveError();
 
+    void showMoveUpSuccess();
+    void showMoveUpError();
+
+    void showSkipSuccess();
+    void showSkipError();
+
 }

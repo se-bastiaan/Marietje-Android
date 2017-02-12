@@ -76,6 +76,50 @@ public class QueuePresenter extends BasePresenter<QueueView> {
         unsubscribeOnDetachView(loadingSubscription);
     }
 
+    public void skipCurrentSong() {
+        checkViewAttached();
+
+        Subscription subscription = dataManager.controlDataManager().skip()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<Empty>() {
+                    @Override
+                    public void onNext(Empty emptyResponse) {
+                        loadData();
+                        view().showSkipSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.w(e);
+                        view().showSkipError();
+                    }
+                });
+
+        unsubscribeOnDetachView(subscription);
+    }
+
+    public void moveSongUpInQueue(long songId) {
+        checkViewAttached();
+
+        Subscription subscription = dataManager.controlDataManager().moveUp(songId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<Empty>() {
+                    @Override
+                    public void onNext(Empty emptyResponse) {
+                        loadData();
+                        view().showMoveUpSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.w(e);
+                        view().showMoveUpError();
+                    }
+                });
+
+        unsubscribeOnDetachView(subscription);
+    }
+
     public void moveSongDownInQueue(long songId) {
         checkViewAttached();
 

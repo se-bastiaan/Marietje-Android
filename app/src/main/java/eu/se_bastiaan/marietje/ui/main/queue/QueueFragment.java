@@ -12,13 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.PlaylistSong;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.injection.ActivityContext;
@@ -36,6 +37,8 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
     @Inject
     @ActivityContext
     Context context;
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -119,15 +122,58 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
     }
 
     @Override
+    public void showMoveUpSuccess() {
+        Snackbar.make(recyclerView, R.string.queue_move_up_success, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMoveUpError() {
+        Snackbar.make(recyclerView, R.string.queue_move_up_error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSkipSuccess() {
+        Snackbar.make(recyclerView, R.string.queue_skip_success, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSkipError() {
+        Snackbar.make(recyclerView, R.string.queue_skip_error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onSongClicked(int position, PlaylistSong playlistSong) {
-        List<String> options = Arrays.asList(getString(R.string.queue_move_down), getString(R.string.queue_remove));
+        List<Integer> options = new ArrayList<>();
+
+        if (preferencesHelper.canSkip() && position == 0) {
+            options.add(R.string.queue_skip);
+        }
+
+        if (preferencesHelper.canMove()) {
+            options.add(R.string.queue_move_up);
+        }
+
+        if (playlistSong.canMoveDown() || preferencesHelper.canMove()) {
+            options.add(R.string.queue_move_down);
+        }
+
+        if (preferencesHelper.canCancel() || preferencesHelper.canMove()) {
+            options.add(R.string.queue_remove);
+        }
+
         MenuBottomSheetDialogFragment.newInstance(options, (menuPosition, item) -> {
-            switch (menuPosition) {
-                case 0:
+            switch (item) {
+                case R.string.queue_move_down:
                     presenter.moveSongDownInQueue(playlistSong.objectId());
                     break;
-                case 1:
+                case R.string.queue_move_up:
+                    presenter.moveSongUpInQueue(playlistSong.objectId());
+                    break;
+                case R.string.queue_remove:
                     presenter.removeSongFromQueue(playlistSong.objectId());
+                    break;
+                case R.string.queue_skip:
+                    presenter.skipCurrentSong();
                     break;
             }
         }).show(getChildFragmentManager(), "song_options_menu");
