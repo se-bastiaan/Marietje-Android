@@ -145,20 +145,22 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
     public void onSongClicked(int position, PlaylistSong playlistSong) {
         List<Integer> options = new ArrayList<>();
 
-        if (preferencesHelper.canSkip() && position == 0) {
-            options.add(R.string.queue_skip);
-        }
+        if (position == 0) {
+            if (preferencesHelper.canSkip()) {
+                options.add(R.string.queue_skip);
+            }
+        } else {
+            if (preferencesHelper.canMove()) {
+                options.add(R.string.queue_move_up);
+            }
 
-        if (preferencesHelper.canMove()) {
-            options.add(R.string.queue_move_up);
-        }
+            if (preferencesHelper.canMove() || playlistSong.canMoveDown()) {
+                options.add(R.string.queue_move_down);
+            }
 
-        if (preferencesHelper.canMove() || playlistSong.canMoveDown()) {
-            options.add(R.string.queue_move_down);
-        }
-
-        if (preferencesHelper.canCancel() || playlistSong.canMoveDown()) {
-            options.add(R.string.queue_remove);
+            if (preferencesHelper.canCancel() || playlistSong.canMoveDown()) {
+                options.add(R.string.queue_remove);
+            }
         }
 
         MenuBottomSheetDialogFragment.newInstance(options, (menuPosition, item) -> {

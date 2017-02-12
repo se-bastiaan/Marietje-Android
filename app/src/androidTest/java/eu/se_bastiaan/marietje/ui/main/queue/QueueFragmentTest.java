@@ -36,7 +36,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static eu.se_bastiaan.marietje.matcher.ViewMatchers.withMenuItemText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
@@ -306,6 +305,15 @@ public class QueueFragmentTest {
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_remove), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
         onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_skip), click()));
 
@@ -333,6 +341,15 @@ public class QueueFragmentTest {
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_remove), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
         onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_skip), click()));
 
@@ -359,6 +376,99 @@ public class QueueFragmentTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         onView(allOf(withText(R.string.queue_skip), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+    }
+
+    @Test
+    public void noModerationPossible() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(allOf(withText(R.string.queue_skip), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_remove), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+    }
+
+    @Test
+    public void moderationCancelSongPossible() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(true);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(allOf(withText(R.string.queue_skip), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_remove), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moderationMoveSongPossible() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(true);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(allOf(withText(R.string.queue_skip), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withText(R.string.queue_remove), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
                 .check(doesNotExist());
     }
 
