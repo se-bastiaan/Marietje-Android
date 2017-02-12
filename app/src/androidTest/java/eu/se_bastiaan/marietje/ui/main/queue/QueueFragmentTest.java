@@ -28,6 +28,7 @@ import rx.Observable;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -35,6 +36,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static eu.se_bastiaan.marietje.matcher.ViewMatchers.withMenuItemText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
@@ -102,6 +104,12 @@ public class QueueFragmentTest {
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().cancel(2))
                 .thenReturn(Observable.just(Empty.create()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
 
         main.launchActivity(null);
 
@@ -121,6 +129,12 @@ public class QueueFragmentTest {
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().cancel(2))
                 .thenReturn(Observable.error(new RuntimeException()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
 
         main.launchActivity(null);
         onView(allOf(withId(R.id.tab_queue), isDisplayed()))
@@ -142,6 +156,12 @@ public class QueueFragmentTest {
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().moveDown(2))
                 .thenReturn(Observable.just(Empty.create()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
 
         main.launchActivity(null);
 
@@ -161,6 +181,12 @@ public class QueueFragmentTest {
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().moveDown(2))
                 .thenReturn(Observable.error(new RuntimeException()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
 
         main.launchActivity(null);
         onView(allOf(withId(R.id.tab_queue), isDisplayed()))
@@ -174,6 +200,166 @@ public class QueueFragmentTest {
 
         onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_move_down_error)))
                 .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moveSongUpInQueueSuccess() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().moveUp(3))
+                .thenReturn(Observable.just(Empty.create()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(true);
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_move_up), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_move_up_success)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moveSongUpInQueueError() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().moveUp(3))
+                .thenReturn(Observable.error(new RuntimeException()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(true);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withText(R.string.queue_move_down), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_move_up), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_move_up_error)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void moveSongUpNotAvailable() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(allOf(withText(R.string.queue_move_up), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
+    }
+
+    @Test
+    public void skipCurrentSongSuccess() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().skip())
+                .thenReturn(Observable.just(Empty.create()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(true);
+
+        main.launchActivity(null);
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_skip), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_skip_success)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void skipCurrentSongError() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().skip())
+                .thenReturn(Observable.error(new RuntimeException()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(true);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnHolderItem(withMenuItemText(R.string.queue_skip), click()));
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.queue_skip_error)))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void skipCurrentSongNotAvailable() {
+        when(component.getMockDataManager().controlDataManager().queue())
+                .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().preferencesHelper().canCancel())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canMove())
+                .thenReturn(false);
+        when(component.getMockDataManager().preferencesHelper().canSkip())
+                .thenReturn(false);
+
+        main.launchActivity(null);
+        onView(allOf(withId(R.id.tab_queue), isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(allOf(withText(R.string.queue_skip), withParent(allOf(withId(R.id.recycler_view), withParent(withId(R.id.design_bottom_sheet)), isDisplayed()))))
+                .check(doesNotExist());
     }
 
 }

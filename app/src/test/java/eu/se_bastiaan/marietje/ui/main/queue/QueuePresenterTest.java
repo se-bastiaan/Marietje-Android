@@ -120,4 +120,46 @@ public class QueuePresenterTest {
         verify(mockQueueView, never()).showMoveDownSuccess();
     }
 
+    @Test
+    public void moveSongUpInQueueShowsSuccess() {
+        Empty response = Empty.create();
+        when(mockDataManager.controlDataManager().moveUp(0))
+                .thenReturn(Observable.just(response));
+
+        queuePresenter.moveSongUpInQueue(0);
+        verify(mockQueueView).showMoveUpSuccess();
+        verify(mockQueueView, never()).showMoveUpError();
+    }
+
+    @Test
+    public void moveSongUpInQueueShowsError() {
+        when(mockDataManager.controlDataManager().moveUp(0))
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        queuePresenter.moveSongUpInQueue(0);
+        verify(mockQueueView).showMoveUpError();
+        verify(mockQueueView, never()).showMoveUpSuccess();
+    }
+
+    @Test
+    public void skipCurrentSongShowsSuccess() {
+        Empty response = Empty.create();
+        when(mockDataManager.controlDataManager().skip())
+                .thenReturn(Observable.just(response));
+
+        queuePresenter.skipCurrentSong();
+        verify(mockQueueView).showSkipSuccess();
+        verify(mockQueueView, never()).showSkipError();
+    }
+
+    @Test
+    public void skipCurrentSongShowsError() {
+        when(mockDataManager.controlDataManager().skip())
+                .thenReturn(Observable.error(new RuntimeException()));
+
+        queuePresenter.skipCurrentSong();
+        verify(mockQueueView).showSkipError();
+        verify(mockQueueView, never()).showSkipSuccess();
+    }
+
 }

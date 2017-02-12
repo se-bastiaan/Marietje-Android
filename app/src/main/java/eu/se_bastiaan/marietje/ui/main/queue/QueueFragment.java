@@ -153,11 +153,11 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
             options.add(R.string.queue_move_up);
         }
 
-        if (playlistSong.canMoveDown() || preferencesHelper.canMove()) {
+        if (preferencesHelper.canMove() || playlistSong.canMoveDown()) {
             options.add(R.string.queue_move_down);
         }
 
-        if (preferencesHelper.canCancel() || preferencesHelper.canMove()) {
+        if (preferencesHelper.canCancel() || playlistSong.canMoveDown()) {
             options.add(R.string.queue_remove);
         }
 
