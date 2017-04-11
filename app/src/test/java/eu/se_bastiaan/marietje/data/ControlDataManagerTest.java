@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.Empty;
+import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.remote.ControlService;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
@@ -159,6 +160,19 @@ public class ControlDataManagerTest {
     }
 
     @Test
+    public void permissionsEmitsValues() {
+        Permissions response = TestDataFactory.makePermissionsResponse();
+        when(mockControlService.permissions())
+                .thenReturn(Observable.just(response));
+
+        TestSubscriber<Permissions> result = new TestSubscriber<>();
+        dataManager.permissions().subscribe(result);
+        result.assertNoErrors();
+
+        result.assertReceivedOnNext(Collections.singletonList(response));
+    }
+
+    @Test
     public void csrfCallsApi() {
         String response = TestDataFactory.makeNormalCsrfResponse();
         when(mockControlService.csrf())
@@ -249,11 +263,21 @@ public class ControlDataManagerTest {
     }
 
     @Test
+    public void permissionsCallsApi() {
+        Permissions response = TestDataFactory.makePermissionsResponse();
+        when(mockControlService.permissions())
+                .thenReturn(Observable.just(response));
+
+        dataManager.permissions().subscribe();
+        verify(mockControlService).permissions();
+    }
+
+    @Test
     public void csrfCallsPreferencesHelper() {
         when(mockPreferencesHelper.getCsrfToken())
                 .thenReturn("csrf_token");
         when(mockControlService.csrf())
-                .thenReturn(Observable.just(TestDataFactory.makeModeratorCsrfResponse()));
+                .thenReturn(Observable.just(TestDataFactory.makeNormalCsrfResponse()));
 
         dataManager.csrf().subscribe();
 
@@ -274,13 +298,6 @@ public class ControlDataManagerTest {
         verify(mockPreferencesHelper, times(2)).setCsrftoken("");
         verify(mockPreferencesHelper, times(4)).getCsrfToken();
         verify(mockPreferencesHelper).setCsrftoken("csrf_token");
-
-        verify(mockPreferencesHelper).setCanCancel(true);
-        verify(mockPreferencesHelper).setCanMove(true);
-        verify(mockPreferencesHelper).setCanSkip(true);
-        verify(mockPreferencesHelper).setCanCancel(false);
-        verify(mockPreferencesHelper).setCanMove(false);
-        verify(mockPreferencesHelper).setCanSkip(false);
 
         verify(mockControlService, times(2)).csrf();
     }

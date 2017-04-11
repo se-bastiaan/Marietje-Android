@@ -105,6 +105,11 @@ public class QueuePresenter extends BasePresenter<QueueView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RxSubscriber<Empty>() {
                     @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                    }
+
+                    @Override
                     public void onNext(Empty emptyResponse) {
                         loadData();
                         view().showMoveUpSuccess();

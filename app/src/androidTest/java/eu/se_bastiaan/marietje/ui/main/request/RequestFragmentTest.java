@@ -56,6 +56,8 @@ public class RequestFragmentTest {
                 .thenReturn("sessionId");
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().permissions())
+                .thenReturn(Observable.just(TestDataFactory.makePermissionsResponse()));
     }
 
     // TestComponentRule needs to go first to make sure the Dagger ApplicationTestComponent is set

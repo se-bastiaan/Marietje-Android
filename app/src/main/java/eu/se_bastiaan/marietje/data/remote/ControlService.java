@@ -1,6 +1,7 @@
 package eu.se_bastiaan.marietje.data.remote;
 
 import eu.se_bastiaan.marietje.data.model.Empty;
+import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import retrofit2.Response;
 import retrofit2.http.Field;
@@ -76,10 +77,17 @@ public interface ControlService {
     Observable<Empty> volumeDown();
 
     /**
-     * Inscrease server playback volume
+     * Increase server playback volume
      * @return {@link Empty}
      */
     @GET("api/volumeup")
     Observable<Empty> volumeUp();
+
+    /**
+     * Get user server permissions
+     * @return {@link Empty}
+     */
+    @GET("api/permissions")
+    Observable<Permissions> permissions();
 
 }

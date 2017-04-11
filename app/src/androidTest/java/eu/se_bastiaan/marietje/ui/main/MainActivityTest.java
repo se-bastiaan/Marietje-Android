@@ -14,6 +14,7 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import eu.se_bastiaan.marietje.R;
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.test.common.TestComponentRule;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.ui.login.LoginActivity;
@@ -27,6 +28,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -67,6 +69,8 @@ public class MainActivityTest {
     public void setUp() {
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
+        when(component.getMockDataManager().controlDataManager().permissions())
+                .thenReturn(Observable.just(TestDataFactory.makePermissionsResponse()));
     }
 
     @Test

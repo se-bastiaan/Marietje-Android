@@ -26,6 +26,7 @@ public class PreferencesHelper {
     public static final String CAN_CANCEL = "can_cancel";
     public static final String CAN_MOVE = "can_move";
     public static final String CAN_SKIP = "can_skip";
+    public static final String CAN_CONTROL_VOLUME = "can_control_volume";
 
     private final SharedPreferences pref;
 
@@ -82,6 +83,14 @@ public class PreferencesHelper {
 
     public void setCanSkip(boolean canSkip) {
         save(CAN_SKIP, canSkip);
+    }
+
+    public Boolean canControlVolume() {
+        return get(CAN_CONTROL_VOLUME, false);
+    }
+
+    public void setCanControlVolume(boolean canControlVolume) {
+        save(CAN_CONTROL_VOLUME, canControlVolume);
     }
 
     // DO NOT EDIT BELOW

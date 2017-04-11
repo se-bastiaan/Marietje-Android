@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
 import eu.se_bastiaan.marietje.data.model.Empty;
+import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.remote.ControlService;
 import eu.se_bastiaan.marietje.util.TextUtil;
@@ -27,11 +28,6 @@ public class ControlDataManager {
         preferencesHelper.setCsrftoken("");
         return controlService.csrf()
                 .onErrorReturn(throwable -> "")
-                .doOnNext(s -> {
-                    preferencesHelper.setCanSkip(s.contains("canSkip = 1"));
-                    preferencesHelper.setCanCancel(s.contains("canCancel = 1"));
-                    preferencesHelper.setCanMove(s.contains("canMoveSongs = 1"));
-                })
                 .map(s -> {
                     String returnToken = preferencesHelper.getCsrfToken();
                     if (TextUtil.isEmpty(returnToken)) {
@@ -71,6 +67,10 @@ public class ControlDataManager {
 
     public Observable<Empty> volumeUp() {
         return controlService.volumeUp();
+    }
+
+    public Observable<Permissions> permissions() {
+        return controlService.permissions();
     }
 
 }

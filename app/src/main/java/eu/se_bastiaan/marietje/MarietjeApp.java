@@ -10,6 +10,8 @@ import com.crashlytics.android.answers.Answers;
 import net.ypresto.timbertreeutils.CrashlyticsLogExceptionTree;
 import net.ypresto.timbertreeutils.CrashlyticsLogTree;
 
+import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
+import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.events.NeedsCsrfToken;
 import eu.se_bastiaan.marietje.injection.component.AppComponent;
 import eu.se_bastiaan.marietje.injection.component.DaggerAppComponent;
@@ -94,4 +96,5 @@ public class MarietjeApp extends MultiDexApplication implements Foreground.Liste
     public void onBecameBackground() {
         // Do nothing
     }
+
 }

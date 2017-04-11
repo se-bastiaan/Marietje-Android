@@ -3,6 +3,7 @@ package eu.se_bastiaan.marietje.test.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.data.model.PlaylistSong;
 import eu.se_bastiaan.marietje.data.model.Queue;
 import eu.se_bastiaan.marietje.data.model.Song;
@@ -78,12 +79,12 @@ public class TestDataFactory {
                 .build();
     }
 
-    public static String makeModeratorCsrfResponse() {
-        return "canMoveSongs = 1;canCancel = 1;canSkip = 1;";
+    public static Permissions makePermissionsResponse() {
+        return Permissions.create(false, true, false, true);
     }
 
     public static String makeNormalCsrfResponse() {
-        return "canMoveSongs = 0;canCancel = 0;canSkip = 0;";
+        return "";
     }
 
 }
