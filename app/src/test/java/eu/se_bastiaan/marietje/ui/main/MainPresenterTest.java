@@ -11,7 +11,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.local.PreferencesHelper;
-import eu.se_bastiaan.marietje.data.model.Permissions;
 import eu.se_bastiaan.marietje.events.NeedsSessionCookie;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.util.EventBus;
