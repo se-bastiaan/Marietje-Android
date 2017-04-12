@@ -20,11 +20,11 @@ before_script:
   - ./gradlew dependencies
 
 script:
-  - ./gradlew --no-daemon --info --stacktrace clean
-  - ./gradlew --no-daemon --info --stacktrace build -PdisablePreDex -PwithDexcount -Dscan
+  - ./gradlew --no-daemon --stacktrace clean
+  - ./gradlew --no-daemon --stacktrace build -PdisablePreDex -PwithDexcount -Dscan
   - emulator -avd test -no-window &
   - android-wait-for-emulator
-  - ./gradlew --no-daemon --info --stacktrace connectedAndroidTest -PdisablePreDex -PwithDexcount
+  - ./gradlew --no-daemon --stacktrace connectedAndroidTest -PdisablePreDex -PwithDexcount
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
