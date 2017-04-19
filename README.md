@@ -1,4 +1,4 @@
-#Marietje for Android
+# Marietje for Android
 [![CircleCI](https://circleci.com/gh/se-bastiaan/Marietje-Android.svg?style=svg)](https://circleci.com/gh/se-bastiaan/Marietje-Android)
 [![BCH compliance](https://bettercodehub.com/edge/badge/se-bastiaan/Marietje-Android)](https://bettercodehub.com)
 [![codecov](https://codecov.io/gh/se-bastiaan/Marietje-Android/branch/develop/graph/badge.svg)](https://codecov.io/gh/se-bastiaan/Marietje-Android)
