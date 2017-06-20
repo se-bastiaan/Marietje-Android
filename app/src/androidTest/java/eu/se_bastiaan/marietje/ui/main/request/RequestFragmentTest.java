@@ -84,14 +84,14 @@ public class RequestFragmentTest {
                 .check(matches(not(isDisplayed())));
 
         int position = 0;
-        for (Song song : response.data()) {
+        for (Song song : response.getData()) {
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
-            onView(withText(song.title()))
+            onView(withText(song.getTitle()))
                     .check(matches(isDisplayed()));
-            onView(withText(song.artist()))
+            onView(withText(song.getArtist()))
                     .check(matches(isDisplayed()));
-            onView(withText(song.durationStr()))
+            onView(withText(song.getDurationStr()))
                     .check(matches(isDisplayed()));
             position++;
         }
@@ -142,7 +142,7 @@ public class RequestFragmentTest {
         when(component.getMockDataManager().songsDataManager().songs(1, ""))
                 .thenReturn(Observable.just(response));
         when(component.getMockDataManager().controlDataManager().request(1))
-                .thenReturn(Observable.just(Empty.create()));
+                .thenReturn(Observable.just(new Empty()));
 
         main.launchActivity(null);
         onView(allOf(withId(R.id.tab_request), isDisplayed()))

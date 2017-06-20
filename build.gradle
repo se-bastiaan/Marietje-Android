@@ -1,19 +1,21 @@
 buildscript {
+    ext.kotlin_version = '1.1.2-5'
     repositories {
         jcenter()
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
+        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
         classpath 'hu.supercluster:paperwork-plugin:1.2.4'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+        classpath 'com.google.gms:google-services:3.1.0'
         //noinspection GradleDynamicVersion
         classpath 'io.fabric.tools:gradle:1.+'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -21,6 +23,7 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url "https://maven.google.com" }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
     }

@@ -129,7 +129,7 @@ public class RequestPresenterTest {
 
     @Test
     public void requestSongShowsSuccess() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockDataManager.controlDataManager().request(0))
                 .thenReturn(Observable.just(response));
 

@@ -61,14 +61,14 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
 
     public void setQueue(Queue queue) {
         this.playlistSongs.clear();
-        this.playlistSongs.add(queue.currentSong());
-        this.playlistSongs.addAll(queue.queuedSongs());
-        this.currentServerTime = queue.currentTime();
-        this.currentStartedAt = queue.startedAt();
+        this.playlistSongs.add(queue.getCurrentSong());
+        this.playlistSongs.addAll(queue.getQueuedSongs());
+        this.currentServerTime = queue.getCurrentTime();
+        this.currentStartedAt = queue.getStartedAt();
 
         long now = System.currentTimeMillis() / 1000;
         timeOffset = now - currentServerTime;
-        this.playNextAt = currentStartedAt + timeOffset + queue.currentSong().song().duration();
+        this.playNextAt = currentStartedAt + timeOffset + queue.getCurrentSong().getSong().getDuration();
 
     }
 
@@ -117,7 +117,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
             }
 
             timeOffset = (System.currentTimeMillis() / 1000) - currentServerTime;
-            timeLeft = playlistSongs.get(0).song().duration() - (currentServerTime - currentStartedAt) + timeOffset;
+            timeLeft = playlistSongs.get(0).getSong().getDuration() - (currentServerTime - currentStartedAt) + timeOffset;
             timer = new Timer();
             timer.scheduleAtFixedRate(new UpdateTimeLeftTask(), 0, TimeUnit.SECONDS.toMillis(1));
         }
@@ -135,14 +135,14 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
             }
 
             PlaylistSong playlistSong = playlistSongs.get(getAdapterPosition());
-            requesterTextView.setText(playlistSong.requester());
+            requesterTextView.setText(playlistSong.getRequester());
             requesterTextView.setVisibility(View.VISIBLE);
 
-            Song song = playlistSong.song();
-            titleTextView.setText(TextUtils.isEmpty(song.title()) ? itemView.getResources().getString(R.string.songs_title_unknown) : song.title());
-            artistTextView.setText(TextUtils.isEmpty(song.artist()) ? itemView.getResources().getString(R.string.songs_artist_unknown) : song.artist());
+            Song song = playlistSong.getSong();
+            titleTextView.setText(TextUtils.isEmpty(song.getTitle()) ? itemView.getResources().getString(R.string.songs_title_unknown) : song.getTitle());
+            artistTextView.setText(TextUtils.isEmpty(song.getArtist()) ? itemView.getResources().getString(R.string.songs_artist_unknown) : song.getArtist());
 
-            boolean enabled = playlistSong.canMoveDown() || isModerator;
+            boolean enabled = playlistSong.getCanMoveDown() || isModerator;
             itemView.setEnabled(enabled);
         }
 
@@ -172,7 +172,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.SongVi
         private String playsAt() {
             long startsAt = playNextAt;
             for (int i = 1; i < getAdapterPosition(); i++) {
-                long duration = playlistSongs.get(i).song().duration();
+                long duration = playlistSongs.get(i).getSong().getDuration();
                 startsAt += duration;
             }
 

@@ -70,7 +70,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void skipEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.skip())
                 .thenReturn(Observable.just(response));
 
@@ -83,7 +83,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void moveUpEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.moveUp(0))
                 .thenReturn(Observable.just(response));
 
@@ -96,7 +96,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void moveDownEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.moveDown(0))
                 .thenReturn(Observable.just(response));
 
@@ -109,7 +109,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void cancelEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.cancel(0))
                 .thenReturn(Observable.just(response));
 
@@ -122,7 +122,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void requestEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.request(0))
                 .thenReturn(Observable.just(response));
 
@@ -135,7 +135,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void volumeDownEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.volumeDown())
                 .thenReturn(Observable.just(response));
 
@@ -148,7 +148,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void volumeUpEmitsValues() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.volumeUp())
                 .thenReturn(Observable.just(response));
 
@@ -194,7 +194,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void skipCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.skip())
                 .thenReturn(Observable.just(response));
 
@@ -204,7 +204,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void moveDownCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.moveDown(0))
                 .thenReturn(Observable.just(response));
 
@@ -214,7 +214,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void moveUpCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.moveUp(0))
                 .thenReturn(Observable.just(response));
 
@@ -224,7 +224,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void cancelCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.cancel(0))
                 .thenReturn(Observable.just(response));
 
@@ -234,7 +234,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void requestCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.request(0))
                 .thenReturn(Observable.just(response));
 
@@ -244,7 +244,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void volumeUpCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.volumeUp())
                 .thenReturn(Observable.just(response));
 
@@ -254,7 +254,7 @@ public class ControlDataManagerTest {
 
     @Test
     public void volumeDownCallsApi() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockControlService.volumeDown())
                 .thenReturn(Observable.just(response));
 
