@@ -73,10 +73,10 @@ public class RequestPresenter extends BasePresenter<RequestView> {
                 .subscribe(new RxSubscriber<Songs>() {
                     @Override
                     public void onNext(Songs response) {
-                        if (response.data().isEmpty()) {
+                        if (response.getData().isEmpty()) {
                             view().showSongsEmpty();
                         } else {
-                            view().showSongs(response.data(), response.currentPage() == 1, response.currentPage() != response.lastPage());
+                            view().showSongs(response.getData(), response.getCurrentPage() == 1, response.getCurrentPage() != response.getLastPage());
                         }
                     }
 

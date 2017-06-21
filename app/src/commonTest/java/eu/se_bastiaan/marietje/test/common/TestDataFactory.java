@@ -16,13 +16,7 @@ import eu.se_bastiaan.marietje.data.model.Songs;
 public class TestDataFactory {
 
     public static Song makeSong(long id) {
-        return Song.builder()
-                .objectId(id)
-                .title("title " + id)
-                .artist("artist " + id)
-                .duration(100L * id)
-                .uploader("uploader " + id)
-                .build();
+        return new Song(id, 100L * id, "title " + id, "artist " + id, "uploader " + id);
     }
 
     public static List<Song> makeListSongs(int number) {
@@ -34,12 +28,7 @@ public class TestDataFactory {
     }
 
     public static PlaylistSong makePlaylistSong(long id) {
-        return PlaylistSong.builder()
-                .objectId(id)
-                .canMoveDown(id % 2 == 0)
-                .requester("requester " + id)
-                .song(makeSong(id))
-                .build();
+        return new PlaylistSong(id, makeSong(id), id % 2 == 0, "requester " + id);
     }
 
     public static List<PlaylistSong> makeListPlaylistSongs(int number) {
@@ -51,36 +40,20 @@ public class TestDataFactory {
     }
 
     public static Songs makeSongsResponse(long currentPage) {
-        return Songs.builder()
-                .currentPage(currentPage)
-                .lastPage(100)
-                .pageSize(10)
-                .data(makeListSongs(10))
-                .total(1000)
-                .build();
+        return new Songs(10, currentPage, 100, makeListSongs(10), 1000);
     }
 
     public static Songs makeEmptySongsResponse(long currentPage) {
-        return Songs.builder()
-                .currentPage(currentPage)
-                .lastPage(currentPage)
-                .pageSize(10)
-                .data(new ArrayList<>())
-                .total((currentPage - 1) * 10)
-                .build();
+        return new Songs(10, currentPage, currentPage, new ArrayList<>(), (currentPage - 1) * 10);
     }
 
     public static Queue makeQueueResponse() {
-        return Queue.builder()
-                .currentSong(makePlaylistSong(11))
-                .currentTime((System.currentTimeMillis() / 1000))
-                .startedAt((System.currentTimeMillis() / 1000) - 90L)
-                .queuedSongs(makeListPlaylistSongs(10))
-                .build();
+        return new Queue((System.currentTimeMillis() / 1000) - 90L,
+                (System.currentTimeMillis() / 1000), makePlaylistSong(11), makeListPlaylistSongs(10));
     }
 
     public static Permissions makePermissionsResponse() {
-        return Permissions.create(false, true, false, true);
+        return new Permissions(false, true, false, true);
     }
 
     public static String makeNormalCsrfResponse() {

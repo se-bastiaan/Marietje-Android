@@ -212,7 +212,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
 
         @NonNull
         @Override
-        public String title() {
+        public String getTitle() {
             return loggingLevel.toString();
         }
 

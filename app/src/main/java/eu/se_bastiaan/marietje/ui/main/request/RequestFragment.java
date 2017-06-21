@@ -158,10 +158,10 @@ public class RequestFragment extends BaseFragment implements RequestView, SongsA
 
     @Override
     public void onSongClicked(int position, Song song) {
-        ConfirmationDialogFragment.newInstance(getString(R.string.request_confirm, song.title(), song.artist()), R.string.dialog_action_ok, R.string.dialog_action_cancel,
+        ConfirmationDialogFragment.newInstance(getString(R.string.request_confirm, song.getTitle(), song.getArtist()), R.string.dialog_action_ok, R.string.dialog_action_cancel,
                 allowed -> {
                    if (allowed) {
-                       presenter.requestSong(song.objectId());
+                       presenter.requestSong(song.getObjectId());
                    }
                 }).show(getChildFragmentManager());
     }

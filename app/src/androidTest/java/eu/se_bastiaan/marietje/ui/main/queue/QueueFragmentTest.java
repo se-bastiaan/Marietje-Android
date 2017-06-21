@@ -77,17 +77,17 @@ public class QueueFragmentTest {
 
         main.launchActivity(null);
 
-        List<PlaylistSong> playlistSongs = new ArrayList<>(response.queuedSongs());
-        playlistSongs.add(0, response.currentSong());
+        List<PlaylistSong> playlistSongs = new ArrayList<>(response.getQueuedSongs());
+        playlistSongs.add(0, response.getCurrentSong());
 
         int position = 0;
         for (PlaylistSong playlistSong : playlistSongs) {
 
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
-            onView(withText(playlistSong.song().title()))
+            onView(withText(playlistSong.getSong().getTitle()))
                     .check(matches(isDisplayed()));
-            onView(withText(playlistSong.song().artist()))
+            onView(withText(playlistSong.getSong().getArtist()))
                     .check(matches(isDisplayed()));
 //            FIXME: Test below doesn't work for unknown reasons on CI
 //            if (position != 0) {
@@ -104,7 +104,7 @@ public class QueueFragmentTest {
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().cancel(2))
-                .thenReturn(Observable.just(Empty.create()));
+                .thenReturn(Observable.just(new Empty()));
         when(component.getMockDataManager().preferencesHelper().canCancel())
                 .thenReturn(false);
         when(component.getMockDataManager().preferencesHelper().canSkip())
@@ -156,7 +156,7 @@ public class QueueFragmentTest {
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().moveDown(2))
-                .thenReturn(Observable.just(Empty.create()));
+                .thenReturn(Observable.just(new Empty()));
         when(component.getMockDataManager().preferencesHelper().canCancel())
                 .thenReturn(false);
         when(component.getMockDataManager().preferencesHelper().canSkip())
@@ -208,7 +208,7 @@ public class QueueFragmentTest {
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().moveUp(3))
-                .thenReturn(Observable.just(Empty.create()));
+                .thenReturn(Observable.just(new Empty()));
         when(component.getMockDataManager().preferencesHelper().canCancel())
                 .thenReturn(false);
         when(component.getMockDataManager().preferencesHelper().canSkip())
@@ -294,7 +294,7 @@ public class QueueFragmentTest {
         when(component.getMockDataManager().controlDataManager().queue())
                 .thenReturn(Observable.just(TestDataFactory.makeQueueResponse()));
         when(component.getMockDataManager().controlDataManager().skip())
-                .thenReturn(Observable.just(Empty.create()));
+                .thenReturn(Observable.just(new Empty()));
         when(component.getMockDataManager().preferencesHelper().canCancel())
                 .thenReturn(false);
         when(component.getMockDataManager().preferencesHelper().canMove())

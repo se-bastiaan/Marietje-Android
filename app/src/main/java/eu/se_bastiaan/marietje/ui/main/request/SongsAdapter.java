@@ -50,9 +50,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
     @Override
     public void onBindViewHolder(final SongViewHolder holder, int position) {
         Song song = songs.get(position);
-        holder.titleTextView.setText(TextUtils.isEmpty(song.title()) ? holder.itemView.getResources().getString(R.string.songs_title_unknown) : song.title());
-        holder.artistTextView.setText(TextUtils.isEmpty(song.artist()) ? holder.itemView.getResources().getString(R.string.songs_artist_unknown) : song.artist());
-        holder.durationTextView.setText(song.durationStr());
+        holder.titleTextView.setText(TextUtils.isEmpty(song.getTitle()) ? holder.itemView.getResources().getString(R.string.songs_title_unknown) : song.getTitle());
+        holder.artistTextView.setText(TextUtils.isEmpty(song.getArtist()) ? holder.itemView.getResources().getString(R.string.songs_artist_unknown) : song.getArtist());
+        holder.durationTextView.setText(song.getDurationStr());
     }
 
     @Override

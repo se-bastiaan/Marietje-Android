@@ -14,7 +14,6 @@ import dagger.Provides;
 import eu.se_bastiaan.marietje.BuildConfig;
 import eu.se_bastiaan.marietje.data.remote.ControlService;
 import eu.se_bastiaan.marietje.data.remote.SongsService;
-import eu.se_bastiaan.marietje.util.GsonTypeAdapterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -65,7 +64,6 @@ public class DataModule {
         return new GsonBuilder()
                 .serializeNulls()
                 .disableHtmlEscaping()
-                .registerTypeAdapterFactory(GsonTypeAdapterFactory.create())
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ")
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();

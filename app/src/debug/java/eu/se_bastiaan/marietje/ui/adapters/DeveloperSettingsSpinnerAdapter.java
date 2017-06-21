@@ -94,13 +94,13 @@ public class DeveloperSettingsSpinnerAdapter<T extends DeveloperSettingsSpinnerA
         }
 
         public void bindItem(@NonNull SelectionOption selectionOption) {
-            titleTextView.setText(selectionOption.title());
+            titleTextView.setText(selectionOption.getTitle());
         }
     }
 
     public interface SelectionOption {
         @NonNull
-        String title();
+        String getTitle();
     }
 
 }

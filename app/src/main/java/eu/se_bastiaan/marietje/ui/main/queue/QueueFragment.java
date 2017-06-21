@@ -154,11 +154,11 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
                 options.add(R.string.queue_move_up);
             }
 
-            if (preferencesHelper.canMove() || playlistSong.canMoveDown()) {
+            if (preferencesHelper.canMove() || playlistSong.getCanMoveDown()) {
                 options.add(R.string.queue_move_down);
             }
 
-            if (preferencesHelper.canCancel() || playlistSong.canMoveDown()) {
+            if (preferencesHelper.canCancel() || playlistSong.getCanMoveDown()) {
                 options.add(R.string.queue_remove);
             }
         }
@@ -166,13 +166,13 @@ public class QueueFragment extends BaseFragment implements QueueView, PlaylistAd
         MenuBottomSheetDialogFragment.newInstance(options, (menuPosition, item) -> {
             switch (item) {
                 case R.string.queue_move_down:
-                    presenter.moveSongDownInQueue(playlistSong.objectId());
+                    presenter.moveSongDownInQueue(playlistSong.getObjectId());
                     break;
                 case R.string.queue_move_up:
-                    presenter.moveSongUpInQueue(playlistSong.objectId());
+                    presenter.moveSongUpInQueue(playlistSong.getObjectId());
                     break;
                 case R.string.queue_remove:
-                    presenter.removeSongFromQueue(playlistSong.objectId());
+                    presenter.removeSongFromQueue(playlistSong.getObjectId());
                     break;
                 case R.string.queue_skip:
                     presenter.skipCurrentSong();

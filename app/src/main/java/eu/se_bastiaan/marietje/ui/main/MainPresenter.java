@@ -49,10 +49,10 @@ public class MainPresenter extends BasePresenter<MainView> {
                 @Override
                 public void onNext(Permissions permissions) {
                     PreferencesHelper preferencesHelper = dataManager.preferencesHelper();
-                    preferencesHelper.setCanSkip(permissions.canSkip());
-                    preferencesHelper.setCanCancel(permissions.canCancel());
-                    preferencesHelper.setCanMove(permissions.canMove());
-                    preferencesHelper.setCanControlVolume(permissions.canControlVolume());
+                    preferencesHelper.setCanSkip(permissions.getCanSkip());
+                    preferencesHelper.setCanCancel(permissions.getCanCancel());
+                    preferencesHelper.setCanMove(permissions.getCanMove());
+                    preferencesHelper.setCanControlVolume(permissions.getCanControlVolume());
                 }
             });
     }

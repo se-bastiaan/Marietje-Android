@@ -80,7 +80,7 @@ public class QueuePresenterTest {
 
     @Test
     public void removeSongFromQueueShowsSuccess() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockDataManager.controlDataManager().cancel(0))
                 .thenReturn(Observable.just(response));
 
@@ -101,7 +101,7 @@ public class QueuePresenterTest {
 
     @Test
     public void moveSongDownInQueueShowsSuccess() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockDataManager.controlDataManager().moveDown(0))
                 .thenReturn(Observable.just(response));
 
@@ -122,7 +122,7 @@ public class QueuePresenterTest {
 
     @Test
     public void moveSongUpInQueueShowsSuccess() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockDataManager.controlDataManager().moveUp(0))
                 .thenReturn(Observable.just(response));
 
@@ -143,7 +143,7 @@ public class QueuePresenterTest {
 
     @Test
     public void skipCurrentSongShowsSuccess() {
-        Empty response = Empty.create();
+        Empty response = new Empty();
         when(mockDataManager.controlDataManager().skip())
                 .thenReturn(Observable.just(response));
 
