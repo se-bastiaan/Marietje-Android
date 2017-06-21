@@ -15,7 +15,6 @@ import eu.se_bastiaan.marietje.data.ControlDataManager;
 import eu.se_bastiaan.marietje.data.DataManager;
 import eu.se_bastiaan.marietje.data.SongsDataManager;
 import eu.se_bastiaan.marietje.data.model.Empty;
-import eu.se_bastiaan.marietje.data.model.Song;
 import eu.se_bastiaan.marietje.data.model.Songs;
 import eu.se_bastiaan.marietje.test.common.TestDataFactory;
 import eu.se_bastiaan.marietje.util.EventBus;
@@ -23,7 +22,7 @@ import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule;
 import rx.Observable;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyListOf;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -69,7 +68,7 @@ public class RequestPresenterTest {
 
         requestPresenter.searchSong(query);
         verify(mockRequestView).showLoading();
-        verify(mockRequestView).showSongs(eq(response.data()), anyBoolean(), anyBoolean());
+        verify(mockRequestView).showSongs(eq(response.getData()), anyBoolean(), anyBoolean());
         verify(mockRequestView, never()).showSongsEmpty();
         verify(mockRequestView, never()).showLoadingError();
     }
@@ -84,7 +83,7 @@ public class RequestPresenterTest {
         requestPresenter.searchSong(query);
         verify(mockRequestView).showLoading();
         verify(mockRequestView).showSongsEmpty();
-        verify(mockRequestView, never()).showSongs(anyListOf(Song.class), anyBoolean(), anyBoolean());
+        verify(mockRequestView, never()).showSongs(anyList(), anyBoolean(), anyBoolean());
         verify(mockRequestView, never()).showLoadingError();
     }
 
@@ -97,14 +96,14 @@ public class RequestPresenterTest {
         requestPresenter.searchSong(query);
         verify(mockRequestView).showLoadingError();
         verify(mockRequestView, never()).showSongsEmpty();
-        verify(mockRequestView, never()).showSongs(anyListOf(Song.class), anyBoolean(), anyBoolean());
+        verify(mockRequestView, never()).showSongs(anyList(), anyBoolean(), anyBoolean());
     }
 
     @Test
     public void searchSongsDoesNothing() {
         requestPresenter.searchSong("te");
         verify(mockRequestView, never()).showLoading();
-        verify(mockRequestView, never()).showSongs(anyListOf(Song.class), anyBoolean(), anyBoolean());
+        verify(mockRequestView, never()).showSongs(anyList(), anyBoolean(), anyBoolean());
         verify(mockRequestView, never()).showSongsEmpty();
         verify(mockRequestView, never()).showLoadingError();
     }
@@ -120,9 +119,9 @@ public class RequestPresenterTest {
         }
 
         verify(mockRequestView).showLoading();
-        verify(mockRequestView).showSongs(anyListOf(Song.class), eq(true), eq(true));
-        verify(mockRequestView, times(98)).showSongs(anyListOf(Song.class), eq(false), eq(true));
-        verify(mockRequestView).showSongs(anyListOf(Song.class), eq(false), eq(false));
+        verify(mockRequestView).showSongs(anyList(), eq(true), eq(true));
+        verify(mockRequestView, times(98)).showSongs(anyList(), eq(false), eq(true));
+        verify(mockRequestView).showSongs(anyList(), eq(false), eq(false));
         verify(mockRequestView, never()).showSongsEmpty();
         verify(mockRequestView, never()).showLoadingError();
     }
