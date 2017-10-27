@@ -1,12 +1,5 @@
 package eu.se_bastiaan.marietje
 
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
-
 import eu.se_bastiaan.marietje.data.ControlDataManager
 import eu.se_bastiaan.marietje.data.DataManager
 import eu.se_bastiaan.marietje.events.NeedsCsrfToken
@@ -14,10 +7,13 @@ import eu.se_bastiaan.marietje.injection.component.AppComponent
 import eu.se_bastiaan.marietje.ui.main.MainView
 import eu.se_bastiaan.marietje.util.EventBus
 import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule
-
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito.*
+import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class MarietjeAppTest {
@@ -32,7 +28,7 @@ class MarietjeAppTest {
     private var eventBus: EventBus? = null
     private var marietjeApp: MarietjeApp? = null
 
-    @Rule
+    @get:Rule
     val overrideSchedulersRule = RxSchedulersOverrideRule()
 
     @Before

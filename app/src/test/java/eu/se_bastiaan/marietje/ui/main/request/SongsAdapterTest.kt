@@ -1,20 +1,18 @@
 package eu.se_bastiaan.marietje.ui.main.request
 
+import eu.se_bastiaan.marietje.test.common.TestDataFactory
+import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
-import eu.se_bastiaan.marietje.test.common.TestDataFactory
-import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule
-
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual.equalTo
-
 @RunWith(MockitoJUnitRunner::class)
 class SongsAdapterTest {
 
-    @Rule
+    @get:Rule
     val overrideSchedulersRule = RxSchedulersOverrideRule()
 
     @Test

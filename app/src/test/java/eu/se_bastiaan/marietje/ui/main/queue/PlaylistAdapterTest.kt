@@ -2,23 +2,20 @@ package eu.se_bastiaan.marietje.ui.main.queue
 
 import android.os.Handler
 import android.os.Looper
-
+import eu.se_bastiaan.marietje.test.common.TestDataFactory
+import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
-
-import eu.se_bastiaan.marietje.test.common.TestDataFactory
-import eu.se_bastiaan.marietje.util.RxSchedulersOverrideRule
-
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual.equalTo
 import org.mockito.Mockito.mock
+import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class PlaylistAdapterTest {
 
-    @Rule
+    @get:Rule
     val overrideSchedulersRule = RxSchedulersOverrideRule()
 
     @Test

@@ -19,20 +19,14 @@ import rx.schedulers.Schedulers
  */
 class RxSchedulersOverrideRule : TestRule {
 
-    private val newThreadSchedulerFunc: Func1<Scheduler, Scheduler>
-    private val ioThreadSchedulerFunc: Func1<Scheduler, Scheduler>
-    private val compThreadSchedulerFunc: Func1<Scheduler, Scheduler>
+    private val newThreadSchedulerFunc: Func1<Scheduler, Scheduler> = Func1 { Schedulers.immediate() }
+    private val ioThreadSchedulerFunc: Func1<Scheduler, Scheduler> = Func1 { Schedulers.immediate() }
+    private val compThreadSchedulerFunc: Func1<Scheduler, Scheduler> = Func1 { Schedulers.immediate() }
 
     private val rxAndroidSchedulersHook = object : RxAndroidSchedulersHook() {
         override fun getMainThreadScheduler(): Scheduler {
             return Schedulers.immediate()
         }
-    }
-
-    init {
-        newThreadSchedulerFunc = { scheduler -> Schedulers.immediate() }
-        ioThreadSchedulerFunc = { scheduler -> Schedulers.immediate() }
-        compThreadSchedulerFunc = { scheduler -> Schedulers.immediate() }
     }
 
     override fun apply(base: Statement, description: Description): Statement {

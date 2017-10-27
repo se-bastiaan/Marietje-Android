@@ -8,10 +8,9 @@ import rx.observers.TestSubscriber
 
 class EventBusTest {
 
-    private var eventBus: EventBus? = null
+    lateinit var eventBus: EventBus
 
-    @Rule
-            // Must be added to every test class that targets app code that uses RxJava
+    @get:Rule
     val overrideSchedulersRule = RxSchedulersOverrideRule()
 
     @Before
@@ -22,12 +21,12 @@ class EventBusTest {
     @Test
     fun postedObjectsAreReceived() {
         val testSubscriber = TestSubscriber<Any>()
-        eventBus!!.register(Any::class.java, testSubscriber)
+        eventBus.register(Any::class.java, testSubscriber)
 
         val event1 = Any()
         val event2 = Any()
-        eventBus!!.post(event1)
-        eventBus!!.post(event2)
+        eventBus.post(event1)
+        eventBus.post(event2)
 
         testSubscriber.assertValues(event1, event2)
     }
@@ -35,12 +34,12 @@ class EventBusTest {
     @Test
     fun onlyReceivesSomeObjects() {
         val testSubscriber = TestSubscriber<String>()
-        eventBus!!.register(String::class.java, testSubscriber)
+        eventBus.register(String::class.java, testSubscriber)
 
         val stringEvent = "Event"
         val intEvent = 20
-        eventBus!!.post(stringEvent)
-        eventBus!!.post(intEvent)
+        eventBus.post(stringEvent)
+        eventBus.post(intEvent)
 
         testSubscriber.assertValueCount(1)
         testSubscriber.assertValue(stringEvent)
